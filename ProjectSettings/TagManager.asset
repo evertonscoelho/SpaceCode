@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Collectable
   layers:
   - Default
   - TransparentFX
@@ -44,6 +45,12 @@ TagManager:
   - name: Floor
     uniqueID: 1708741775
     locked: 0
-  - name: Items
+  - name: Item
     uniqueID: 50066249
+    locked: 0
+  - name: Player
+    uniqueID: 4292381743
+    locked: 0
+  - name: Button
+    uniqueID: 3837490823
     locked: 0
