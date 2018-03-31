@@ -1,0 +1,13 @@
+{  
+   "name":"Level 1",
+   "level":1,
+   "author":"Everton/Yuri",
+   "difficulty":1,
+   "board":{  
+      "fields":["positionX", "positionY", "objectType"],
+      "data":[  
+         [0, 0, "Player"],
+         [0, 1, "Floor"]
+      ]
+   }
+}
