@@ -11,28 +11,30 @@ public class BoardManager : MonoBehaviour
     public GameObject Wall;                     //Prefab to spawn for Wall.
 
     private Transform boardHolder;                                  //A variable to store a reference to the transform of our Board object.
-    private List<Vector3> gridPositions = new List<Vector3>();   //A list of possible locations to place tiles.
 
     //Sets up the outer walls and floor (background) of the game board.
     void BoardSetup(Board board)
     {
         //Instantiate Board and set boardHolder to its transform.
         boardHolder = new GameObject("Board").transform;
-        gridPositions.Clear();
         DataBoard dataBoard;
 
         for (int x = 0; x < board.data.Length; x++)
         {
             dataBoard = board.data[x];
-            gridPositions.Add(new Vector3(dataBoard.positionX, dataBoard.positionY, 0f));
+            GameObject floor = Instantiate(Floor, new Vector3(dataBoard.positionX, dataBoard.positionY, 0f), Quaternion.identity) as GameObject;
+            floor.transform.SetParent(boardHolder);
 
-            GameObject toInstantiate = getObjectToInstantiate(dataBoard.objectType);
+            if (dataBoard.objectType != "Floor")
+            {
+                GameObject toInstantiate = getObjectToInstantiate(dataBoard.objectType);
 
-            //Instantiate the GameObject instance using the prefab chosen for toInstantiate at the Vector3 corresponding to current grid position in loop, cast it to GameObject.
-            GameObject instance = Instantiate(toInstantiate, new Vector3(dataBoard.positionX, dataBoard.positionY, 0f), Quaternion.identity) as GameObject;
+                //Instantiate the GameObject instance using the prefab chosen for toInstantiate at the Vector3 corresponding to current grid position in loop, cast it to GameObject.
+                GameObject instance = Instantiate(toInstantiate, new Vector3(dataBoard.positionX, dataBoard.positionY, 0f), Quaternion.identity) as GameObject;
 
-            //Set the parent of our newly instantiated object instance to boardHolder, this is just organizational to avoid cluttering hierarchy.
-            instance.transform.SetParent(boardHolder);
+                //Set the parent of our newly instantiated object instance to boardHolder, this is just organizational to avoid cluttering hierarchy.
+                instance.transform.SetParent(boardHolder);
+            }
         }
 
     }
@@ -61,8 +63,6 @@ public class BoardManager : MonoBehaviour
     {
         Level levelObject = JsonUtility.FromJson<Level>(getJsonFileById(idLevel));
         //Creates the outer walls and floor.
-
-        Debug.Log(levelObject.name);
 
         BoardSetup(levelObject.board);
     }

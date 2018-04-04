@@ -15,7 +15,6 @@ public class Level
 [System.Serializable]
 public class Board
 {
-    public string fields;
     public DataBoard[] data;
 }
 
