@@ -9,7 +9,6 @@ public class Level
     public string author;
     public int difficulty;
     public Board board;
-
 }
 
 [System.Serializable]

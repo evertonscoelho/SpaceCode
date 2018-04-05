@@ -17,25 +17,34 @@ public class BoardManager : MonoBehaviour
     {
         //Instantiate Board and set boardHolder to its transform.
         boardHolder = new GameObject("Board").transform;
+
         DataBoard dataBoard;
 
         for (int x = 0; x < board.data.Length; x++)
         {
             dataBoard = board.data[x];
-            GameObject floor = Instantiate(Floor, new Vector3(dataBoard.positionX, dataBoard.positionY, 0f), Quaternion.identity) as GameObject;
-            floor.transform.SetParent(boardHolder);
+            GameObject floor = Instantiate(Floor, getPositionInstance(dataBoard.positionX, dataBoard.positionY), Quaternion.identity) as GameObject;
+            // floor.transform.SetParent(boardHolder);
 
             if (dataBoard.objectType != "Floor")
             {
                 GameObject toInstantiate = getObjectToInstantiate(dataBoard.objectType);
 
                 //Instantiate the GameObject instance using the prefab chosen for toInstantiate at the Vector3 corresponding to current grid position in loop, cast it to GameObject.
-                GameObject instance = Instantiate(toInstantiate, new Vector3(dataBoard.positionX, dataBoard.positionY, 0f), Quaternion.identity) as GameObject;
+                GameObject instance = Instantiate(toInstantiate, getPositionInstance(dataBoard.positionX, dataBoard.positionY), Quaternion.identity) as GameObject;
 
                 //Set the parent of our newly instantiated object instance to boardHolder, this is just organizational to avoid cluttering hierarchy.
                 instance.transform.SetParent(boardHolder);
             }
         }
+
+    }
+
+    private Vector3 getPositionInstance(int x, int y)
+    {
+        float offsetX = Floor.GetComponent<SpriteRenderer>().bounds.size.x;
+        float offsetY = Floor.GetComponent<SpriteRenderer>().bounds.size.y;
+        return new Vector3(x * offsetX, y * offsetY, 0f);
 
     }
 
@@ -50,6 +59,10 @@ public class BoardManager : MonoBehaviour
             case "Obstacle":
                 return Obstacle;
             case "Player":
+          //      float width = Floor.GetComponent<SpriteRenderer>().bounds.size.x * 0.5f;
+            //    float height = Floor.GetComponent<SpriteRenderer>().bounds.size.y * 0.5f;
+              //  Vector3 scale = new Vector3(width, height, 0f);
+              //  Player.GetComponent<SpriteRenderer>().transform.localScale = scale;
                 return Player;
             case "Wall":
                 return Wall;

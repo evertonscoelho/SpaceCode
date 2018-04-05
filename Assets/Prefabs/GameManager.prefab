@@ -52,20 +52,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e03d107f79901344963d185005d29f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  columns: 8
-  rows: 8
-  wallCount:
-    minimum: 5
-    maximum: 9
-  foodCount:
-    minimum: 1
-    maximum: 5
-  exit: {fileID: 0}
-  floorTiles: []
-  wallTiles: []
-  foodTiles: []
-  enemyTiles: []
-  outerWallTiles: []
+  Collectable: {fileID: 1588028509577710, guid: 33aa62c756a31ce45aea8338cb8160e0,
+    type: 2}
+  Floor: {fileID: 1870836708395210, guid: 55a4b46799091b344adcb0631c133a68, type: 2}
+  Obstacle: {fileID: 1858006639062768, guid: 4d164a24570999444b4f9b66b693ad03, type: 2}
+  Player: {fileID: 1068185102179462, guid: 9c8d00b4ba8e3de4a92d5091c634ab92, type: 2}
+  Wall: {fileID: 1261921265851540, guid: dc1897bfbef7a894eb57704a74c57ae2, type: 2}
 --- !u!114 &114576425978126010
 MonoBehaviour:
   m_ObjectHideFlags: 1

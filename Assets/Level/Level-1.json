@@ -4,10 +4,16 @@
 	"author": "Everton/Yuri",
 	"difficulty": 1,
 	"board": {
-		"data": [{
+		"data": [
+			{
+				"positionX": 0,
+				"positionY": -1,
+				"objectType": "Player"
+			},
+			{
 				"positionX": 0,
 				"positionY": 0,
-				"objectType": "Player"
+				"objectType": "Floor"
 			},
 			{
 				"positionX": 0,
@@ -21,6 +27,11 @@
 			},
 			{
 				"positionX": 0,
+				"positionY": 3,
+				"objectType": "Floor"
+			},
+			{
+				"positionX": -1,
 				"positionY": 3,
 				"objectType": "Collectable"
 			}
