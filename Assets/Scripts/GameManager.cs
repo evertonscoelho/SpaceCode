@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;       //Allows us to use Lists.
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -38,5 +39,10 @@ public class GameManager : MonoBehaviour
     {
         //Call the SetupScene function of the BoardManager script, pass it current level number.
         boardScript.SetupScene("1");
+    }
+
+    public void loadScene(int sceneIndex)
+    {
+        SceneManager.LoadScene(sceneIndex);
     }
 }
