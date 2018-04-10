@@ -25,7 +25,6 @@ public class BoardManager : MonoBehaviour
                 instance.transform.SetParent(boardHolder);
             }
         }
-
     }
 
     private Vector3 getPositionInstance(int x, int y)
