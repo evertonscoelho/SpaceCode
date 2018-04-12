@@ -166,19 +166,48 @@ Prefab:
         type: 2}
       propertyPath: F1
       value: 
-      objectReference: {fileID: 1484045354403782, guid: 1825dcac2c509054d879a0b44e9dd9dc,
+      objectReference: {fileID: 1718171769270022, guid: fa35ba587f3c88b42be4357d3d5f1a2c,
         type: 2}
     - target: {fileID: 114776303351180832, guid: 6741198e64be281448b254bf1e5e3b1e,
         type: 2}
       propertyPath: F2
       value: 
-      objectReference: {fileID: 1598242645071174, guid: 19e97ab54bb76b245b862312dd579fef,
+      objectReference: {fileID: 1235578376309890, guid: a072f36a82b194e418bd87799c7637dc,
         type: 2}
     - target: {fileID: 114776303351180832, guid: 6741198e64be281448b254bf1e5e3b1e,
         type: 2}
       propertyPath: F3
       value: 
-      objectReference: {fileID: 1644615154134584, guid: 7ef8dea67433bff45a5c93d886b98d69,
+      objectReference: {fileID: 1586636335638972, guid: d067a5b8bf2effc42b9e7e7e1c12d3c1,
+        type: 2}
+    - target: {fileID: 114776303351180832, guid: 6741198e64be281448b254bf1e5e3b1e,
+        type: 2}
+      propertyPath: boardCommand
+      value: 
+      objectReference: {fileID: 1890384705}
+    - target: {fileID: 114776303351180832, guid: 6741198e64be281448b254bf1e5e3b1e,
+        type: 2}
+      propertyPath: Up
+      value: 
+      objectReference: {fileID: 1403755424599792, guid: 30e80a18a0b1c0f4488724e328056c78,
+        type: 2}
+    - target: {fileID: 114776303351180832, guid: 6741198e64be281448b254bf1e5e3b1e,
+        type: 2}
+      propertyPath: Down
+      value: 
+      objectReference: {fileID: 1014797172218464, guid: c011d949569f2b1418e2565c0f307882,
+        type: 2}
+    - target: {fileID: 114776303351180832, guid: 6741198e64be281448b254bf1e5e3b1e,
+        type: 2}
+      propertyPath: Left
+      value: 
+      objectReference: {fileID: 1892771488415406, guid: eacbeeb03b4b610498667cd284fbdf34,
+        type: 2}
+    - target: {fileID: 114776303351180832, guid: 6741198e64be281448b254bf1e5e3b1e,
+        type: 2}
+      propertyPath: Right
+      value: 
+      objectReference: {fileID: 1446852294419002, guid: e71a80c391d48b94980f0a74c74bf581,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6741198e64be281448b254bf1e5e3b1e, type: 2}
@@ -1047,13 +1076,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c480d0d6114d2564e88836cba9db2a67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Up: {fileID: 1588028509577710, guid: 33aa62c756a31ce45aea8338cb8160e0, type: 2}
-  Down: {fileID: 1870836708395210, guid: 55a4b46799091b344adcb0631c133a68, type: 2}
-  Left: {fileID: 1858006639062768, guid: 4d164a24570999444b4f9b66b693ad03, type: 2}
-  Right: {fileID: 1261921265851540, guid: dc1897bfbef7a894eb57704a74c57ae2, type: 2}
-  F1: {fileID: 0}
-  F2: {fileID: 0}
-  F3: {fileID: 0}
+  Up: {fileID: 1403755424599792, guid: 30e80a18a0b1c0f4488724e328056c78, type: 2}
+  Down: {fileID: 1014797172218464, guid: c011d949569f2b1418e2565c0f307882, type: 2}
+  Left: {fileID: 1892771488415406, guid: eacbeeb03b4b610498667cd284fbdf34, type: 2}
+  Right: {fileID: 1446852294419002, guid: e71a80c391d48b94980f0a74c74bf581, type: 2}
+  F1: {fileID: 1718171769270022, guid: fa35ba587f3c88b42be4357d3d5f1a2c, type: 2}
+  F2: {fileID: 1235578376309890, guid: a072f36a82b194e418bd87799c7637dc, type: 2}
+  F3: {fileID: 1586636335638972, guid: d067a5b8bf2effc42b9e7e7e1c12d3c1, type: 2}
   boardCommand: {fileID: 1890384705}
 --- !u!1001 &2120951944
 Prefab:
