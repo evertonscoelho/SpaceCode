@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     {
         //Call the SetupScene function of the BoardManager script, pass it current level number.
         boardScript.SetupScene("1");
-        MovementManager test = GetComponent<MovementManager>();
+        BoardCommandManager test = GetComponent<BoardCommandManager>();
         test.testClass();
 
     }

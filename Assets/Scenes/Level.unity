@@ -162,6 +162,24 @@ Prefab:
       propertyPath: boardCommand
       value: 
       objectReference: {fileID: 1890384705}
+    - target: {fileID: 114776303351180832, guid: 6741198e64be281448b254bf1e5e3b1e,
+        type: 2}
+      propertyPath: F1
+      value: 
+      objectReference: {fileID: 1484045354403782, guid: 1825dcac2c509054d879a0b44e9dd9dc,
+        type: 2}
+    - target: {fileID: 114776303351180832, guid: 6741198e64be281448b254bf1e5e3b1e,
+        type: 2}
+      propertyPath: F2
+      value: 
+      objectReference: {fileID: 1598242645071174, guid: 19e97ab54bb76b245b862312dd579fef,
+        type: 2}
+    - target: {fileID: 114776303351180832, guid: 6741198e64be281448b254bf1e5e3b1e,
+        type: 2}
+      propertyPath: F3
+      value: 
+      objectReference: {fileID: 1644615154134584, guid: 7ef8dea67433bff45a5c93d886b98d69,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6741198e64be281448b254bf1e5e3b1e, type: 2}
   m_IsPrefabParent: 0
@@ -958,11 +976,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb58d606467b404c844d1d682a26a29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Up: {fileID: 0}
-  Down: {fileID: 0}
-  Left: {fileID: 0}
-  Right: {fileID: 0}
-  BoardCommand: {fileID: 0}
 --- !u!212 &1890384707
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -995,8 +1008,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -457476473
-  m_SortingLayer: 4
+  m_SortingLayerID: 1708741775
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e8d1a966075889f4ea8483f4d8a9b04d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1016,8 +1029,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1890384705}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.2, y: -19.7, z: 0}
-  m_LocalScale: {x: 1.6343943, y: 0.17973675, z: 1}
+  m_LocalPosition: {x: 3.23, y: -14.31, z: 0}
+  m_LocalScale: {x: 1.6449819, y: 0.31802848, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -1038,6 +1051,9 @@ MonoBehaviour:
   Down: {fileID: 1870836708395210, guid: 55a4b46799091b344adcb0631c133a68, type: 2}
   Left: {fileID: 1858006639062768, guid: 4d164a24570999444b4f9b66b693ad03, type: 2}
   Right: {fileID: 1261921265851540, guid: dc1897bfbef7a894eb57704a74c57ae2, type: 2}
+  F1: {fileID: 0}
+  F2: {fileID: 0}
+  F3: {fileID: 0}
   boardCommand: {fileID: 1890384705}
 --- !u!1001 &2120951944
 Prefab:

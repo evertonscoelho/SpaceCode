@@ -10,8 +10,10 @@ MonoImporter:
   - Down: {fileID: 1870836708395210, guid: 55a4b46799091b344adcb0631c133a68, type: 2}
   - Left: {fileID: 1858006639062768, guid: 4d164a24570999444b4f9b66b693ad03, type: 2}
   - Right: {fileID: 1261921265851540, guid: dc1897bfbef7a894eb57704a74c57ae2, type: 2}
-  - BoardCommand: {fileID: 1179811938066842, guid: d42a83bb6e6d57b4bb8fd79baa218106,
-      type: 2}
+  - F1: {fileID: 1484045354403782, guid: 1825dcac2c509054d879a0b44e9dd9dc, type: 2}
+  - F2: {fileID: 1948282322323322, guid: 30adf36def7afb94c8a90d5fdf38d9fe, type: 2}
+  - F3: {fileID: 1598242645071174, guid: 19e97ab54bb76b245b862312dd579fef, type: 2}
+  - boardCommand: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
