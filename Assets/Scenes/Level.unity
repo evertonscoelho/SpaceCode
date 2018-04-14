@@ -209,7 +209,8 @@ Prefab:
       value: 
       objectReference: {fileID: 1446852294419002, guid: e71a80c391d48b94980f0a74c74bf581,
         type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114776303351180832, guid: 6741198e64be281448b254bf1e5e3b1e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 6741198e64be281448b254bf1e5e3b1e, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &496824223
@@ -869,6 +870,41 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224341465882300714, guid: b0c3ad2a487fe8d458e6be41c7f0dfa8,
     type: 2}
   m_PrefabInternal: {fileID: 1642198952}
+--- !u!1 &1746901589 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1484045354403782, guid: 1825dcac2c509054d879a0b44e9dd9dc,
+    type: 2}
+  m_PrefabInternal: {fileID: 982826797}
+--- !u!114 &1746901593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1746901589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1890384709}
+          m_MethodName: testClass
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1001 &1858974646
 Prefab:
   m_ObjectHideFlags: 0
@@ -1058,8 +1094,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1890384705}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.23, y: -14.31, z: 0}
-  m_LocalScale: {x: 1.6449819, y: 0.31802848, z: 1}
+  m_LocalPosition: {x: 9.65, y: -15.48, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4

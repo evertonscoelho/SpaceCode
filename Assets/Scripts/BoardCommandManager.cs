@@ -19,20 +19,10 @@ public class BoardCommandManager : MonoBehaviour
 
     public void testClass()
     {
-        Function[] functions = { new Function(), new Function(), new Function()};
-        functions[0].Commands = new EnumCommand[4];
-        functions[1].Commands = new EnumCommand[4];
-        functions[2].Commands = new EnumCommand[4];
-
-        functions[0].Commands[0] = EnumCommand.UP;
-        functions[0].Commands[1] = EnumCommand.LEFT;
-        functions[0].Commands[2] = EnumCommand.F1;
-        functions[1].Commands[0] = EnumCommand.DOWN;
-        functions[1].Commands[0] = EnumCommand.RIGHT;
-        functions[1].Commands[0] = EnumCommand.F2;
-        functions[2].Commands[0] = EnumCommand.UP;
-        functions[2].Commands[0] = EnumCommand.UP;
-        functions[2].Commands[0] = EnumCommand.UP;
+        Function[] functions = { new Function(), new Function(), new Function() };
+        functions[0].Commands = new EnumCommand[]{ EnumCommand.UP, EnumCommand.UP} ;
+        functions[1].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.UP, EnumCommand.UP };
+        functions[2].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.UP, EnumCommand.UP, EnumCommand.UP };
 
         doCommands(functions);
     }
@@ -41,8 +31,8 @@ public class BoardCommandManager : MonoBehaviour
     public void doCommands(Function[] functions)
     {
         BoardCommandManager boardCommandManager = boardCommand.GetComponent<BoardCommandManager>();
-        offsetX = Down.GetComponent<SpriteRenderer>().bounds.size.x;
-        offsetY = Down.GetComponent<SpriteRenderer>().bounds.size.y;
+        offsetX = Up.GetComponent<SpriteRenderer>().bounds.size.x;
+        offsetY = Up.GetComponent<SpriteRenderer>().bounds.size.y;
 
         printActionsInBoard(functions);
         for (int i = 0; i < functions.Length; i++)
@@ -67,18 +57,20 @@ public class BoardCommandManager : MonoBehaviour
     public void printActionsInBoard(Function[] functions)
     {
         Transform transformBoardCommand = boardCommand.transform;
-        for (int y = 0; y < functions.Length; y++)
+        
+        float positionY;
+        for (int y= 0; y < functions.Length; y++)
         {
             for (int x = 0; x < functions[y].Commands.Length; x++)
             {
                 GameObject toInstantiate = getObjectToInstantiate(functions[y].Commands[x]);
                 GameObject instance = Instantiate(toInstantiate, transformBoardCommand.transform, true) as GameObject;
-                instance.transform.localPosition = getPositionInstance(x - 4, y);
+                instance.transform.localPosition = getPositionInstance(x - 3, (y* -1)+1);
             }
         }
     }
 
-    private Vector3 getPositionInstance(int x, int y)
+    private Vector3 getPositionInstance(int x, float y)
     {
         return new Vector3(x * offsetX, y * offsetY, 0f);
     }
