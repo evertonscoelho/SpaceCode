@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;       //Allows us to use Lists.
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -38,5 +39,33 @@ public class GameManager : MonoBehaviour
     {
         //Call the SetupScene function of the BoardManager script, pass it current level number.
         boardScript.SetupScene("1");
+    }
+
+    public Boolean checkEndGame(int addCommand, int addCollectable)
+    {
+        StatusGame status = boardScript.checkEndGame(addCommand, addCollectable);
+        if(status.Equals(StatusGame.VICTORY))
+        {
+            doVictory();
+            return true;
+        }else if (status.Equals(StatusGame.DEFEAT))
+        {
+            doDefeat();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private void doDefeat()
+    {
+        print("Perdeu");
+    }
+
+    private void doVictory()
+    {
+        print("Ganhou");
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using System.Collections;
 
 public class BoardCommandManager : MonoBehaviour
 {
@@ -11,61 +12,75 @@ public class BoardCommandManager : MonoBehaviour
     public GameObject F1;
     public GameObject F2;
     public GameObject F3;
-
     public GameObject boardCommand;
 
-    float offsetX;
-    float offsetY;
+    private Function[] functionsBoard;
+
+    private float offsetX;
+    private float offsetY;
+    private float offsetXPlayer;
+    private float offsetYPlayer;
+    private GameObject player;
+    private GameManager gameManager;
 
     public void testClass()
     {
         Function[] functions = { new Function(), new Function(), new Function() };
-        functions[0].Commands = new EnumCommand[]{ EnumCommand.UP, EnumCommand.UP} ;
-        functions[1].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.UP, EnumCommand.UP };
-        functions[2].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.UP, EnumCommand.UP, EnumCommand.UP };
+
+        functions[0].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.UP, EnumCommand.UP, EnumCommand.UP, EnumCommand.LEFT};
+        //functions[0].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.DOWN, EnumCommand.F2, EnumCommand.F1 };
+        functions[1].Commands = new EnumCommand[] { EnumCommand.DOWN, EnumCommand.F3, EnumCommand.LEFT };
+        functions[2].Commands = new EnumCommand[] { EnumCommand.RIGHT, EnumCommand.UP };
 
         doCommands(functions);
     }
 
+    public void Awake()
+    {
+        offsetX = Up.GetComponent<SpriteRenderer>().bounds.size.x;
+        offsetY = Up.GetComponent<SpriteRenderer>().bounds.size.y;
+        player = GameObject.Find("Player(Clone)");
+        GameObject floor = GameObject.Find("Floor(Clone)");
+        offsetXPlayer = floor.GetComponent<SpriteRenderer>().bounds.size.y;
+        offsetYPlayer = floor.GetComponent<SpriteRenderer>().bounds.size.y;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
 
     public void doCommands(Function[] functions)
     {
-        BoardCommandManager boardCommandManager = boardCommand.GetComponent<BoardCommandManager>();
-        offsetX = Up.GetComponent<SpriteRenderer>().bounds.size.x;
-        offsetY = Up.GetComponent<SpriteRenderer>().bounds.size.y;
-
+        functionsBoard = functions;
         printActionsInBoard(functions);
-        for (int i = 0; i < functions.Length; i++)
-        {
-            doFunction(functions[i]);
-        }
+        doFunction(functions[0]);
     }
 
     public void doFunction(Function function)
     {
         EnumCommand command;
-        for (int i = 0; i < function.Commands.Length; i++)
+        Boolean endGame = false;
+        int i = 0;
+        while (i < function.Commands.Length && !endGame)
         {
             command = function.Commands[i];
             animationMoviment(i);
+            Debug.Log("oi");
+           // System.Threading.Thread.Sleep(1000);
             this.action(command);
-            new WaitForSeconds(1);
+            endGame = gameManager.checkEndGame(1, 0);
+            i++;
         }
     }
 
-
-    public void printActionsInBoard(Function[] functions)
+     public void printActionsInBoard(Function[] functions)
     {
         Transform transformBoardCommand = boardCommand.transform;
-        
-        float positionY;
-        for (int y= 0; y < functions.Length; y++)
+
+        for (int y = 0; y < functions.Length; y++)
         {
             for (int x = 0; x < functions[y].Commands.Length; x++)
             {
                 GameObject toInstantiate = getObjectToInstantiate(functions[y].Commands[x]);
                 GameObject instance = Instantiate(toInstantiate, transformBoardCommand.transform, true) as GameObject;
-                instance.transform.localPosition = getPositionInstance(x - 3, (y* -1)+1);
+                instance.transform.localPosition = getPositionInstance(x - 3, (y * -1) + 1);
             }
         }
     }
@@ -85,17 +100,34 @@ public class BoardCommandManager : MonoBehaviour
         switch (command)
         {
             case EnumCommand.UP:
-                int teste = 1 + 1;
+                player.transform.position += new Vector3(0, offsetXPlayer, 0);
+                break;
+            case EnumCommand.DOWN:
+                player.transform.position -= new Vector3(0, offsetXPlayer, 0);
+                break;
+            case EnumCommand.LEFT:
+                player.transform.position -= new Vector3(offsetYPlayer, 0, 0);
+                break;
+            case EnumCommand.RIGHT:
+                player.transform.position += new Vector3(offsetYPlayer, 0, 0);
+                break;
+            case EnumCommand.F1:
+                doFunction(functionsBoard[0]);
+                break;
+            case EnumCommand.F2:
+                doFunction(functionsBoard[1]);
+                break;
+            case EnumCommand.F3:
+                doFunction(functionsBoard[2]);
                 break;
             default:
-                teste = 2 + 2;
                 break;
         }
     }
 
-    private GameObject getObjectToInstantiate(EnumCommand movement)
+    private GameObject getObjectToInstantiate(EnumCommand command)
     {
-        switch (movement)
+        switch (command)
         {
             case EnumCommand.UP:
                 return Up;

@@ -3,6 +3,8 @@
 	"levelID": "1",
 	"author": "Everton/Yuri",
 	"difficulty": 1,
+	"collectable": 1,
+	"maxCommands": 40,
 	"board": {
 		"data": [
 			{

@@ -9,6 +9,14 @@
     F3
 };  
 
+public enum StatusGame
+{
+    VICTORY,
+    DEFEAT,
+    CONTINUE
+
+}
+
 public class Function
 {
     public EnumCommand[] Commands;
