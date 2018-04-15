@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
 
     private GameManager gameManager;
+    public AudioClip collectableAudio;
 
     private void Awake()
     {
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Collectable"))
         {
             other.gameObject.SetActive(false);
+            SoundManager.instance.PlaySingle(collectableAudio);
             gameManager.checkEndGame(0, 1);
         }
     }
