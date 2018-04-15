@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
     public void setupSceneLevel()
     {
         boardScript.SetupScene(levelId);
+        BoardCommandManager boardCommand = GameObject.Find("BoardCommand").GetComponent<BoardCommandManager>();
+        boardCommand.initValues();
     }
 
     public void loadScene(int sceneIndex)

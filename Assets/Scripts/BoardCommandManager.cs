@@ -35,7 +35,7 @@ public class BoardCommandManager : MonoBehaviour
         doCommands(functions);
     }
 
-    public void Awake111()
+    public void initValues()
     {
         offsetX = Up.GetComponent<SpriteRenderer>().bounds.size.x;
         offsetY = Up.GetComponent<SpriteRenderer>().bounds.size.y;
@@ -62,8 +62,6 @@ public class BoardCommandManager : MonoBehaviour
         {
             command = function.Commands[i];
             animationMoviment(i);
-            Debug.Log("oi");
-           // System.Threading.Thread.Sleep(1000);
             this.action(command);
             endGame = gameManager.checkEndGame(1, 0);
             i++;
