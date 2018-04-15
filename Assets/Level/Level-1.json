@@ -35,11 +35,6 @@
 				"positionX": -1,
 				"positionY": 3,
 				"objectType": "Collectable"
-			},
-			{
-				"positionX": -1,
-				"positionY": 4,
-				"objectType": "Collectable"
 			}
 		]
 	}

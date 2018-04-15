@@ -35,7 +35,7 @@ public class BoardCommandManager : MonoBehaviour
         doCommands(functions);
     }
 
-    public void Awake()
+    public void Awake111()
     {
         offsetX = Up.GetComponent<SpriteRenderer>().bounds.size.x;
         offsetY = Up.GetComponent<SpriteRenderer>().bounds.size.y;

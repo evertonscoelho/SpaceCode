@@ -118,6 +118,81 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224955314832033308, guid: 30adf36def7afb94c8a90d5fdf38d9fe,
     type: 2}
   m_PrefabInternal: {fileID: 1241326916}
+--- !u!1 &515334504
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1641797266424156, guid: 6741198e64be281448b254bf1e5e3b1e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 515334508}
+  - component: {fileID: 515334507}
+  - component: {fileID: 515334506}
+  - component: {fileID: 515334505}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &515334505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114399504128250460, guid: 6741198e64be281448b254bf1e5e3b1e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 515334504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &515334506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114576425978126010, guid: 6741198e64be281448b254bf1e5e3b1e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 515334504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e8b0d47d80f6f340875dad6e995d10d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &515334507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114536239324836098, guid: 6741198e64be281448b254bf1e5e3b1e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 515334504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e03d107f79901344963d185005d29f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Collectable: {fileID: 1588028509577710, guid: 33aa62c756a31ce45aea8338cb8160e0,
+    type: 2}
+  Floor: {fileID: 1870836708395210, guid: 55a4b46799091b344adcb0631c133a68, type: 2}
+  Obstacle: {fileID: 1858006639062768, guid: 4d164a24570999444b4f9b66b693ad03, type: 2}
+  Player: {fileID: 1068185102179462, guid: 9c8d00b4ba8e3de4a92d5091c634ab92, type: 2}
+  Wall: {fileID: 1261921265851540, guid: dc1897bfbef7a894eb57704a74c57ae2, type: 2}
+--- !u!4 &515334508
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4453728365149380, guid: 6741198e64be281448b254bf1e5e3b1e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 515334504}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &777457621 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224341465882300714, guid: b0c3ad2a487fe8d458e6be41c7f0dfa8,
