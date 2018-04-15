@@ -44,6 +44,7 @@ public class BoardManager : MonoBehaviour
         switch (objectType)
         {
             case "Collectable":
+                level.collectable++;
                 return Collectable;
             case "Floor":
                 return Floor;

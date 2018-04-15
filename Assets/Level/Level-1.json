@@ -3,7 +3,6 @@
 	"levelID": "1",
 	"author": "Everton/Yuri",
 	"difficulty": 1,
-	"collectable": 1,
 	"maxCommands": 40,
 	"board": {
 		"data": [
@@ -35,6 +34,11 @@
 			{
 				"positionX": -1,
 				"positionY": 3,
+				"objectType": "Collectable"
+			},
+			{
+				"positionX": -1,
+				"positionY": 4,
 				"objectType": "Collectable"
 			}
 		]
