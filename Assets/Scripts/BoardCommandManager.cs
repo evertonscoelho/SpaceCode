@@ -22,16 +22,16 @@ public class BoardCommandManager : MonoBehaviour
     private float offsetYPlayer;
     private GameObject player;
     private GameManager gameManager;
+    private Rigidbody2D playerBody;
 
     public void testClass()
     {
-        Function[] functions = { new Function(), new Function(), new Function() };
+        Function[] functions = {new Function()};
 
-        functions[0].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.UP, EnumCommand.UP, EnumCommand.UP, EnumCommand.LEFT};
+        functions[0].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.UP, EnumCommand.UP, EnumCommand.UP, EnumCommand.LEFT, EnumCommand.RIGHT, EnumCommand.RIGHT, EnumCommand.RIGHT };
         //functions[0].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.DOWN, EnumCommand.F2, EnumCommand.F1 };
-        functions[1].Commands = new EnumCommand[] { EnumCommand.DOWN, EnumCommand.F3, EnumCommand.LEFT };
-        functions[2].Commands = new EnumCommand[] { EnumCommand.RIGHT, EnumCommand.UP };
-
+       // functions[1].Commands = new EnumCommand[] { EnumCommand.DOWN, EnumCommand.F3, EnumCommand.LEFT };
+       // functions[2].Commands = new EnumCommand[] { EnumCommand.RIGHT, EnumCommand.UP };
         doCommands(functions);
     }
 
@@ -40,6 +40,7 @@ public class BoardCommandManager : MonoBehaviour
         offsetX = Up.GetComponent<SpriteRenderer>().bounds.size.x;
         offsetY = Up.GetComponent<SpriteRenderer>().bounds.size.y;
         player = GameObject.Find("Player(Clone)");
+        playerBody = player.GetComponent<Rigidbody2D>();
         GameObject floor = GameObject.Find("Floor(Clone)");
         offsetXPlayer = floor.GetComponent<SpriteRenderer>().bounds.size.y;
         offsetYPlayer = floor.GetComponent<SpriteRenderer>().bounds.size.y;
@@ -55,20 +56,75 @@ public class BoardCommandManager : MonoBehaviour
 
     public void doFunction(Function function)
     {
+        StartCoroutine(this.testeMovimento(function));
+        /*
         EnumCommand command;
         Boolean endGame = false;
         int i = 0;
         while (i < function.Commands.Length && !endGame)
         {
             command = function.Commands[i];
-            animationMoviment(i);
             this.action(command);
             endGame = gameManager.checkEndGame(1, 0);
             i++;
+        }*/
+    }
+
+    private IEnumerator testeMovimento(Function function)
+    {
+        for (int i = 0; i < function.Commands.Length; i++)
+        {
+            EnumCommand comando = function.Commands[i];
+            switch (comando)
+            {
+                case EnumCommand.UP:
+                    Vector2 targetUp = playerBody.position + new Vector2(0, offsetXPlayer);
+                    while (playerBody.position.y < targetUp.y)
+                    {
+                        playerBody.MovePosition(new Vector2(playerBody.position.x, playerBody.position.y + 0.1f));
+                        yield return null;
+                    }
+                    break;
+                case EnumCommand.DOWN:
+                    Vector2 targetDown = playerBody.position - new Vector2(0, offsetXPlayer);
+                    while (playerBody.position.y > targetDown.y)
+                    {
+                        playerBody.MovePosition(new Vector2(playerBody.position.x, playerBody.position.y - 0.1f));
+                        yield return null;
+                    }
+                    break;
+                case EnumCommand.LEFT:
+                    Vector2 targetLeft = playerBody.position - new Vector2(offsetYPlayer, 0);
+                    while (playerBody.position.x > targetLeft.x)
+                    {
+                        playerBody.MovePosition(new Vector2(playerBody.position.x - 0.1f, playerBody.position.y));
+                        yield return null;
+                    }
+                    break;
+                case EnumCommand.RIGHT:
+                    Vector2 targetRight = playerBody.position + new Vector2(offsetYPlayer, 0);
+                    while (playerBody.position.x < targetRight.x)
+                    {
+                        playerBody.MovePosition(new Vector2(playerBody.position.x + 0.1f, playerBody.position.y));
+                        yield return null;
+                    }
+                    break;
+            }
+           
+            bool endGame = gameManager.checkEndGame(1, 0);
+            if (endGame)
+            {
+                break;
+            }
+            else
+            {
+                yield return new WaitForSeconds(1);
+            }
+           
         }
     }
 
-     public void printActionsInBoard(Function[] functions)
+    public void printActionsInBoard(Function[] functions)
     {
         Transform transformBoardCommand = boardCommand.transform;
 
@@ -88,9 +144,15 @@ public class BoardCommandManager : MonoBehaviour
         return new Vector3(x * offsetX, y * offsetY, 0f);
     }
 
-    public void animationMoviment(int i)
+    private IEnumerator animationMoviment(Vector2 target)
     {
-        //TODO
+        Vector2 playerPosition = playerBody.position;
+        while (playerBody.position.y < target.y)
+        {
+            playerBody.MovePosition(new Vector2(0, playerBody.position.y+0.1f));
+            yield return null;
+        }
+            
     }
 
     private void action(EnumCommand command)
@@ -98,7 +160,8 @@ public class BoardCommandManager : MonoBehaviour
         switch (command)
         {
             case EnumCommand.UP:
-                player.transform.position += new Vector3(0, offsetXPlayer, 0);
+                StartCoroutine(this.animationMoviment(playerBody.position + new Vector2(0, offsetXPlayer))); 
+                //player.transform.position += new Vector3(0, offsetXPlayer, 0);
                 break;
             case EnumCommand.DOWN:
                 player.transform.position -= new Vector3(0, offsetXPlayer, 0);
