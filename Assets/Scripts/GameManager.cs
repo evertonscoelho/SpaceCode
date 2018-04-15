@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;       //Allows us to use Lists.
+using UnityEngine.SceneManagement;
 using System;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -41,6 +42,11 @@ public class GameManager : MonoBehaviour
         boardScript.SetupScene("1");
     }
 
+    public void loadScene(int sceneIndex)
+    {
+        SceneManager.LoadScene(sceneIndex);
+    }
+    
     public Boolean checkEndGame(int addCommand, int addCollectable)
     {
         StatusGame status = boardScript.checkEndGame(addCommand, addCollectable);
