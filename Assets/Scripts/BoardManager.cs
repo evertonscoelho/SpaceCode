@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.IO;
+using System;
 
 public class BoardManager : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class BoardManager : MonoBehaviour
     public GameObject Obstacle;
     public GameObject Player;
     public GameObject Wall;
+
+    private Level level;
+    private int commands = 0;
+    private int collectables= 0;
 
     void BoardSetup(Board board)
     {
@@ -25,7 +30,6 @@ public class BoardManager : MonoBehaviour
                 instance.transform.SetParent(boardHolder);
             }
         }
-
     }
 
     private Vector3 getPositionInstance(int x, int y)
@@ -40,6 +44,7 @@ public class BoardManager : MonoBehaviour
         switch (objectType)
         {
             case "Collectable":
+                level.collectable++;
                 return Collectable;
             case "Floor":
                 return Floor;
@@ -56,8 +61,8 @@ public class BoardManager : MonoBehaviour
 
     public void SetupScene(string idLevel)
     {
-        Level levelObject = JsonUtility.FromJson<Level>(getJsonFileById(idLevel));
-        BoardSetup(levelObject.board);
+        this.level = JsonUtility.FromJson<Level>(getJsonFileById(idLevel));
+        BoardSetup(level.board);
     }
 
     private string getJsonFileById(string idLevel)
@@ -67,5 +72,25 @@ public class BoardManager : MonoBehaviour
         string json = reader.ReadToEnd();
         reader.Close();
         return json;
+    }
+
+    public StatusGame checkEndGame(int addCommand, int addCollectable)
+    {
+        commands += addCommand;
+        collectables += addCollectable;
+        if (commands >= level.maxCommands)
+        {
+            return StatusGame.DEFEAT;
+        }
+        else if(collectables >= level.collectable)
+        {
+            return StatusGame.VICTORY;
+        }
+        else
+        {
+            return StatusGame.CONTINUE;
+        }
+        
+        
     }
 }

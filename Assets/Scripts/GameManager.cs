@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using System;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -44,5 +45,33 @@ public class GameManager : MonoBehaviour
     public void loadScene(int sceneIndex)
     {
         SceneManager.LoadScene(sceneIndex);
+    }
+    
+    public Boolean checkEndGame(int addCommand, int addCollectable)
+    {
+        StatusGame status = boardScript.checkEndGame(addCommand, addCollectable);
+        if(status.Equals(StatusGame.VICTORY))
+        {
+            doVictory();
+            return true;
+        }else if (status.Equals(StatusGame.DEFEAT))
+        {
+            doDefeat();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private void doDefeat()
+    {
+        print("Perdeu");
+    }
+
+    private void doVictory()
+    {
+        print("Ganhou");
     }
 }

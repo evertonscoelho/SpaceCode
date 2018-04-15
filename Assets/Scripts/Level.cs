@@ -8,6 +8,8 @@ public class Level
     public string levelID;
     public string author;
     public int difficulty;
+    public int collectable;
+    public int maxCommands;
     public Board board;
 }
 
