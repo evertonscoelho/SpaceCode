@@ -26,12 +26,16 @@ public class BoardCommandManager : MonoBehaviour
 
     public void testClass()
     {
-        Function[] functions = {new Function()};
+        Function[] functions = {new Function() };
 
-        functions[0].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.UP, EnumCommand.UP, EnumCommand.UP, EnumCommand.LEFT, EnumCommand.RIGHT, EnumCommand.RIGHT, EnumCommand.RIGHT };
+         functions[0].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.UP, EnumCommand.UP, EnumCommand.UP, EnumCommand.LEFT, EnumCommand.RIGHT, EnumCommand.RIGHT, EnumCommand.RIGHT };
         //functions[0].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.DOWN, EnumCommand.F2, EnumCommand.F1 };
-       // functions[1].Commands = new EnumCommand[] { EnumCommand.DOWN, EnumCommand.F3, EnumCommand.LEFT };
-       // functions[2].Commands = new EnumCommand[] { EnumCommand.RIGHT, EnumCommand.UP };
+        // functions[1].Commands = new EnumCommand[] { EnumCommand.DOWN, EnumCommand.F3, EnumCommand.LEFT };
+        // functions[2].Commands = new EnumCommand[] { EnumCommand.RIGHT, EnumCommand.UP };
+
+       // functions[0].Commands = new EnumCommand[] { EnumCommand.F1, EnumCommand.F1, EnumCommand.F2 };
+       // functions[1].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.UP};
+        //functions[2].Commands = new EnumCommand[] { EnumCommand.LEFT, EnumCommand.DOWN};
         doCommands(functions);
     }
 
@@ -51,30 +55,16 @@ public class BoardCommandManager : MonoBehaviour
     {
         functionsBoard = functions;
         printActionsInBoard(functions);
-        doFunction(functions[0]);
+        StartCoroutine(DoFunction(functions[0]));
     }
 
-    public void doFunction(Function function)
+    private IEnumerator DoFunction(Function function)
     {
-        StartCoroutine(this.testeMovimento(function));
-        /*
-        EnumCommand command;
-        Boolean endGame = false;
-        int i = 0;
-        while (i < function.Commands.Length && !endGame)
-        {
-            command = function.Commands[i];
-            this.action(command);
-            endGame = gameManager.checkEndGame(1, 0);
-            i++;
-        }*/
-    }
-
-    private IEnumerator testeMovimento(Function function)
-    {
+        bool endGame;
+        EnumCommand comando;
         for (int i = 0; i < function.Commands.Length; i++)
         {
-            EnumCommand comando = function.Commands[i];
+            comando = function.Commands[i];
             switch (comando)
             {
                 case EnumCommand.UP:
@@ -109,9 +99,18 @@ public class BoardCommandManager : MonoBehaviour
                         yield return null;
                     }
                     break;
+                case EnumCommand.F1:
+                    yield return StartCoroutine(DoFunction(functionsBoard[0]));
+                    break;
+                case EnumCommand.F2:
+                    yield return StartCoroutine(DoFunction(functionsBoard[1]));
+                    break;
+                case EnumCommand.F3:
+                    yield return StartCoroutine(DoFunction(functionsBoard[2]));
+                    break;
             }
-           
-            bool endGame = gameManager.checkEndGame(1, 0);
+
+            endGame = gameManager.checkEndGame(1, 0);
             if (endGame)
             {
                 break;
@@ -153,37 +152,6 @@ public class BoardCommandManager : MonoBehaviour
             yield return null;
         }
             
-    }
-
-    private void action(EnumCommand command)
-    {
-        switch (command)
-        {
-            case EnumCommand.UP:
-                StartCoroutine(this.animationMoviment(playerBody.position + new Vector2(0, offsetXPlayer))); 
-                //player.transform.position += new Vector3(0, offsetXPlayer, 0);
-                break;
-            case EnumCommand.DOWN:
-                player.transform.position -= new Vector3(0, offsetXPlayer, 0);
-                break;
-            case EnumCommand.LEFT:
-                player.transform.position -= new Vector3(offsetYPlayer, 0, 0);
-                break;
-            case EnumCommand.RIGHT:
-                player.transform.position += new Vector3(offsetYPlayer, 0, 0);
-                break;
-            case EnumCommand.F1:
-                doFunction(functionsBoard[0]);
-                break;
-            case EnumCommand.F2:
-                doFunction(functionsBoard[1]);
-                break;
-            case EnumCommand.F3:
-                doFunction(functionsBoard[2]);
-                break;
-            default:
-                break;
-        }
     }
 
     private GameObject getObjectToInstantiate(EnumCommand command)

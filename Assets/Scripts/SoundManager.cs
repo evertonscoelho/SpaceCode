@@ -25,8 +25,8 @@ public class SoundManager : MonoBehaviour {
         if (instance == null)
         {
             instance = this;
-            soundOn = true;
-            musicSource.Play();
+            soundOn = false;
+            //musicSource.Play();
         }
         else if (instance != this)
             Destroy(gameObject);
