@@ -33,7 +33,7 @@ public class BoardCommandManager : MonoBehaviour
         // functions[1].Commands = new EnumCommand[] { EnumCommand.DOWN, EnumCommand.F3, EnumCommand.LEFT };
         // functions[2].Commands = new EnumCommand[] { EnumCommand.RIGHT, EnumCommand.UP };
 
-        functions[0].Commands = new EnumCommand[] { EnumCommand.F2, EnumCommand.F2, EnumCommand.F3 };
+        functions[0].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.UP, EnumCommand.UP, EnumCommand.UP, EnumCommand.LEFT, EnumCommand.RIGHT, EnumCommand.RIGHT, EnumCommand.RIGHT };
         functions[1].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.UP};
         functions[2].Commands = new EnumCommand[] { EnumCommand.LEFT, EnumCommand.DOWN};
         doCommands(functions);
@@ -84,7 +84,7 @@ public class BoardCommandManager : MonoBehaviour
             {
                 case EnumCommand.UP:
                     Vector2 targetUp = playerBody.position + new Vector2(0, offsetXPlayer);
-                    while (playerBody.position.y < targetUp.y)
+                    for(float aux = playerBody.position.y; aux < targetUp.y; aux += 0.1f)
                     {
                         playerBody.MovePosition(new Vector2(playerBody.position.x, playerBody.position.y + 0.1f));
                         yield return null;
@@ -92,7 +92,7 @@ public class BoardCommandManager : MonoBehaviour
                     break;
                 case EnumCommand.DOWN:
                     Vector2 targetDown = playerBody.position - new Vector2(0, offsetXPlayer);
-                    while (playerBody.position.y > targetDown.y)
+                    for (float aux = playerBody.position.y; aux > targetDown.y; aux -= 0.1f)
                     {
                         playerBody.MovePosition(new Vector2(playerBody.position.x, playerBody.position.y - 0.1f));
                         yield return null;
@@ -100,7 +100,7 @@ public class BoardCommandManager : MonoBehaviour
                     break;
                 case EnumCommand.LEFT:
                     Vector2 targetLeft = playerBody.position - new Vector2(offsetYPlayer, 0);
-                    while (playerBody.position.x > targetLeft.x)
+                    for (float aux = playerBody.position.x; aux > targetLeft.x; aux -= 0.1f)
                     {
                         playerBody.MovePosition(new Vector2(playerBody.position.x - 0.1f, playerBody.position.y));
                         yield return null;
@@ -108,7 +108,7 @@ public class BoardCommandManager : MonoBehaviour
                     break;
                 case EnumCommand.RIGHT:
                     Vector2 targetRight = playerBody.position + new Vector2(offsetYPlayer, 0);
-                    while (playerBody.position.x < targetRight.x)
+                    for (float aux = playerBody.position.x; aux < targetRight.x; aux += 0.1f)
                     {
                         playerBody.MovePosition(new Vector2(playerBody.position.x + 0.1f, playerBody.position.y));
                         yield return null;
