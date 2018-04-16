@@ -33,7 +33,7 @@ public class BoardCommandManager : MonoBehaviour
         // functions[1].Commands = new EnumCommand[] { EnumCommand.DOWN, EnumCommand.F3, EnumCommand.LEFT };
         // functions[2].Commands = new EnumCommand[] { EnumCommand.RIGHT, EnumCommand.UP };
 
-        functions[0].Commands = new EnumCommand[] { EnumCommand.up, EnumCommand.F2, EnumCommand.F3 };
+        functions[0].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.F2, EnumCommand.F3 };
         functions[1].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.UP };
         functions[2].Commands = new EnumCommand[] { EnumCommand.LEFT, EnumCommand.DOWN };
         doCommands(functions);
