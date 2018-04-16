@@ -7,10 +7,11 @@ using System;
 public class GameManager : MonoBehaviour
 {
 
-    public static GameManager instance = null;             
+    public static GameManager instance = null;
 
-    private BoardManager boardScript;                      
+    private BoardManager boardScript;
     private String levelId;
+    public BoardCommandManager boardComamandManager;
 
     void Awake()
     {
@@ -21,7 +22,7 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         boardScript = GetComponent<BoardManager>();
-        
+
     }
 
     public void soundClick()
@@ -47,32 +48,37 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(sceneIndex);
     }
-    
-    public Boolean checkEndGame(int addCommand, int addCollectable)
+
+    public Boolean checkEndGameCommand()
     {
-        StatusGame status = boardScript.checkEndGame(addCommand, addCollectable);
-        if(status.Equals(StatusGame.VICTORY))
-        {
-            doVictory();
-            return true;
-        }else if (status.Equals(StatusGame.DEFEAT))
+        StatusGame status = boardScript.checkEndGame(1, 0);
+        if (status.Equals(StatusGame.DEFEAT))
         {
             doDefeat();
             return true;
         }
-        else
+        return false;
+    }
+
+    public void checkEndGameCollectable(Vector2 positionCollectable)
+    {
+        StatusGame status = boardScript.checkEndGame(0, 1);
+        if (status.Equals(StatusGame.VICTORY))
         {
-            return false;
+            StartCoroutine(doVictory(positionCollectable));
         }
     }
 
     private void doDefeat()
     {
+        boardComamandManager.StopAllCoroutines();
         print("Perdeu");
     }
 
-    private void doVictory()
+    private IEnumerator doVictory(Vector2 positionCollectable)
     {
+        boardComamandManager.StopAllCoroutines();
+        yield return StartCoroutine(boardComamandManager.terminateMovement(positionCollectable));
         print("Ganhou");
     }
 }

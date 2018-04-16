@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,7 +21,7 @@ public class PlayerController : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             SoundManager.instance.PlaySingle(collectableAudio);
-            gameManager.checkEndGame(0, 1);
+            gameManager.checkEndGameCollectable(other.transform.position);
         }
     }
 }

@@ -78,7 +78,7 @@ public class BoardManager : MonoBehaviour
     {
         commands += addCommand;
         collectables += addCollectable;
-        if (commands >= level.maxCommands)
+        if (commands > level.maxCommands)
         {
             return StatusGame.DEFEAT;
         }

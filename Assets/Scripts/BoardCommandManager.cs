@@ -26,16 +26,16 @@ public class BoardCommandManager : MonoBehaviour
 
     public void testClass()
     {
-        Function[] functions = {new Function() };
+        Function[] functions = { new Function(), new Function(), new Function() };
 
-         functions[0].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.UP, EnumCommand.UP, EnumCommand.UP, EnumCommand.LEFT, EnumCommand.RIGHT, EnumCommand.RIGHT, EnumCommand.RIGHT };
+        //functions[0].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.UP, EnumCommand.UP, EnumCommand.UP, EnumCommand.LEFT, EnumCommand.RIGHT, EnumCommand.RIGHT, EnumCommand.RIGHT };
         //functions[0].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.DOWN, EnumCommand.F2, EnumCommand.F1 };
         // functions[1].Commands = new EnumCommand[] { EnumCommand.DOWN, EnumCommand.F3, EnumCommand.LEFT };
         // functions[2].Commands = new EnumCommand[] { EnumCommand.RIGHT, EnumCommand.UP };
 
-       // functions[0].Commands = new EnumCommand[] { EnumCommand.F1, EnumCommand.F1, EnumCommand.F2 };
-       // functions[1].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.UP};
-        //functions[2].Commands = new EnumCommand[] { EnumCommand.LEFT, EnumCommand.DOWN};
+        functions[0].Commands = new EnumCommand[] { EnumCommand.F2, EnumCommand.F2, EnumCommand.F3 };
+        functions[1].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.UP};
+        functions[2].Commands = new EnumCommand[] { EnumCommand.LEFT, EnumCommand.DOWN};
         doCommands(functions);
     }
 
@@ -49,6 +49,16 @@ public class BoardCommandManager : MonoBehaviour
         offsetXPlayer = floor.GetComponent<SpriteRenderer>().bounds.size.y;
         offsetYPlayer = floor.GetComponent<SpriteRenderer>().bounds.size.y;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager.boardComamandManager = this;
+    }
+
+    public IEnumerator terminateMovement(Vector2 positionCollectable)
+    {
+        while (!playerBody.position.Equals(positionCollectable))
+        {
+            playerBody.position = Vector3.MoveTowards(playerBody.position, positionCollectable, 0.1f);
+            yield return null;
+        }
     }
 
     public void doCommands(Function[] functions)
@@ -65,6 +75,11 @@ public class BoardCommandManager : MonoBehaviour
         for (int i = 0; i < function.Commands.Length; i++)
         {
             comando = function.Commands[i];
+            endGame = gameManager.checkEndGameCommand();
+            if (endGame)
+            {
+                break;
+            }
             switch (comando)
             {
                 case EnumCommand.UP:
@@ -109,17 +124,10 @@ public class BoardCommandManager : MonoBehaviour
                     yield return StartCoroutine(DoFunction(functionsBoard[2]));
                     break;
             }
-
-            endGame = gameManager.checkEndGame(1, 0);
-            if (endGame)
-            {
-                break;
-            }
-            else
+            if (!endGame)
             {
                 yield return new WaitForSeconds(1);
             }
-           
         }
     }
 
@@ -148,10 +156,10 @@ public class BoardCommandManager : MonoBehaviour
         Vector2 playerPosition = playerBody.position;
         while (playerBody.position.y < target.y)
         {
-            playerBody.MovePosition(new Vector2(0, playerBody.position.y+0.1f));
+            playerBody.MovePosition(new Vector2(0, playerBody.position.y + 0.1f));
             yield return null;
         }
-            
+
     }
 
     private GameObject getObjectToInstantiate(EnumCommand command)
