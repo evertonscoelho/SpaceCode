@@ -3,14 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class SoundManager : MonoBehaviour {
+public class SoundManager : MonoBehaviour
+{
 
-    public AudioSource efxSource;                  
-    public AudioSource musicSource;      
-    
+    public AudioSource efxSource;
+    public AudioSource musicSource;
+
     public static SoundManager instance = null;
-    
-    public float lowPitchRange = .95f;              
+
+    public float lowPitchRange = .95f;
     public float highPitchRange = 1.05f;
 
     public Sprite soundOnImage;
@@ -18,7 +19,7 @@ public class SoundManager : MonoBehaviour {
 
     private GameObject sound;
     private Boolean soundOn;
-    
+
 
     void Awake()
     {
@@ -62,8 +63,11 @@ public class SoundManager : MonoBehaviour {
 
     public void PlaySingle(AudioClip clip)
     {
-        efxSource.clip = clip;
-        efxSource.Play();
+        if (soundOn)
+        {
+            efxSource.clip = clip;
+            efxSource.Play();
+        }
     }
 
 
