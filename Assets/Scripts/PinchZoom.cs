@@ -7,7 +7,6 @@ public class PinchZoom : MonoBehaviour
 
     void Update()
     {
-        /*
         // If there are two touches on the device...
         if (Input.touchCount == 2)
         {
@@ -33,8 +32,7 @@ public class PinchZoom : MonoBehaviour
             // Make sure the orthographic size never drops below zero.
             camera.orthographicSize = Mathf.Max(camera.orthographicSize, 0.5f);
 
-            camera.orthographicSize = Mathf.Min(camera.orthographicSize, 20f);
+           // camera.orthographicSize = Mathf.Min(camera.orthographicSize, 20f);
         }
-        */
     }
 }

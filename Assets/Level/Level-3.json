@@ -29,7 +29,7 @@
 			{
 				"positionX": 0,
 				"positionY": 0,
-				"objectType": "Obstacle"
+				"objectType": "Wall"
 			},
 			{
 				"positionX": 0,

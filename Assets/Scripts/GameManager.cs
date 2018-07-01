@@ -30,6 +30,11 @@ public class GameManager : MonoBehaviour
         SoundManager.instance.soundClick();
     }
 
+    public void pictureClick()
+    {
+        PictureManager.instance.pictureClick();
+    }
+
     public void loadLevel(String id)
     {
         GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();

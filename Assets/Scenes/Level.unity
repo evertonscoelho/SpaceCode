@@ -394,6 +394,16 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 496824227}
     m_Modifications:
+    - target: {fileID: 114381450485955928, guid: 1825dcac2c509054d879a0b44e9dd9dc,
+        type: 2}
+      propertyPath: m_Delegates.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114381450485955928, guid: 1825dcac2c509054d879a0b44e9dd9dc,
+        type: 2}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224456712405242292, guid: 1825dcac2c509054d879a0b44e9dd9dc,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -483,6 +493,27 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114381450485955928, guid: 1825dcac2c509054d879a0b44e9dd9dc,
+        type: 2}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 114576425978126010, guid: 6741198e64be281448b254bf1e5e3b1e,
+        type: 2}
+    - target: {fileID: 114381450485955928, guid: 1825dcac2c509054d879a0b44e9dd9dc,
+        type: 2}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: pictureClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 114381450485955928, guid: 1825dcac2c509054d879a0b44e9dd9dc,
+        type: 2}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114381450485955928, guid: 1825dcac2c509054d879a0b44e9dd9dc,
+        type: 2}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1825dcac2c509054d879a0b44e9dd9dc, type: 2}
@@ -771,41 +802,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orthoZoomSpeed: 0.5
---- !u!1 &1746901589 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1484045354403782, guid: 1825dcac2c509054d879a0b44e9dd9dc,
-    type: 2}
-  m_PrefabInternal: {fileID: 982826797}
---- !u!114 &1746901593
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1746901589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1890384709}
-          m_MethodName: testClass
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
-        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  delegates: []
 --- !u!1001 &1858974646
 Prefab:
   m_ObjectHideFlags: 0

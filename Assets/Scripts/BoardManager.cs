@@ -61,6 +61,8 @@ public class BoardManager : MonoBehaviour
 
     public void SetupScene(string idLevel)
     {
+        commands = 0;
+        collectables = 0;
         this.level = JsonUtility.FromJson<Level>(getJsonFileById(idLevel));
         BoardSetup(level.board);
     }
@@ -89,8 +91,6 @@ public class BoardManager : MonoBehaviour
         else
         {
             return StatusGame.CONTINUE;
-        }
-        
-        
+        }      
     }
 }
