@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.IO;
+using System.Net;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -19,18 +21,20 @@ public class PictureManager : MonoBehaviour
 
     public void pictureClick()
     {
-        request();
+        StartCoroutine(request());
  
     }
 
-    public void request()
+    public IEnumerator request()
     {
-        JsonRequest jsonRequest = new JsonRequest(getImage64(), new Features("LABEL_DETECTION", 1));
-        string json = JsonUtility.ToJson(jsonRequest);
+        string json = getJsonRequest(getImage64());
         UnityWebRequest www = UnityWebRequest.Post("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyB3CYJqXrWOnMqvzrgawkvR44dX4Z5iAF4", json);
+        byte[] bytes = Encoding.UTF8.GetBytes(json);
+        UploadHandlerRaw uH = new UploadHandlerRaw(bytes);
+        uH.contentType = "application/json";
+        www.uploadHandler = uH;
         {
-            //yield return www.SendWebRequest();
-            UnityWebRequestAsyncOperation teste = www.SendWebRequest();
+            yield return www.SendWebRequest();
             if (www.isNetworkError || www.isHttpError)
             {
                 Debug.Log(www.error);
@@ -38,7 +42,6 @@ public class PictureManager : MonoBehaviour
             else
             {
                 Debug.Log(www.downloadHandler.text);
-                Debug.Log(teste.);
             }
         }
     }
@@ -50,13 +53,10 @@ public class PictureManager : MonoBehaviour
         return System.Convert.ToBase64String(fileData);
     }
 
+    public string getJsonRequest(string imageBase64)
+    {
+        return "{ \"requests\":[{\"image\":{\"content\":\"" + imageBase64 + "\"},\"features\":[{\"type\":\"DOCUMENT_TEXT_DETECTION\",\"maxResults\":1}]}]}";
+    }
 
-
-    //    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("http://api.openweathermap.org/data/2.5/weather?id={0}&APPID={1}", CityId, API_KEY));
-    //    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-    //    StreamReader reader = new StreamReader(response.GetResponseStream());
-    //    string jsonResponse = reader.ReadToEnd();
-    //    WeatherInfo info = JsonUtility.FromJson<WeatherInfo>(jsonResponse);
-    //    return info;
 }
 
