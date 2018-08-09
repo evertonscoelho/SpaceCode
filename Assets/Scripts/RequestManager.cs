@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.IO;
 using System.Text;
 using UnityEngine;
@@ -26,10 +27,49 @@ public static class RequestManager{
                 {
                     JsonResponse jsonResponse = JsonUtility.FromJson<JsonResponse>(www.downloadHandler.text);
                     string response = jsonResponse.responses[0].textAnnotations[0].description;
-                                        
+                    Debug.Log(www.downloadHandler.text);
+                    Debug.Log(response);
+                    convertToCommand(response);                    
                 }
             }
         }
+    }
+
+    private static void convertToCommand(string response)
+    {
+        /*
+            switch (response)
+            {
+                case "PIS":
+                    return Up;
+                case "VRO":
+                    return Up;
+                case "CIR":
+                    return Up;
+                case "BRA":
+                    return Down;
+                case "LI":
+                    return Down;
+                case "LA":
+                    return Left;
+                case "PO":
+                    return Left;
+                case "DO":
+                    return Right;
+                case "MO":
+                    return Right;
+                case "RA":
+                    return F1;
+                case "CA":
+                    return F2;
+                case "TO":
+                    return F3;
+                default:
+                    return null;
+            }
+            
+        }
+        */
     }
 
     private static string getImage64()
@@ -64,12 +104,12 @@ public class TextAnnotations
 {
     public string locale;
     public string description;
-    public Object boundingPoly; 
+    public System.Object boundingPoly; 
 }
 
 [System.Serializable]
 public class FullTextAnnotation
 {
-    Object[] pages;
+    System.Object[] pages;
 }
 

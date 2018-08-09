@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System;
-
+using UnityEngine.Experimental.UIElements;
 
 public class GameManager : MonoBehaviour
 {
@@ -63,6 +63,19 @@ public class GameManager : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public void clickHelpMainScene(Boolean active)
+    {
+        GameObject modalHelpMainScene = GameObject.Find("ModalPanel");
+        if (active)
+        {
+            modalHelpMainScene.GetComponent<Transform>().SetAsLastSibling();
+        }
+        else
+        {
+            modalHelpMainScene.SetActive(false);
+        }
     }
 
     public void checkEndGameCollectable(Vector2 positionCollectable)
