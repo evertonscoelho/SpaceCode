@@ -117,8 +117,13 @@ NavMeshSettings:
 RectTransform:
   m_PrefabParentObject: {fileID: 224489097223888526, guid: a5b914a602e755d40a2544fc07c58dc4,
     type: 2}
-  m_PrefabInternal: {fileID: 214309069}
---- !u!1001 &214309069
+  m_PrefabInternal: {fileID: 480203988}
+--- !u!224 &237033568 stripped
+RectTransform:
+  m_PrefabParentObject: {fileID: 224955314832033308, guid: 30adf36def7afb94c8a90d5fdf38d9fe,
+    type: 2}
+  m_PrefabInternal: {fileID: 1241326916}
+--- !u!1001 &480203988
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -241,18 +246,30 @@ Prefab:
         Sed sit amet nibh purus. Etiam magna lorem, porttitor sed metus ut, aliquam
         molestie arcu. Donec faucibus turpis nec nibh condimentum porta."
       objectReference: {fileID: 0}
-    - target: {fileID: 1533713169342256, guid: a5b914a602e755d40a2544fc07c58dc4, type: 2}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 114025471696754210, guid: a5b914a602e755d40a2544fc07c58dc4,
+        type: 2}
+      propertyPath: tipoModal
+      value: ModalPanelHelp
       objectReference: {fileID: 0}
+    - target: {fileID: 114025471696754210, guid: a5b914a602e755d40a2544fc07c58dc4,
+        type: 2}
+      propertyPath: question
+      value: 
+      objectReference: {fileID: 486557561}
+    - target: {fileID: 114025471696754210, guid: a5b914a602e755d40a2544fc07c58dc4,
+        type: 2}
+      propertyPath: modalPanelObject
+      value: 
+      objectReference: {fileID: 661079214}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a5b914a602e755d40a2544fc07c58dc4, type: 2}
   m_IsPrefabParent: 0
---- !u!224 &237033568 stripped
-RectTransform:
-  m_PrefabParentObject: {fileID: 224955314832033308, guid: 30adf36def7afb94c8a90d5fdf38d9fe,
+--- !u!114 &486557561 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114266460888503062, guid: a5b914a602e755d40a2544fc07c58dc4,
     type: 2}
-  m_PrefabInternal: {fileID: 1241326916}
+  m_PrefabInternal: {fileID: 480203988}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &515334504
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,7 +281,6 @@ GameObject:
   - component: {fileID: 515334508}
   - component: {fileID: 515334507}
   - component: {fileID: 515334506}
-  - component: {fileID: 515334505}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -272,18 +288,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &515334505
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114399504128250460, guid: 6741198e64be281448b254bf1e5e3b1e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 515334504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &515334506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,6 +438,11 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224534793432331498, guid: 4220d538157b9894c956ec76320a1ac2,
     type: 2}
   m_PrefabInternal: {fileID: 557312585}
+--- !u!1 &661079214 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1533713169342256, guid: a5b914a602e755d40a2544fc07c58dc4,
+    type: 2}
+  m_PrefabInternal: {fileID: 480203988}
 --- !u!1 &783214594
 GameObject:
   m_ObjectHideFlags: 0

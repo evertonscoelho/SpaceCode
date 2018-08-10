@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 224489097223888526}
   - component: {fileID: 222638340148176092}
   - component: {fileID: 114398334540719604}
-  - component: {fileID: 114733424713959788}
+  - component: {fileID: 114025471696754210}
   m_Layer: 5
   m_Name: ModalPanelHelp
   m_TagString: Untagged
@@ -82,6 +82,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114025471696754210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1533713169342256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2468d150ae6b917489005fe5459bccfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  question: {fileID: 0}
+  tipoModal: 
+  modalPanelObject: {fileID: 0}
 --- !u!114 &114063105762556866
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -241,19 +255,6 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
---- !u!114 &114733424713959788
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1533713169342256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 043af1ccd4f2dcc42bddc00d716043dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  question: {fileID: 114266460888503062}
-  modalPanelObject: {fileID: 1533713169342256}
 --- !u!114 &114949253905129332
 MonoBehaviour:
   m_ObjectHideFlags: 1

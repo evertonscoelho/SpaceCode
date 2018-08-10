@@ -6,6 +6,6 @@ public class LoaderLevel : MonoBehaviour
 {
     void Awake()
     {
-        GameManager.instance.setupSceneLevel();
+       GameManager.instance.setupSceneLevel();
     }
 }

@@ -11,8 +11,10 @@ public class GameManager : MonoBehaviour
 
     private BoardManager boardScript;
     private String levelId;
+
     public BoardCommandManager boardComamandManager;
-    private ModalPanelHelp modalPanelHelp;
+    private ModalPanel modalPanelHelp;
+    private ModalPanel modalPanelEndGame;
 
     void Awake()
     {
@@ -69,7 +71,7 @@ public class GameManager : MonoBehaviour
     public void clickHelpMainScene(Boolean active)
     {
         GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        gameManager.modalPanelHelp.clickHelpMainScene(active);
+        gameManager.modalPanelHelp.clickHelpMainScene(active, null);
     }
 
     public void checkEndGameCollectable(Vector2 positionCollectable)
@@ -94,8 +96,13 @@ public class GameManager : MonoBehaviour
         print("Ganhou");
     }
 
-    public void setModalPanelHelp(ModalPanelHelp modalPanelHelp)
+    public void setModalPanelHelp(ModalPanel modalPanel)
     {
-        this.modalPanelHelp = modalPanelHelp;
+        this.modalPanelHelp = modalPanel;
+    }
+
+    public void setModalPanelEndGame(ModalPanel modalPanel)
+    {
+        this.modalPanelEndGame = modalPanel;
     }
 }

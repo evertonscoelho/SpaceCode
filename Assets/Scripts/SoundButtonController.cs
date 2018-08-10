@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SoundButtonController : MonoBehaviour {
 
 	void Start () {
-        SoundManager.instance.soundInit(gameObject);
+       SoundManager.instance.soundInit(gameObject);
     }
 
 }
