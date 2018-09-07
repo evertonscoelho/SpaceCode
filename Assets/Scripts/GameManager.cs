@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public BoardCommandManager boardComamandManager;
     private ModalPanel modalPanelHelp;
     private ModalPanel modalPanelEndGame;
+    private ModalPanel modalPanelCommands;
+    private Function[] functions;
 
     void Awake()
     {
@@ -35,7 +37,25 @@ public class GameManager : MonoBehaviour
 
     public void pictureClick()
     {
-        PictureManager.instance.pictureClick();
+        print("teste");
+        GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager.functions = PictureManager.instance.pictureClick();
+        gameManager.modalPanelCommands.setCommands(gameManager.functions, gameManager.boardComamandManager);
+        gameManager.modalPanelCommands.showModal(true, null);
+    }
+
+    public void functionsCorrect()
+    {
+        GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager.modalPanelCommands.showModal(false, null);
+        gameManager.boardComamandManager.doCommands(gameManager.functions);
+    }
+
+    public void functionsWrong()
+    {
+        GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager.modalPanelCommands.showModal(false, null);
+        gameManager.pictureClick();
     }
 
     public void loadLevel(String id)
@@ -71,7 +91,7 @@ public class GameManager : MonoBehaviour
     public void clickHelpMainScene(Boolean active)
     {
         GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        gameManager.modalPanelHelp.clickHelpMainScene(active, null);
+        gameManager.modalPanelHelp.showModal(active, null);
     }
 
     public void checkEndGameCollectable(Vector2 positionCollectable)
@@ -86,14 +106,14 @@ public class GameManager : MonoBehaviour
     private void doDefeat()
     {
         boardComamandManager.StopAllCoroutines();
-        print("Perdeu");
+        modalPanelEndGame.showModal(true, "Perdeu :/");
     }
 
     private IEnumerator doVictory(Vector2 positionCollectable)
     {
         boardComamandManager.StopAllCoroutines();
         yield return StartCoroutine(boardComamandManager.terminateMovement(positionCollectable));
-        print("Ganhou");
+        modalPanelEndGame.showModal(true, "Ganhou :)");
     }
 
     public void setModalPanelHelp(ModalPanel modalPanel)
@@ -105,4 +125,10 @@ public class GameManager : MonoBehaviour
     {
         this.modalPanelEndGame = modalPanel;
     }
+
+    public void setModalPanelCommands(ModalPanel modalPanel)
+    {
+        this.modalPanelCommands = modalPanel;
+    }
+    
 }

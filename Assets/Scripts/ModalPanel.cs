@@ -10,6 +10,10 @@ public class ModalPanel : MonoBehaviour {
     public string tipoModal;
 
     public GameObject modalPanelObject;
+    public GameObject boardCommand;
+
+    private float offsetX;
+    private float offsetY;
 
     void Start()
     {
@@ -21,11 +25,16 @@ public class ModalPanel : MonoBehaviour {
         {
             GameManager.instance.setModalPanelEndGame(this.GetComponent<ModalPanel>());
         }
-        
-        clickHelpMainScene(false, null);
+        else if (tipoModal.Equals("ModalPanelCommand"))
+        {
+            GameManager.instance.setModalPanelCommands(this.GetComponent<ModalPanel>());
+        }
+
+
+        showModal(false, null);
     }
 
-    public void clickHelpMainScene(Boolean active, string text)
+    public void showModal(Boolean active, string text)
     {
         if (active)
         {
@@ -41,6 +50,28 @@ public class ModalPanel : MonoBehaviour {
         }
     }
 
+    internal void setCommands(Function[] functions, BoardCommandManager boardComamandManager)
+    {
+        Transform transformBoardCommand = boardCommand.transform;
+        GameObject command = boardComamandManager.getObjectToInstantiate(functions[0].Commands[0]);
+        offsetX = command.GetComponent<SpriteRenderer>().bounds.size.x;
+        offsetY = command.GetComponent<SpriteRenderer>().bounds.size.y;
+
+        for (int y = 0; y < functions.Length; y++)
+        {
+            for (int x = 0; x < functions[y].Commands.Length; x++)
+            {
+                GameObject toInstantiate = boardComamandManager.getObjectToInstantiate(functions[y].Commands[x]);
+                GameObject instance = Instantiate(toInstantiate, transformBoardCommand.transform, true) as GameObject;
+                instance.transform.localPosition = getPositionInstance(x - 3, (y * -1) + 1);
+            }
+        }
+    }
+
+    private Vector3 getPositionInstance(int x, float y)
+    {
+        return new Vector3(x * offsetX, y * offsetY, 0f);
+    }
     private void ShowPainel()
     {
         modalPanelObject.SetActive(true);

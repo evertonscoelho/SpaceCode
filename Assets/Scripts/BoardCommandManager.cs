@@ -162,7 +162,7 @@ public class BoardCommandManager : MonoBehaviour
 
     }
 
-    private GameObject getObjectToInstantiate(EnumCommand command)
+    public GameObject getObjectToInstantiate(EnumCommand command)
     {
         switch (command)
         {
