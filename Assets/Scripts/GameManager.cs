@@ -37,7 +37,6 @@ public class GameManager : MonoBehaviour
 
     public void pictureClick()
     {
-        print("teste");
         GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         gameManager.functions = PictureManager.instance.pictureClick();
         gameManager.modalPanelCommands.setCommands(gameManager.functions, gameManager.boardComamandManager);
@@ -61,7 +60,14 @@ public class GameManager : MonoBehaviour
     public void loadLevel(String id)
     {
         GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        gameManager.levelId = id;
+        if (id.Equals("-1")) {
+            int newLevel = Int32.Parse(gameManager.levelId) + 1;
+            gameManager.levelId = newLevel.ToString();
+        }
+        else
+        {
+            gameManager.levelId = id;
+        }
         gameManager.loadScene(2);
     }
 
@@ -103,10 +109,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void doDefeat()
+    public void doDefeat()
     {
         boardComamandManager.StopAllCoroutines();
         modalPanelEndGame.showModal(true, "Perdeu :/");
+        modalPanelEndGame.interactableButtonNext(false);
     }
 
     private IEnumerator doVictory(Vector2 positionCollectable)
@@ -114,6 +121,7 @@ public class GameManager : MonoBehaviour
         boardComamandManager.StopAllCoroutines();
         yield return StartCoroutine(boardComamandManager.terminateMovement(positionCollectable));
         modalPanelEndGame.showModal(true, "Ganhou :)");
+        modalPanelEndGame.interactableButtonNext(true);
     }
 
     public void setModalPanelHelp(ModalPanel modalPanel)

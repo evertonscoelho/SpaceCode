@@ -70,7 +70,7 @@ public class BoardCommandManager : MonoBehaviour
 
     private IEnumerator DoFunction(Function function)
     {
-        bool endGame;
+        bool endGame = false;
         EnumCommand comando;
         for (int i = 0; i < function.Commands.Length; i++)
         {
@@ -128,6 +128,10 @@ public class BoardCommandManager : MonoBehaviour
             {
                 yield return new WaitForSeconds(1);
             }
+        }
+        if (!endGame)
+        {
+            gameManager.doDefeat();
         }
     }
 

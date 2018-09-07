@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ModalPanel : MonoBehaviour {
 
     public Text question;
+    public Button buttonNext;
     public string tipoModal;
 
     public GameObject modalPanelObject;
@@ -33,6 +34,10 @@ public class ModalPanel : MonoBehaviour {
 
         showModal(false, null);
     }
+    public void interactableButtonNext(Boolean interactable)
+    {
+        buttonNext.interactable = interactable;
+    }
 
     public void showModal(Boolean active, string text)
     {
@@ -50,7 +55,7 @@ public class ModalPanel : MonoBehaviour {
         }
     }
 
-    internal void setCommands(Function[] functions, BoardCommandManager boardComamandManager)
+    public void setCommands(Function[] functions, BoardCommandManager boardComamandManager)
     {
         Transform transformBoardCommand = boardCommand.transform;
         GameObject command = boardComamandManager.getObjectToInstantiate(functions[0].Commands[0]);
