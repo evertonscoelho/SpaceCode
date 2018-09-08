@@ -5,10 +5,12 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public static class RequestManager{
+public class RequestManager{
 
-    public static IEnumerator request()
+    public String request()
     {
+        return "A,Left,Right,Down,NEXT,B,Right,Up,Left,Up,Down,NEXT,C,B,B";
+        /*
         string json = getJsonRequest(getImage64());
         UnityWebRequest www = UnityWebRequest.Post("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyB3CYJqXrWOnMqvzrgawkvR44dX4Z5iAF4", json);
         byte[] bytes = Encoding.UTF8.GetBytes(json);
@@ -33,6 +35,7 @@ public static class RequestManager{
                 }
             }
         }
+        */
     }
 
     private static void convertToCommand(string response)
@@ -85,31 +88,3 @@ public static class RequestManager{
     }
 
 }
-
-[System.Serializable]
-public class JsonResponse
-{
-    public Response[] responses;
-}
-
-[System.Serializable]
-public class Response
-{
-    public TextAnnotations[] textAnnotations;
-    public FullTextAnnotation fullTextAnnotation;
-}
-
-[System.Serializable]
-public class TextAnnotations
-{
-    public string locale;
-    public string description;
-    public System.Object boundingPoly; 
-}
-
-[System.Serializable]
-public class FullTextAnnotation
-{
-    System.Object[] pages;
-}
-

@@ -16,7 +16,7 @@ public class PictureManager : MonoBehaviour
 
     public Function[] pictureClick()
     {
-        StartCoroutine(RequestManager.request());
+        //StartCoroutine(RequestManager.request());
         Function[] functions = testClass();
         return functions;
     }
