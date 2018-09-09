@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class PictureManager : MonoBehaviour
 {
@@ -14,26 +15,99 @@ public class PictureManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public Function[] pictureClick()
+    public List<Function> pictureClick()
     {
-        //StartCoroutine(RequestManager.request());
-        Function[] functions = testClass();
+        string request = RequestManager.request();
+        List<Function> functions = convertToCommand(request);
         return functions;
     }
 
-    public Function[] testClass()
+    private List<Function> convertToCommand(string response)
     {
-        Function[] functions = { new Function(), new Function(), new Function() };
-
-        functions[0].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.UP, EnumCommand.UP, EnumCommand.UP, EnumCommand.LEFT, EnumCommand.RIGHT, EnumCommand.RIGHT };
-        //functions[0].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.DOWN, EnumCommand.F2, EnumCommand.F1 };
-        functions[1].Commands = new EnumCommand[] { EnumCommand.DOWN, EnumCommand.F3, EnumCommand.LEFT };
-        functions[2].Commands = new EnumCommand[] { EnumCommand.RIGHT, EnumCommand.UP };
-
-        //functions[0].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.F2, EnumCommand.F3 };
-        //functions[1].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.UP };
-        //functions[2].Commands = new EnumCommand[] { EnumCommand.LEFT, EnumCommand.DOWN };
+        if (response.ToUpper().Equals("UNKNOW"))
+        {
+            throw new System.InvalidOperationException("Nenhum comando reconhecido");
+        }
+        response = response.ToUpper();
+        string[] commands = response.Split(',');
+        List<Function> functions= new List<Function>();
+        int line = 1;
+        bool firstCommandInLine = true;
+        List<EnumCommand> commandsLine = new List<EnumCommand>(); 
+        foreach (string command in commands)
+        {
+            if (firstCommandInLine)
+            {
+                firstCommandLineCheck(line, command);
+                firstCommandInLine = false;
+            }
+            else if (command.Equals("NEXT"))
+            {
+                if(line == 3)
+                {
+                    throw new System.InvalidOperationException("É permitido apenas 3 linhas de comandos");
+                }
+                line = line + 1;
+                functions.Add(new Function(commandsLine));
+                commandsLine = new List<EnumCommand>();
+                firstCommandInLine = true;
+            }
+            else
+            {
+                commandsLine.Add(getCommand(command));
+            }
+        }
+        functions.Add(new Function(commandsLine));
         return functions;
+    }
+
+    private static void firstCommandLineCheck(int line, string command)
+    {
+        if (line == 1)
+        {
+            if (!command.Equals("A"))
+            {
+                throw new System.InvalidOperationException("A primeira linha deve começar com o comando A");
+            }
+        }
+        else if (line == 2)
+        {
+            if (!command.Equals("B"))
+            {
+                throw new System.InvalidOperationException("A segunda linha deve começar com o comando B");
+            }
+        }
+        else if (line == 3)
+        {
+            if (!command.Equals("C"))
+            {
+                throw new System.InvalidOperationException("A terceira linha deve começar com o comando C");
+            }
+        }
+    }
+
+    public EnumCommand getCommand(string command)
+    {
+        switch (command)
+        {
+            case "UP":
+                return EnumCommand.UP;
+            case "DOWN":
+                return EnumCommand.DOWN;
+            case "LEFT":
+                return EnumCommand.LEFT;
+            case "RIGHT":
+                return EnumCommand.RIGHT;
+            case "A":
+                return EnumCommand.A;
+            case "B":
+                return EnumCommand.B;
+            case "C":
+                return EnumCommand.C;
+            default:
+                return EnumCommand.UNKNOW;
+        }
+
     }
 }
 

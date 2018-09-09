@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using System;
 using UnityEngine.Experimental.UIElements;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,7 +17,8 @@ public class GameManager : MonoBehaviour
     private ModalPanel modalPanelHelp;
     private ModalPanel modalPanelEndGame;
     private ModalPanel modalPanelCommands;
-    private Function[] functions;
+    private ModalPanel modalPanelErroCommands;
+    private List<Function> functions;
 
     void Awake()
     {
@@ -37,10 +39,18 @@ public class GameManager : MonoBehaviour
 
     public void pictureClick()
     {
+        print("teste");
         GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        gameManager.functions = PictureManager.instance.pictureClick();
-        gameManager.modalPanelCommands.setCommands(gameManager.functions, gameManager.boardComamandManager);
-        gameManager.modalPanelCommands.showModal(true, null);
+        try
+        {
+            gameManager.functions = PictureManager.instance.pictureClick();
+            gameManager.modalPanelCommands.setCommands(gameManager.functions, gameManager.boardComamandManager);
+            gameManager.modalPanelCommands.showModal(true, null);
+        }
+        catch (System.InvalidOperationException e)
+        {
+            gameManager.modalPanelErroCommands.showModal(true, e.Message); 
+        }
     }
 
     public void functionsCorrect()
@@ -50,10 +60,17 @@ public class GameManager : MonoBehaviour
         gameManager.boardComamandManager.doCommands(gameManager.functions);
     }
 
-    public void functionsWrong()
+    public void functionsWrong(bool erro)
     {
         GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        gameManager.modalPanelCommands.showModal(false, null);
+        if (erro)
+        {
+            gameManager.modalPanelErroCommands.showModal(false, null);
+        }
+        else
+        {
+            gameManager.modalPanelCommands.showModal(false, null);
+        }
         gameManager.pictureClick();
     }
 
@@ -138,5 +155,10 @@ public class GameManager : MonoBehaviour
     {
         this.modalPanelCommands = modalPanel;
     }
-    
+
+    public void setModalPanelErroCommands(ModalPanel modalPanel)
+    {
+        this.modalPanelErroCommands = modalPanel;
+    }
+
 }

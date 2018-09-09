@@ -1,12 +1,15 @@
-﻿public enum EnumCommand
+﻿using System.Collections.Generic;
+
+public enum EnumCommand
 {
     UP, 
     DOWN,
     LEFT,
     RIGHT,
-    F1,
-    F2,
-    F3
+    A,
+    B,
+    C,
+    UNKNOW
 };  
 
 public enum StatusGame
@@ -14,10 +17,14 @@ public enum StatusGame
     VICTORY,
     DEFEAT,
     CONTINUE
-
 }
 
 public class Function
 {
-    public EnumCommand[] Commands;
+    public List<EnumCommand> Commands;
+
+    public Function(List<EnumCommand> commands)
+    {
+        this.Commands = commands;
+    }
 }

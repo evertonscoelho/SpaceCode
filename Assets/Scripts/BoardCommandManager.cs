@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BoardCommandManager : MonoBehaviour
 {
@@ -9,12 +10,12 @@ public class BoardCommandManager : MonoBehaviour
     public GameObject Down;
     public GameObject Left;
     public GameObject Right;
-    public GameObject F1;
-    public GameObject F2;
-    public GameObject F3;
+    public GameObject A;
+    public GameObject B;
+    public GameObject C;
     public GameObject boardCommand;
 
-    private Function[] functionsBoard;
+    private List<Function> functionsBoard;
 
     private float offsetX;
     private float offsetY;
@@ -23,21 +24,6 @@ public class BoardCommandManager : MonoBehaviour
     private GameObject player;
     private GameManager gameManager;
     private Rigidbody2D playerBody;
-
-    public void testClass()
-    {
-        Function[] functions = { new Function(), new Function(), new Function() };
-
-        functions[0].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.UP, EnumCommand.UP, EnumCommand.UP, EnumCommand.LEFT, EnumCommand.RIGHT, EnumCommand.RIGHT };
-        //functions[0].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.DOWN, EnumCommand.F2, EnumCommand.F1 };
-        functions[1].Commands = new EnumCommand[] { EnumCommand.DOWN, EnumCommand.F3, EnumCommand.LEFT };
-        functions[2].Commands = new EnumCommand[] { EnumCommand.RIGHT, EnumCommand.UP };
-
-        //functions[0].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.F2, EnumCommand.F3 };
-        //functions[1].Commands = new EnumCommand[] { EnumCommand.UP, EnumCommand.UP };
-        //functions[2].Commands = new EnumCommand[] { EnumCommand.LEFT, EnumCommand.DOWN };
-        doCommands(functions);
-    }
 
     public void initValues()
     {
@@ -61,7 +47,7 @@ public class BoardCommandManager : MonoBehaviour
         }
     }
 
-    public void doCommands(Function[] functions)
+    public void doCommands(List<Function> functions)
     {
         functionsBoard = functions;
         printActionsInBoard(functions);
@@ -72,15 +58,14 @@ public class BoardCommandManager : MonoBehaviour
     {
         bool endGame = false;
         EnumCommand comando;
-        for (int i = 0; i < function.Commands.Length; i++)
+        foreach (EnumCommand command in function.Commands)
         {
-            comando = function.Commands[i];
             endGame = gameManager.checkEndGameCommand();
             if (endGame)
             {
                 break;
             }
-            switch (comando)
+            switch (command)
             {
                 case EnumCommand.UP:
                     Vector2 targetUp = playerBody.position + new Vector2(0, offsetXPlayer);
@@ -114,13 +99,13 @@ public class BoardCommandManager : MonoBehaviour
                         yield return null;
                     }
                     break;
-                case EnumCommand.F1:
+                case EnumCommand.A:
                     yield return StartCoroutine(DoFunction(functionsBoard[0]));
                     break;
-                case EnumCommand.F2:
+                case EnumCommand.B:
                     yield return StartCoroutine(DoFunction(functionsBoard[1]));
                     break;
-                case EnumCommand.F3:
+                case EnumCommand.C:
                     yield return StartCoroutine(DoFunction(functionsBoard[2]));
                     break;
             }
@@ -135,13 +120,13 @@ public class BoardCommandManager : MonoBehaviour
         }
     }
 
-    public void printActionsInBoard(Function[] functions)
+    public void printActionsInBoard(List<Function> functions)
     {
         Transform transformBoardCommand = boardCommand.transform;
 
-        for (int y = 0; y < functions.Length; y++)
+        for (int y = 0; y < functions.Count; y++)
         {
-            for (int x = 0; x < functions[y].Commands.Length; x++)
+            for (int x = 0; x < functions[y].Commands.Count; x++)
             {
                 GameObject toInstantiate = getObjectToInstantiate(functions[y].Commands[x]);
                 GameObject instance = Instantiate(toInstantiate, transformBoardCommand.transform, true) as GameObject;
@@ -178,12 +163,12 @@ public class BoardCommandManager : MonoBehaviour
                 return Left;
             case EnumCommand.RIGHT:
                 return Right;
-            case EnumCommand.F1:
-                return F1;
-            case EnumCommand.F2:
-                return F2;
-            case EnumCommand.F3:
-                return F3;
+            case EnumCommand.A:
+                return A;
+            case EnumCommand.B:
+                return B;
+            case EnumCommand.C:
+                return C;
             default:
                 return null;
         }

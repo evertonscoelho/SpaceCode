@@ -30,6 +30,10 @@ public class ModalPanel : MonoBehaviour {
         {
             GameManager.instance.setModalPanelCommands(this.GetComponent<ModalPanel>());
         }
+        else if (tipoModal.Equals("ModalPanelErroCommand"))
+        {
+            GameManager.instance.setModalPanelErroCommands(this.GetComponent<ModalPanel>());
+        }
 
 
         showModal(false, null);
@@ -55,16 +59,16 @@ public class ModalPanel : MonoBehaviour {
         }
     }
 
-    public void setCommands(Function[] functions, BoardCommandManager boardComamandManager)
+    public void setCommands(List<Function> functions, BoardCommandManager boardComamandManager)
     {
         Transform transformBoardCommand = boardCommand.transform;
         GameObject command = boardComamandManager.getObjectToInstantiate(functions[0].Commands[0]);
         offsetX = command.GetComponent<SpriteRenderer>().bounds.size.x;
         offsetY = command.GetComponent<SpriteRenderer>().bounds.size.y;
 
-        for (int y = 0; y < functions.Length; y++)
+        for (int y = 0; y < functions.Count; y++)
         {
-            for (int x = 0; x < functions[y].Commands.Length; x++)
+            for (int x = 0; x < functions[y].Commands.Count; x++)
             {
                 GameObject toInstantiate = boardComamandManager.getObjectToInstantiate(functions[y].Commands[x]);
                 GameObject instance = Instantiate(toInstantiate, transformBoardCommand.transform, true) as GameObject;

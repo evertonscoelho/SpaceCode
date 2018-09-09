@@ -7,9 +7,11 @@ using UnityEngine.Networking;
 
 public class RequestManager{
 
-    public String request()
+    public static String request()
     {
-        return "A,Left,Right,Down,NEXT,B,Right,Up,Left,Up,Down,NEXT,C,B,B";
+        //return "UNKNOW";
+        //return "A,Left,Right,Down,NEXT,B,Right,Up,Left,Up,Down,NEXT,C,B,B,NEXT,A";
+        return "A,UP,UP,UP,B,NEXT,B,UP,LEFT,Left,Up,Down,NEXT,C,B,B";
         /*
         string json = getJsonRequest(getImage64());
         UnityWebRequest www = UnityWebRequest.Post("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyB3CYJqXrWOnMqvzrgawkvR44dX4Z5iAF4", json);
@@ -38,42 +40,7 @@ public class RequestManager{
         */
     }
 
-    private static void convertToCommand(string response)
-    {
-        /*
-            switch (response)
-            {
-                case "PIS":
-                    return Up;
-                case "VRO":
-                    return Up;
-                case "CIR":
-                    return Up;
-                case "BRA":
-                    return Down;
-                case "LI":
-                    return Down;
-                case "LA":
-                    return Left;
-                case "PO":
-                    return Left;
-                case "DO":
-                    return Right;
-                case "MO":
-                    return Right;
-                case "RA":
-                    return F1;
-                case "CA":
-                    return F2;
-                case "TO":
-                    return F3;
-                default:
-                    return null;
-            }
-            
-        }
-        */
-    }
+    
 
     private static string getImage64()
     {
