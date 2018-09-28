@@ -69,10 +69,8 @@ public class BoardManager : MonoBehaviour
 
     private string getJsonFileById(string idLevel)
     {
-        string path = "Assets/Level/Level-" + idLevel + ".json";
-        StreamReader reader = new StreamReader(path);
-        string json = reader.ReadToEnd();
-        reader.Close();
+        TextAsset file = Resources.Load("Level-" + idLevel) as TextAsset;
+        string json = file.ToString();
         return json;
     }
 

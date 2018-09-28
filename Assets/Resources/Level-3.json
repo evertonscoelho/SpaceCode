@@ -1,0 +1,61 @@
+{
+	"name": "Level 1",
+	"levelID": "1",
+	"author": "Everton/Yuri",
+	"difficulty": 1,
+	"maxCommands": 40,
+	"board": {
+		"data": [
+			{
+				"positionX": 0,
+				"positionY": -1,
+				"objectType": "Player"
+			},
+				{
+				"positionX": -1,
+				"positionY": -1,
+				"objectType": "Floor"
+			},
+				{
+				"positionX": -1,
+				"positionY": 0,
+				"objectType": "Floor"
+			},
+			{
+				"positionX": -1,
+				"positionY": 1,
+				"objectType": "Floor"
+			},
+			{
+				"positionX": 0,
+				"positionY": 0,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": 0,
+				"positionY": 1,
+				"objectType": "Floor"
+			},
+			{
+				"positionX": 0,
+				"positionY": 2,
+				"objectType": "Floor"
+			},
+			{
+				"positionX": 0,
+				"positionY": 3,
+				"objectType": "Floor"
+			},
+			{
+				"positionX": -1,
+				"positionY": 3,
+				"objectType": "Collectable"
+			},
+			{
+				"positionX": -1,
+				"positionY": 4,
+				"objectType": "Collectable"
+			}
+		]
+	}
+}
