@@ -39,13 +39,13 @@ public class GameManager : MonoBehaviour
 
     public void pictureClick()
     {
-        print("teste");
         GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         try
         {
-            gameManager.functions = PictureManager.instance.pictureClick();
-            gameManager.modalPanelCommands.setCommands(gameManager.functions, gameManager.boardComamandManager);
-            gameManager.modalPanelCommands.showModal(true, null);
+            PictureManager.instance.pictureClick();
+            //gameManager.functions = PictureManager.instance.pictureClick();
+            //gameManager.modalPanelCommands.setCommands(gameManager.functions, gameManager.boardComamandManager);
+            //gameManager.modalPanelCommands.showModal(true, null);
         }
         catch (System.InvalidOperationException e)
         {

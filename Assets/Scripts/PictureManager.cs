@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
 
 public class PictureManager : MonoBehaviour
 {
     public static PictureManager instance = null;
+    private RawImage cameraImage;
 
     void Awake()
     {
@@ -15,7 +18,19 @@ public class PictureManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public List<Function> pictureClick()
+    public void pictureClick()
+    {
+        PhoneCamera phoneCamera = new PhoneCamera(cameraImage);
+        cameraImage.enabled = true;
+        //return request();
+    }
+
+    public void setCameraImage(RawImage cameraImage)
+    {
+        this.cameraImage = cameraImage;
+    }
+
+    public List<Function> request()
     {
         string request = RequestManager.request();
         List<Function> functions = convertToCommand(request);
