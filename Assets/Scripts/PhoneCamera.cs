@@ -32,25 +32,15 @@ public class PhoneCamera : MonoBehaviour {
         cameraImage.texture = cam;
     }
 	
-    public IEnumerator TakePhoto()
+    public byte[] TakePhoto()
     {
-        // NOTE - you almost certainly have to do this here:
-
-        yield return new WaitForEndOfFrame();
-
-        // it's a rare case where the Unity doco is pretty clear,
-        // http://docs.unity3d.com/ScriptReference/WaitForEndOfFrame.html
-        // be sure to scroll down to the SECOND long example on that doco page 
-
         Texture2D photo = new Texture2D(cam.width, cam.height);
         photo.SetPixels(cam.GetPixels());
         photo.Apply();
-
-        //Encode to a PNG
         byte[] bytes = photo.EncodeToPNG();
-        //Write out the PNG. Of course you have to substitute your_path for something sensible
-        print("HAHA");
-        yield return null;
+        cam.Stop();
 
+        return bytes;
     }
+
 }

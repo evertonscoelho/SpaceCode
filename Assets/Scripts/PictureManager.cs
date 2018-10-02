@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class PictureManager : MonoBehaviour
 {
     public static PictureManager instance = null;
-    private RawImage cameraImage;
+    private CameraViewManager cameraViewManager;
+    PhoneCamera phoneCamera;
 
     void Awake()
     {
@@ -20,19 +21,25 @@ public class PictureManager : MonoBehaviour
 
     public void pictureClick()
     {
-        PhoneCamera phoneCamera = new PhoneCamera(cameraImage);
-        cameraImage.enabled = true;
-        //return request();
+        phoneCamera = new PhoneCamera(cameraViewManager.GetComponent<RawImage>());
+        cameraViewManager.active();
     }
 
-    public void setCameraImage(RawImage cameraImage)
+    public List<Function> takePictureClick()
     {
-        this.cameraImage = cameraImage;
+        byte[] bytes = phoneCamera.TakePhoto();
+        cameraViewManager.deactivate();
+        return request(bytes);
     }
 
-    public List<Function> request()
+    public void setCameraViewManager(CameraViewManager cameraViewManager)
     {
-        string request = RequestManager.request();
+        this.cameraViewManager = cameraViewManager;
+    }
+
+    public List<Function> request(byte[] bytes)
+    {
+        string request = RequestManager.request(bytes);
         List<Function> functions = convertToCommand(request);
         return functions;
     }
@@ -125,4 +132,3 @@ public class PictureManager : MonoBehaviour
 
     }
 }
-

@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 
 public class RequestManager{
 
-    public static String request()
+    public static String request(byte[] bytes)
     {
         //return "UNKNOW";
         //return "A,Left,Right,Down,NEXT,B,Right,Up,Left,Up,Down,NEXT,C,B,B,NEXT,A";
