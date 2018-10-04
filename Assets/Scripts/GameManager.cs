@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     private BoardManager boardScript;
+    private LoaderLevel loaderLevel;
     private String levelId;
 
     public BoardCommandManager boardComamandManager;
@@ -62,6 +63,7 @@ public class GameManager : MonoBehaviour
         GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         gameManager.modalPanelCommands.showModal(false, null);
         gameManager.boardComamandManager.doCommands(gameManager.functions);
+        gameManager.loaderLevel.deactivateButtons();
     }
 
     public void functionsWrong(bool erro)
@@ -92,8 +94,9 @@ public class GameManager : MonoBehaviour
         gameManager.loadScene(2);
     }
 
-    public void setupSceneLevel()
+    public void setupSceneLevel(LoaderLevel loaderLevel)
     {
+        this.loaderLevel = loaderLevel;
         boardScript.SetupScene(levelId);
         BoardCommandManager boardCommand = GameObject.Find("BoardCommand").GetComponent<BoardCommandManager>();
         boardCommand.initValues();
@@ -135,6 +138,7 @@ public class GameManager : MonoBehaviour
         boardComamandManager.StopAllCoroutines();
         modalPanelEndGame.showModal(true, "Perdeu :/");
         modalPanelEndGame.interactableButtonNext(false);
+        loaderLevel.activateButtons();
     }
 
     private IEnumerator doVictory(Vector2 positionCollectable)
@@ -143,6 +147,7 @@ public class GameManager : MonoBehaviour
         yield return StartCoroutine(boardComamandManager.terminateMovement(positionCollectable));
         modalPanelEndGame.showModal(true, "Ganhou :)");
         modalPanelEndGame.interactableButtonNext(true);
+        loaderLevel.activateButtons();
     }
 
     public void setModalPanelHelp(ModalPanel modalPanel)
