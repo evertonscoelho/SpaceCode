@@ -1,9 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-
-public class CameraViewManager : MonoBehaviour {
+﻿public class CameraViewManager : UnityEngine.MonoBehaviour
+{
 
 	void Start () {
         deactivate();

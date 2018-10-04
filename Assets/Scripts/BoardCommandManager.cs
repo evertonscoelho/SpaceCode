@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -34,17 +33,8 @@ public class BoardCommandManager : MonoBehaviour
         GameObject floor = GameObject.Find("Floor(Clone)");
         offsetXPlayer = floor.GetComponent<SpriteRenderer>().bounds.size.y;
         offsetYPlayer = floor.GetComponent<SpriteRenderer>().bounds.size.y;
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager = GameManager.instance;
         gameManager.boardComamandManager = this;
-    }
-
-    public IEnumerator terminateMovement(Vector2 positionCollectable)
-    {
-        while (!playerBody.position.Equals(positionCollectable))
-        {
-            playerBody.position = Vector3.MoveTowards(playerBody.position, positionCollectable, 0.1f);
-            yield return null;
-        }
     }
 
     public void doCommands(List<Function> functions)
@@ -57,14 +47,13 @@ public class BoardCommandManager : MonoBehaviour
     private IEnumerator DoFunction(Function function)
     {
         bool endGame = false;
-        EnumCommand comando;
         foreach (EnumCommand command in function.Commands)
         {
-            endGame = gameManager.checkEndGameCommand();
             if (endGame)
             {
                 break;
             }
+            endGame = gameManager.checkEndGameCommand();
             switch (command)
             {
                 case EnumCommand.UP:
@@ -123,13 +112,13 @@ public class BoardCommandManager : MonoBehaviour
     public void printActionsInBoard(List<Function> functions)
     {
         Transform transformBoardCommand = boardCommand.transform;
-
+        GameObject toInstantiate, instance;
         for (int y = 0; y < functions.Count; y++)
         {
             for (int x = 0; x < functions[y].Commands.Count; x++)
             {
-                GameObject toInstantiate = getObjectToInstantiate(functions[y].Commands[x]);
-                GameObject instance = Instantiate(toInstantiate, transformBoardCommand.transform, true) as GameObject;
+                toInstantiate = getObjectToInstantiate(functions[y].Commands[x]);
+                instance = Instantiate(toInstantiate, transformBoardCommand.transform, true) as GameObject;
                 instance.transform.localPosition = getPositionInstance(x - 3, (y * -1) + 1);
             }
         }
@@ -140,15 +129,13 @@ public class BoardCommandManager : MonoBehaviour
         return new Vector3(x * offsetX, y * offsetY, 0f);
     }
 
-    private IEnumerator animationMoviment(Vector2 target)
+    public IEnumerator terminateMovement(Vector2 positionCollectable)
     {
-        Vector2 playerPosition = playerBody.position;
-        while (playerBody.position.y < target.y)
+        while (!playerBody.position.Equals(positionCollectable))
         {
-            playerBody.MovePosition(new Vector2(0, playerBody.position.y + 0.1f));
+            playerBody.position = Vector3.MoveTowards(playerBody.position, positionCollectable, 0.1f);
             yield return null;
         }
-
     }
 
     public GameObject getObjectToInstantiate(EnumCommand command)

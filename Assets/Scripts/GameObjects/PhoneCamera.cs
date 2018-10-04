@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class PhoneCamera : MonoBehaviour {
@@ -12,7 +9,7 @@ public class PhoneCamera : MonoBehaviour {
         WebCamDevice[] devices = WebCamTexture.devices;
         if(devices.Length == 0)
         {
-            throw new System.InvalidOperationException("Nenhuma câmera encontrada");
+            throw new System.InvalidOperationException(Messages.NENHUMA_CAMERA_ENCONTRADA);
         }
 
         for(int i = 0; i < devices.Length; i++)
@@ -25,7 +22,7 @@ public class PhoneCamera : MonoBehaviour {
 
         if(cam == null)
         {
-            throw new System.InvalidOperationException("Não foi possível abrir a câmera");
+            throw new System.InvalidOperationException(Messages.NAO_ABRIU_CAMERA);
         }
         
         cam.Play();

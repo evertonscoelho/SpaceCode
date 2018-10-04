@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
-    private GameManager gameManager;
     public AudioClip collectableAudio;
-
-    private void Awake()
-    {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-    }
-
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -21,7 +10,7 @@ public class PlayerController : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             SoundManager.instance.PlaySingle(collectableAudio);
-            gameManager.checkEndGameCollectable(other.transform.position);
+            GameManager.instance.checkEndGameCollectable(other.transform.position);
         }
     }
 }

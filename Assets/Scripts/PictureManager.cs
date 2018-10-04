@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 public class PictureManager : MonoBehaviour
@@ -21,15 +20,15 @@ public class PictureManager : MonoBehaviour
 
     public void pictureClick()
     {
-        //phoneCamera = new PhoneCamera(cameraViewManager.GetComponent<RawImage>());
+        phoneCamera = new PhoneCamera(cameraViewManager.GetComponent<RawImage>());
         cameraViewManager.active();
     }
 
     public List<Function> takePictureClick()
     {
-        //byte[] bytes = phoneCamera.TakePhoto();
+        byte[] bytes = phoneCamera.TakePhoto();
         cameraViewManager.deactivate();
-        return request(null);
+        return request(bytes);
     }
 
     public void setCameraViewManager(CameraViewManager cameraViewManager)
@@ -48,7 +47,7 @@ public class PictureManager : MonoBehaviour
     {
         if (response.ToUpper().Equals("UNKNOW"))
         {
-            throw new System.InvalidOperationException("Nenhum comando reconhecido");
+            throw new System.InvalidOperationException(Messages.NENHUM_COMANDO_RECONHECIDO);
         }
         response = response.ToUpper();
         string[] commands = response.Split(',');
@@ -56,6 +55,7 @@ public class PictureManager : MonoBehaviour
         int line = 1;
         bool firstCommandInLine = true;
         List<EnumCommand> commandsLine = new List<EnumCommand>(); 
+
         foreach (string command in commands)
         {
             if (firstCommandInLine)
@@ -67,7 +67,7 @@ public class PictureManager : MonoBehaviour
             {
                 if(line == 3)
                 {
-                    throw new System.InvalidOperationException("É permitido apenas 3 linhas de comandos");
+                    throw new System.InvalidOperationException(Messages.LINHAS_INVALIDAS);
                 }
                 line = line + 1;
                 functions.Add(new Function(commandsLine));
@@ -89,21 +89,21 @@ public class PictureManager : MonoBehaviour
         {
             if (!command.Equals("A"))
             {
-                throw new System.InvalidOperationException("A primeira linha deve começar com o comando A");
+                throw new System.InvalidOperationException(Messages.PRIMEIRA_LINHA_INAVLIDA);
             }
         }
         else if (line == 2)
         {
             if (!command.Equals("B"))
             {
-                throw new System.InvalidOperationException("A segunda linha deve começar com o comando B");
+                throw new System.InvalidOperationException(Messages.SEGUNDA_LINHA_INAVLIDA);
             }
         }
         else if (line == 3)
         {
             if (!command.Equals("C"))
             {
-                throw new System.InvalidOperationException("A terceira linha deve começar com o comando C");
+                throw new System.InvalidOperationException(Messages.TERCEIRA_LINHA_INAVLIDA);
             }
         }
     }

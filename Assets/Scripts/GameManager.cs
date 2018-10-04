@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System;
-using UnityEngine.Experimental.UIElements;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
@@ -45,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     public void takePictureClick()
     {
-        GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        GameManager gameManager = GameManager.instance;
         try
         {
             gameManager.functions = PictureManager.instance.takePictureClick();
@@ -60,7 +59,7 @@ public class GameManager : MonoBehaviour
 
     public void functionsCorrect()
     {
-        GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        GameManager gameManager = GameManager.instance;
         gameManager.modalPanelCommands.showModal(false, null);
         gameManager.boardComamandManager.doCommands(gameManager.functions);
         gameManager.loaderLevel.deactivateButtons();
@@ -68,7 +67,7 @@ public class GameManager : MonoBehaviour
 
     public void functionsWrong(bool erro)
     {
-        GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        GameManager gameManager = GameManager.instance;
         if (erro)
         {
             gameManager.modalPanelErroCommands.showModal(false, null);
@@ -82,7 +81,7 @@ public class GameManager : MonoBehaviour
 
     public void loadLevel(String id)
     {
-        GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        GameManager gameManager = GameManager.instance;
         if (id.Equals("-1")) {
             int newLevel = Int32.Parse(gameManager.levelId) + 1;
             gameManager.levelId = newLevel.ToString();
@@ -120,7 +119,7 @@ public class GameManager : MonoBehaviour
 
     public void clickHelpMainScene(Boolean active)
     {
-        GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        GameManager gameManager = GameManager.instance;
         gameManager.modalPanelHelp.showModal(active, null);
     }
 

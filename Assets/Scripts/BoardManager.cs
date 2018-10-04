@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.IO;
-using System;
 
 public class BoardManager : MonoBehaviour
 {
@@ -17,16 +15,15 @@ public class BoardManager : MonoBehaviour
     void BoardSetup(Board board)
     {
         Transform boardHolder = new GameObject("Board").transform;
-        DataBoard dataBoard;
-        for (int x = 0; x < board.data.Length; x++)
+        GameObject floor, toInstantiate, instance;
+        foreach (DataBoard dataBoard in board.data)
         {
-            dataBoard = board.data[x];
-            GameObject floor = Instantiate(Floor, getPositionInstance(dataBoard.positionX, dataBoard.positionY), Quaternion.identity) as GameObject;
+            floor = Instantiate(Floor, getPositionInstance(dataBoard.positionX, dataBoard.positionY), Quaternion.identity) as GameObject;
             floor.transform.SetParent(boardHolder);
             if (dataBoard.objectType != "Floor")
             {
-                GameObject toInstantiate = getObjectToInstantiate(dataBoard.objectType);
-                GameObject instance = Instantiate(toInstantiate, getPositionInstance(dataBoard.positionX, dataBoard.positionY), Quaternion.identity) as GameObject;
+                toInstantiate = getObjectToInstantiate(dataBoard.objectType);
+                instance = Instantiate(toInstantiate, getPositionInstance(dataBoard.positionX, dataBoard.positionY), Quaternion.identity) as GameObject;
                 instance.transform.SetParent(boardHolder);
             }
         }

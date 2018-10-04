@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.IO;
-using System.Text;
-using UnityEngine;
-using UnityEngine.Networking;
 
 public class RequestManager{
 
@@ -42,11 +37,9 @@ public class RequestManager{
 
     
 
-    private static string getImage64()
+    private static string getImage64(byte[] data)
     {
-        string path = "Assets/Level/3.jpg";
-        byte[] fileData = File.ReadAllBytes(path);
-        return System.Convert.ToBase64String(fileData);
+        return System.Convert.ToBase64String(data);
     }
 
     private static string getJsonRequest(string imageBase64)
