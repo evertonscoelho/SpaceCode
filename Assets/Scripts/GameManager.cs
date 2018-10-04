@@ -14,10 +14,8 @@ public class GameManager : MonoBehaviour
     private String levelId;
 
     public BoardCommandManager boardComamandManager;
-    private ModalPanel modalPanelHelp;
-    private ModalPanel modalPanelEndGame;
-    private ModalPanel modalPanelCommands;
-    private ModalPanel modalPanelErroCommands;
+    public ModalPanelManager ModalPanelManager;
+
     private List<Function> functions;
 
     void Awake()
@@ -48,34 +46,28 @@ public class GameManager : MonoBehaviour
         try
         {
             gameManager.functions = PictureManager.instance.takePictureClick();
-            gameManager.modalPanelCommands.setCommands(gameManager.functions, gameManager.boardComamandManager);
-            gameManager.modalPanelCommands.showModal(true, null);
+            gameManager.ModalPanelManager.setCommands(gameManager.functions, gameManager.boardComamandManager);
+            gameManager.ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_COMANDOS, false, false, false, true);
         }
         catch (System.InvalidOperationException e)
         {
-            gameManager.modalPanelErroCommands.showModal(true, e.Message);
+            gameManager.ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_ERRO, false, false, true, false);
+            gameManager.ModalPanelManager.setDescriptionError(e.Message);
         }
     }
 
     public void functionsCorrect()
     {
         GameManager gameManager = GameManager.instance;
-        gameManager.modalPanelCommands.showModal(false, null);
+        gameManager.ModalPanelManager.deactiveModal();
         gameManager.boardComamandManager.doCommands(gameManager.functions);
         gameManager.loaderLevel.deactivateButtons();
     }
 
-    public void functionsWrong(bool erro)
+    public void functionsWrong()
     {
         GameManager gameManager = GameManager.instance;
-        if (erro)
-        {
-            gameManager.modalPanelErroCommands.showModal(false, null);
-        }
-        else
-        {
-            gameManager.modalPanelCommands.showModal(false, null);
-        }
+        gameManager.ModalPanelManager.deactiveModal();
         gameManager.pictureClick();
     }
 
@@ -117,10 +109,23 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
-    public void clickHelpMainScene(Boolean active)
+    public void clickHelp(Boolean mainScene)
     {
         GameManager gameManager = GameManager.instance;
-        gameManager.modalPanelHelp.showModal(active, null);
+        gameManager.ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_AJUDA, true, false, false, false);
+        if (mainScene)
+        {
+            gameManager.ModalPanelManager.setDescriptionHelp(Messages.DESCRICAO_AJUDA_SOBRE_JOGO);
+        }
+        else
+        {
+            gameManager.ModalPanelManager.setDescriptionHelp(Messages.DESCRICAO_AJUDA_SOBRE_FASE);
+        }
+    }
+
+    public void clickCloseModal()
+    {
+        GameManager.instance.ModalPanelManager.deactiveModal();
     }
 
     public void checkEndGameCollectable(Vector2 positionCollectable)
@@ -135,8 +140,8 @@ public class GameManager : MonoBehaviour
     public void doDefeat()
     {
         boardComamandManager.StopAllCoroutines();
-        modalPanelEndGame.showModal(true, "Perdeu :/");
-        modalPanelEndGame.interactableButtonNext(false);
+        ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_FIM_JOGO_DERROTA, false, true, false, false);
+        ModalPanelManager.interactableButtonNext(false);
         loaderLevel.activateButtons();
     }
 
@@ -144,29 +149,8 @@ public class GameManager : MonoBehaviour
     {
         boardComamandManager.StopAllCoroutines();
         yield return StartCoroutine(boardComamandManager.terminateMovement(positionCollectable));
-        modalPanelEndGame.showModal(true, "Ganhou :)");
-        modalPanelEndGame.interactableButtonNext(true);
+        ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_FIM_JOGO_VITORIA, false, true, false, false);
+        ModalPanelManager.interactableButtonNext(true);
         loaderLevel.activateButtons();
     }
-
-    public void setModalPanelHelp(ModalPanel modalPanel)
-    {
-        this.modalPanelHelp = modalPanel;
-    }
-
-    public void setModalPanelEndGame(ModalPanel modalPanel)
-    {
-        this.modalPanelEndGame = modalPanel;
-    }
-
-    public void setModalPanelCommands(ModalPanel modalPanel)
-    {
-        this.modalPanelCommands = modalPanel;
-    }
-
-    public void setModalPanelErroCommands(ModalPanel modalPanel)
-    {
-        this.modalPanelErroCommands = modalPanel;
-    }
-
 }

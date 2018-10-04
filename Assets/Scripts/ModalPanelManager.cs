@@ -4,59 +4,53 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ModalPanel : MonoBehaviour {
+public class ModalPanelManager : MonoBehaviour {
 
-    public Text question;
-    public Button buttonNext;
-    public string tipoModal;
-
-    public GameObject modalPanelObject;
+    public Text title, descriptionError, descriptionHelp;
+    public GameObject panelHelp, panelEndGame, panelErrorCommand, panelCommands;
+   
     public GameObject boardCommand;
+    public Button buttonNext;
 
-    private float offsetX;
-    private float offsetY;
+    private float offsetX, offsetY;
 
     void Start()
     {
-        if(tipoModal.Equals("ModalPanelHelp"))
-        {
-            GameManager.instance.setModalPanelHelp(this.GetComponent<ModalPanel>());
-        }
-        else if(tipoModal.Equals("ModalPanelEndGame"))
-        {
-            GameManager.instance.setModalPanelEndGame(this.GetComponent<ModalPanel>());
-        }
-        else if (tipoModal.Equals("ModalPanelCommand"))
-        {
-            GameManager.instance.setModalPanelCommands(this.GetComponent<ModalPanel>());
-        }
-        else if (tipoModal.Equals("ModalPanelErroCommand"))
-        {
-            GameManager.instance.setModalPanelErroCommands(this.GetComponent<ModalPanel>());
-        }
-
-
-        showModal(false, null);
+        GameManager.instance.ModalPanelManager = this;
+        deactiveModal();
     }
+
     public void interactableButtonNext(Boolean interactable)
     {
         buttonNext.interactable = interactable;
     }
 
-    public void showModal(Boolean active, string text)
+    public void activeModal(Boolean active, string title, Boolean panelHelp, Boolean panelEndGame, Boolean panelErrorCommand, Boolean panelCommands)
     {
         if (active)
         {
-            if(text != null)
-            {
-                question.text = text;
-            }
-            ShowPainel();
+            gameObject.SetActive(true);
         }
-        else
-        {
-            ClosePanel();
-        }
+        this.title.text = title;
+        this.panelHelp.SetActive(panelHelp);
+        this.panelEndGame.SetActive(panelEndGame);
+        this.panelErrorCommand.SetActive(panelErrorCommand);
+        this.panelCommands.SetActive(panelCommands);
+    }
+
+    public void setDescriptionError(string description)
+    {
+        descriptionError.text = description;
+    }
+
+    public void setDescriptionHelp(string description)
+    {
+        descriptionHelp.text = description;
+    }
+
+    public void deactiveModal()
+    {
+        gameObject.SetActive(false);
     }
 
     public void setCommands(List<Function> functions, BoardCommandManager boardComamandManager)
@@ -80,14 +74,5 @@ public class ModalPanel : MonoBehaviour {
     private Vector3 getPositionInstance(int x, float y)
     {
         return new Vector3(x * offsetX, y * offsetY, 0f);
-    }
-    private void ShowPainel()
-    {
-        modalPanelObject.SetActive(true);
-    }
-
-    private void ClosePanel()
-    {
-        modalPanelObject.SetActive(false);
     }
 }

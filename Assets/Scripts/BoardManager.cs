@@ -2,15 +2,10 @@
 
 public class BoardManager : MonoBehaviour
 {
-    public GameObject Collectable;
-    public GameObject Floor;
-    public GameObject Obstacle;
-    public GameObject Player;
-    public GameObject Wall;
+    public GameObject Collectable, Floor, Obstacle, Player, Wall;
 
     private Level level;
-    private int commands = 0;
-    private int collectables= 0;
+    private int commands = 0, collectables = 0;
 
     void BoardSetup(Board board)
     {
