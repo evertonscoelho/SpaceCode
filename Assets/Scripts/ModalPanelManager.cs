@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ModalPanelManager : MonoBehaviour {
 
-    public Text title, descriptionError, descriptionHelp;
+    public Text title, descriptionError, descriptionHelp, titleCommands;
     public GameObject panelHelp, panelEndGame, panelErrorCommand, panelCommands;
    
     public GameObject boardCommand;
@@ -36,6 +35,11 @@ public class ModalPanelManager : MonoBehaviour {
         this.panelEndGame.SetActive(panelEndGame);
         this.panelErrorCommand.SetActive(panelErrorCommand);
         this.panelCommands.SetActive(panelCommands);
+    }
+
+    public void setTitleCommands(string titleCommands)
+    {
+        this.titleCommands.text = titleCommands;
     }
 
     public void setDescriptionError(string description)

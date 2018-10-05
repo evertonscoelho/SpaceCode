@@ -1,31 +1,23 @@
 ﻿using UnityEngine;
-using UnityEngine.Experimental.UIElements;
+using UnityEngine.UI;
 
 public class LoaderLevel : MonoBehaviour
 {
-    public GameObject picture;
-    public GameObject back;
-    public GameObject help;
-    public GameObject sound;
+    public Button picture;
+    public Button back;
+    public Button help;
+    public Button sound;
 
     void Awake()
     {
        GameManager.instance.setupSceneLevel(this);
     }
-
-    public void activateButtons()
-    {
-        picture.GetComponent<Button>().SetEnabled(true);
-        back.GetComponent<Button>().SetEnabled(true);
-        help.GetComponent<Button>().SetEnabled(true);
-        sound.GetComponent<Button>().SetEnabled(true);
-    }
-
+    
     public void deactivateButtons()
     {
-        picture.GetComponent<Button>().SetEnabled(false);
-        back.GetComponent<Button>().SetEnabled(false);
-        help.GetComponent<Button>().SetEnabled(false);
-        sound.GetComponent<Button>().SetEnabled(false);
+        picture.interactable = false;
+        back.interactable = false;
+        help.interactable = false;
+        sound.interactable = false;
     }
 }

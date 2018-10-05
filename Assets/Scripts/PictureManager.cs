@@ -20,14 +20,15 @@ public class PictureManager : MonoBehaviour
 
     public void pictureClick()
     {
-        phoneCamera = new PhoneCamera(cameraViewManager.GetComponent<RawImage>());
+       // phoneCamera = new PhoneCamera(cameraViewManager.GetComponent<RawImage>());
         cameraViewManager.active();
     }
 
     public List<Function> takePictureClick()
     {
-        byte[] bytes = phoneCamera.TakePhoto();
+       // byte[] bytes = phoneCamera.TakePhoto();
         cameraViewManager.deactivate();
+        byte[] bytes = null;
         return request(bytes);
     }
 

@@ -47,7 +47,8 @@ public class GameManager : MonoBehaviour
         {
             gameManager.functions = PictureManager.instance.takePictureClick();
             gameManager.ModalPanelManager.setCommands(gameManager.functions, gameManager.boardComamandManager);
-            gameManager.ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_COMANDOS, false, false, false, true);
+            gameManager.ModalPanelManager.activeModal(true, "", false, false, false, true);
+            gameManager.ModalPanelManager.setTitleCommands(Messages.TITULO_PAINEL_COMANDOS);
         }
         catch (System.InvalidOperationException e)
         {
@@ -142,7 +143,6 @@ public class GameManager : MonoBehaviour
         boardComamandManager.StopAllCoroutines();
         ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_FIM_JOGO_DERROTA, false, true, false, false);
         ModalPanelManager.interactableButtonNext(false);
-        loaderLevel.activateButtons();
     }
 
     private IEnumerator doVictory(Vector2 positionCollectable)
@@ -151,6 +151,5 @@ public class GameManager : MonoBehaviour
         yield return StartCoroutine(boardComamandManager.terminateMovement(positionCollectable));
         ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_FIM_JOGO_VITORIA, false, true, false, false);
         ModalPanelManager.interactableButtonNext(true);
-        loaderLevel.activateButtons();
     }
 }
