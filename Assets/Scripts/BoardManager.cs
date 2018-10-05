@@ -83,4 +83,9 @@ public class BoardManager : MonoBehaviour
             return StatusGame.CONTINUE;
         }      
     }
+
+    public string getCommandsRemaining()
+    {
+        return (level.maxCommands - commands).ToString();
+    }
 }

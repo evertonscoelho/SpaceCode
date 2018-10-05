@@ -5,22 +5,12 @@ using System.Collections.Generic;
 public class BoardCommandManager : MonoBehaviour
 {
 
-    public GameObject Up;
-    public GameObject Down;
-    public GameObject Left;
-    public GameObject Right;
-    public GameObject A;
-    public GameObject B;
-    public GameObject C;
-    public GameObject boardCommand;
+    public GameObject Up, Down, Left, Right, A, B, C, boardCommand, player;
 
     private List<Function> functionsBoard;
 
-    private float offsetX;
-    private float offsetY;
-    private float offsetXPlayer;
-    private float offsetYPlayer;
-    private GameObject player;
+    private float offsetX, offsetY, offsetXPlayer, offsetYPlayer;
+
     private GameManager gameManager;
     private Rigidbody2D playerBody;
 

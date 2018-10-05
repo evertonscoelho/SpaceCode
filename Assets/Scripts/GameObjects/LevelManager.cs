@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class LoaderLevel : MonoBehaviour
+public class LevelManager: MonoBehaviour
 {
-    public Button picture;
-    public Button back;
-    public Button help;
-    public Button sound;
+    public Button picture, back, help, sound;
+    public Text TextCommands;
 
     void Awake()
     {
@@ -19,5 +17,10 @@ public class LoaderLevel : MonoBehaviour
         back.interactable = false;
         help.interactable = false;
         sound.interactable = false;
+    }
+
+    public void setTextCommands(string commands)
+    {
+        TextCommands.text = commands;
     }
 }

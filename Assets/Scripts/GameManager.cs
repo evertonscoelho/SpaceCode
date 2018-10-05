@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     private BoardManager boardScript;
-    private LoaderLevel loaderLevel;
+    private LevelManager levelManager;
     private String levelId;
 
     public BoardCommandManager boardComamandManager;
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
         GameManager gameManager = GameManager.instance;
         gameManager.ModalPanelManager.deactiveModal();
         gameManager.boardComamandManager.doCommands(gameManager.functions);
-        gameManager.loaderLevel.deactivateButtons();
+        gameManager.levelManager.deactivateButtons();
     }
 
     public void functionsWrong()
@@ -86,12 +86,13 @@ public class GameManager : MonoBehaviour
         gameManager.loadScene(2);
     }
 
-    public void setupSceneLevel(LoaderLevel loaderLevel)
+    public void setupSceneLevel(LevelManager levelManager)
     {
-        this.loaderLevel = loaderLevel;
+        this.levelManager = levelManager;
         boardScript.SetupScene(levelId);
         BoardCommandManager boardCommand = GameObject.Find("BoardCommand").GetComponent<BoardCommandManager>();
         boardCommand.initValues();
+        levelManager.setTextCommands(boardScript.getCommandsRemaining());
     }
 
     public void loadScene(int sceneIndex)
@@ -102,6 +103,7 @@ public class GameManager : MonoBehaviour
     public Boolean checkEndGameCommand()
     {
         StatusGame status = boardScript.checkEndGame(1, 0);
+        levelManager.setTextCommands(boardScript.getCommandsRemaining());
         if (status.Equals(StatusGame.DEFEAT))
         {
             doDefeat();
