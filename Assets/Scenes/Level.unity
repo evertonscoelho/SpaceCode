@@ -934,64 +934,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 1730047196632648, guid: 9d10bc40564381d468f4e8f0145fd818, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114578698235517094, guid: 9d10bc40564381d468f4e8f0145fd818,
-        type: 2}
-      propertyPath: m_Text
-      value: "T\xEDtulo"
-      objectReference: {fileID: 0}
-    - target: {fileID: 224884028391833588, guid: 9d10bc40564381d468f4e8f0145fd818,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 165.30809
-      objectReference: {fileID: 0}
-    - target: {fileID: 224884028391833588, guid: 9d10bc40564381d468f4e8f0145fd818,
-        type: 2}
-      propertyPath: m_SizeDelta.y
-      value: 107.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 224961189341033340, guid: 9d10bc40564381d468f4e8f0145fd818,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: -154
-      objectReference: {fileID: 0}
-    - target: {fileID: 224539533701530182, guid: 9d10bc40564381d468f4e8f0145fd818,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: -148.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 224732468842635518, guid: 9d10bc40564381d468f4e8f0145fd818,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 19.029041
-      objectReference: {fileID: 0}
-    - target: {fileID: 224732468842635518, guid: 9d10bc40564381d468f4e8f0145fd818,
-        type: 2}
-      propertyPath: m_SizeDelta.y
-      value: 185.36
-      objectReference: {fileID: 0}
-    - target: {fileID: 1263496431082800, guid: 9d10bc40564381d468f4e8f0145fd818, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224631608549601054, guid: 9d10bc40564381d468f4e8f0145fd818,
-        type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224631608549601054, guid: 9d10bc40564381d468f4e8f0145fd818,
-        type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224631608549601054, guid: 9d10bc40564381d468f4e8f0145fd818,
-        type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9d10bc40564381d468f4e8f0145fd818, type: 2}
   m_IsPrefabParent: 0

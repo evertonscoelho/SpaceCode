@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class ModalPanelManager : MonoBehaviour {
 
-    public Text title, descriptionError, descriptionHelp, titleCommands;
-    public GameObject panelHelp, panelEndGame, panelErrorCommand, panelCommands;
+    public Text title, descriptionError, descriptionHelp, titleCommands, descriptionLastLevel;
+    public GameObject panelHelp, panelEndGame, panelErrorCommand, panelCommands, panelLastLevel;
    
     public GameObject boardCommand;
     public Button buttonNext;
@@ -24,7 +24,7 @@ public class ModalPanelManager : MonoBehaviour {
         buttonNext.interactable = interactable;
     }
 
-    public void activeModal(Boolean active, string title, Boolean panelHelp, Boolean panelEndGame, Boolean panelErrorCommand, Boolean panelCommands)
+    public void activeModal(Boolean active, string title, Boolean panelHelp, Boolean panelEndGame, Boolean panelErrorCommand, Boolean panelCommands, Boolean panelLastLevel)
     {
         if (active)
         {
@@ -35,6 +35,7 @@ public class ModalPanelManager : MonoBehaviour {
         this.panelEndGame.SetActive(panelEndGame);
         this.panelErrorCommand.SetActive(panelErrorCommand);
         this.panelCommands.SetActive(panelCommands);
+        this.panelLastLevel.SetActive(panelLastLevel);
     }
 
     public void setTitleCommands(string titleCommands)
@@ -50,6 +51,11 @@ public class ModalPanelManager : MonoBehaviour {
     public void setDescriptionHelp(string description)
     {
         descriptionHelp.text = description;
+    }
+
+    public void setDescriptionLastLevel(string description)
+    {
+        descriptionLastLevel.text = description;
     }
 
     public void deactiveModal()

@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     private BoardManager boardScript;
     private LevelManager levelManager;
     private String levelId;
+    public int maxLevel;
 
     public BoardCommandManager boardComamandManager;
     public ModalPanelManager ModalPanelManager;
@@ -47,12 +48,12 @@ public class GameManager : MonoBehaviour
         {
             gameManager.functions = PictureManager.instance.takePictureClick();
             gameManager.ModalPanelManager.setCommands(gameManager.functions, gameManager.boardComamandManager);
-            gameManager.ModalPanelManager.activeModal(true, "", false, false, false, true);
+            gameManager.ModalPanelManager.activeModal(true, "", false, false, false, true, false);
             gameManager.ModalPanelManager.setTitleCommands(Messages.TITULO_PAINEL_COMANDOS);
         }
         catch (System.InvalidOperationException e)
         {
-            gameManager.ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_ERRO, false, false, true, false);
+            gameManager.ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_ERRO, false, false, true, false, false);
             gameManager.ModalPanelManager.setDescriptionError(e.Message);
         }
     }
@@ -115,7 +116,7 @@ public class GameManager : MonoBehaviour
     public void clickHelp(Boolean mainScene)
     {
         GameManager gameManager = GameManager.instance;
-        gameManager.ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_AJUDA, true, false, false, false);
+        gameManager.ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_AJUDA, true, false, false, false, false);
         if (mainScene)
         {
             gameManager.ModalPanelManager.setDescriptionHelp(Messages.DESCRICAO_AJUDA_SOBRE_JOGO);
@@ -143,7 +144,7 @@ public class GameManager : MonoBehaviour
     public void doDefeat()
     {
         boardComamandManager.StopAllCoroutines();
-        ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_FIM_JOGO_DERROTA, false, true, false, false);
+        ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_FIM_JOGO_DERROTA, false, true, false, false, false);
         ModalPanelManager.interactableButtonNext(false);
     }
 
@@ -151,7 +152,16 @@ public class GameManager : MonoBehaviour
     {
         boardComamandManager.StopAllCoroutines();
         yield return StartCoroutine(boardComamandManager.terminateMovement(positionCollectable));
-        ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_FIM_JOGO_VITORIA, false, true, false, false);
+        if (Int32.Parse(levelId) < maxLevel)
+        {
+            ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_FIM_JOGO_VITORIA, false, true, false, false, false);
+        }
+        else
+        {
+            ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_FIM_JOGO_VITORIA, false, false, false, false, true);
+            ModalPanelManager.setDescriptionLastLevel(Messages.MENSAGEM_ULTIMA_FASE);
+        }
+        
         ModalPanelManager.interactableButtonNext(true);
     }
 }

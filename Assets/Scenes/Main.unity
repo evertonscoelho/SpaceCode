@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e8b0d47d80f6f340875dad6e995d10d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxLevel: 3
   boardComamandManager: {fileID: 0}
   ModalPanelManager: {fileID: 0}
 --- !u!114 &515334507
