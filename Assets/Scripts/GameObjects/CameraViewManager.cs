@@ -3,7 +3,7 @@
 
 	void Start () {
         deactivate();
-        PictureManager.instance.setCameraViewManager(this);
+        RecognizeCommandManager.instance.setCameraViewManager(this);
     }
 
     public void active()

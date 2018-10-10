@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
     private String levelId;
     public int maxLevel;
 
-    public BoardCommandManager boardComamandManager;
     public ModalPanelManager ModalPanelManager;
 
     private List<Function> functions;
@@ -28,7 +27,7 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         boardScript = GetComponent<BoardManager>();
-
+        boardScript.initValues();
     }
 
     public void soundClick()
@@ -38,7 +37,7 @@ public class GameManager : MonoBehaviour
 
     public void pictureClick()
     {
-        PictureManager.instance.pictureClick();      
+        RecognizeCommandManager.instance.pictureClick();      
     }
 
     public void takePictureClick()
@@ -46,8 +45,8 @@ public class GameManager : MonoBehaviour
         GameManager gameManager = GameManager.instance;
         try
         {
-            gameManager.functions = PictureManager.instance.takePictureClick();
-            gameManager.ModalPanelManager.setCommands(gameManager.functions, gameManager.boardComamandManager);
+            gameManager.functions = RecognizeCommandManager.instance.takePictureClick();
+            gameManager.ModalPanelManager.setCommands(gameManager.functions, gameManager.boardScript);
             gameManager.ModalPanelManager.activeModal(true, "", false, false, false, true, false);
             gameManager.ModalPanelManager.setTitleCommands(Messages.TITULO_PAINEL_COMANDOS);
         }
@@ -62,7 +61,7 @@ public class GameManager : MonoBehaviour
     {
         GameManager gameManager = GameManager.instance;
         gameManager.ModalPanelManager.deactiveModal();
-        gameManager.boardComamandManager.doCommands(gameManager.functions);
+        gameManager.boardScript.doCommands(gameManager.functions);
         gameManager.levelManager.deactivateButtons();
     }
 
@@ -91,8 +90,7 @@ public class GameManager : MonoBehaviour
     {
         this.levelManager = levelManager;
         boardScript.SetupScene(levelId);
-        BoardCommandManager boardCommand = GameObject.Find("BoardCommand").GetComponent<BoardCommandManager>();
-        boardCommand.initValues();
+        boardScript.initValues();
         levelManager.setTextCommands(boardScript.getCommandsRemaining());
     }
 
@@ -143,15 +141,15 @@ public class GameManager : MonoBehaviour
 
     public void doDefeat()
     {
-        boardComamandManager.StopAllCoroutines();
+        boardScript.StopAllCoroutines();
         ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_FIM_JOGO_DERROTA, false, true, false, false, false);
         ModalPanelManager.interactableButtonNext(false);
     }
 
     private IEnumerator doVictory(Vector2 positionCollectable)
     {
-        boardComamandManager.StopAllCoroutines();
-        yield return StartCoroutine(boardComamandManager.terminateMovement(positionCollectable));
+        boardScript.StopAllCoroutines();
+        yield return StartCoroutine(boardScript.terminateMovement(positionCollectable));
         if (Int32.Parse(levelId) < maxLevel)
         {
             ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_FIM_JOGO_VITORIA, false, true, false, false, false);

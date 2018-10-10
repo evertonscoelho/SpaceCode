@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class PictureManager : MonoBehaviour
+public class RecognizeCommandManager : MonoBehaviour
 {
-    public static PictureManager instance = null;
+    public static RecognizeCommandManager instance = null;
     private CameraViewManager cameraViewManager;
     PhoneCamera phoneCamera;
 

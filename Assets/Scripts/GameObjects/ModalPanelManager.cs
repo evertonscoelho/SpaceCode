@@ -63,10 +63,10 @@ public class ModalPanelManager : MonoBehaviour {
         gameObject.SetActive(false);
     }
 
-    public void setCommands(List<Function> functions, BoardCommandManager boardComamandManager)
+    public void setCommands(List<Function> functions, BoardManager boardManager)
     {
         Transform transformBoardCommand = boardCommand.transform;
-        GameObject command = boardComamandManager.getObjectToInstantiate(functions[0].Commands[0]);
+        GameObject command = boardManager.getObjectToInstantiate(functions[0].Commands[0]);
         offsetX = command.GetComponent<SpriteRenderer>().bounds.size.x;
         offsetY = command.GetComponent<SpriteRenderer>().bounds.size.y;
 
@@ -74,7 +74,7 @@ public class ModalPanelManager : MonoBehaviour {
         {
             for (int x = 0; x < functions[y].Commands.Count; x++)
             {
-                GameObject toInstantiate = boardComamandManager.getObjectToInstantiate(functions[y].Commands[x]);
+                GameObject toInstantiate = boardManager.getObjectToInstantiate(functions[y].Commands[x]);
                 GameObject instance = Instantiate(toInstantiate, transformBoardCommand.transform, true) as GameObject;
                 instance.transform.localPosition = getPositionInstance(x - 3, (y * -1) + 1);
             }
