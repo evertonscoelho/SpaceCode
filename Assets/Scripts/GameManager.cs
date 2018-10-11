@@ -42,19 +42,21 @@ public class GameManager : MonoBehaviour
 
     public void takePictureClick()
     {
-        GameManager gameManager = GameManager.instance;
-        try
-        {
-            gameManager.functions = RecognizeCommandManager.instance.takePictureClick();
-            gameManager.ModalPanelManager.setCommands(gameManager.functions, gameManager.boardScript);
-            gameManager.ModalPanelManager.activeModal(true, "", false, false, false, true, false);
-            gameManager.ModalPanelManager.setTitleCommands(Messages.TITULO_PAINEL_COMANDOS);
-        }
-        catch (System.InvalidOperationException e)
-        {
-            gameManager.ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_ERRO, false, false, true, false, false);
-            gameManager.ModalPanelManager.setDescriptionError(e.Message);
-        }
+        RecognizeCommandManager.instance.takePictureClick();
+    }
+
+    public void recognizeCommand(List<Function> functions)
+    {
+        this.functions = functions;
+        ModalPanelManager.setCommands(functions, boardScript);
+        ModalPanelManager.activeModal(true, "", false, false, false, true, false);
+        ModalPanelManager.setTitleCommands(Messages.TITULO_PAINEL_COMANDOS);
+    }
+
+    public void showErro(string erro)
+    {
+        ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_ERRO, false, false, true, false, false);
+        ModalPanelManager.setDescriptionError(erro);
     }
 
     public void functionsCorrect()

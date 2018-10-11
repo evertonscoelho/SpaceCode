@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RecognizeCommandManager : MonoBehaviour
 {
@@ -19,16 +20,14 @@ public class RecognizeCommandManager : MonoBehaviour
 
     public void pictureClick()
     {
-       // phoneCamera = new PhoneCamera(cameraViewManager.GetComponent<RawImage>());
+       phoneCamera = new PhoneCamera(cameraViewManager.GetComponent<RawImage>());
         cameraViewManager.active();
     }
 
-    public List<Function> takePictureClick()
+    public void takePictureClick()
     {
-       // byte[] bytes = phoneCamera.TakePhoto();
-        cameraViewManager.deactivate();
-        byte[] bytes = null;
-        return request(bytes);
+        byte[] bytes = phoneCamera.TakePhoto();
+        request(bytes);
     }
 
     public void setCameraViewManager(CameraViewManager cameraViewManager)
@@ -36,18 +35,28 @@ public class RecognizeCommandManager : MonoBehaviour
         this.cameraViewManager = cameraViewManager;
     }
 
-    public List<Function> request(byte[] bytes)
+    public void request(byte[] bytes)
     {
-        string request = RequestManager.request(bytes);
-        List<Function> functions = convertToCommand(request);
-        return functions;
+        StartCoroutine(RequestManager.Request(bytes));
+        cameraViewManager.deactivate();
     }
 
-    private List<Function> convertToCommand(string response)
+    public static void response(string response, bool error)
+    {
+        if (!error)
+        {
+            convertToCommand(response);
+        }
+        else
+        {
+            GameManager.instance.showErro(response);
+        }
+    }
+    public static void convertToCommand(string response)
     {
         if (response.ToUpper().Equals("UNKNOW"))
         {
-            throw new System.InvalidOperationException(Messages.NENHUM_COMANDO_RECONHECIDO);
+            GameManager.instance.showErro(Messages.NENHUM_COMANDO_RECONHECIDO);
         }
         response = response.ToUpper();
         string[] commands = response.Split(',');
@@ -67,7 +76,7 @@ public class RecognizeCommandManager : MonoBehaviour
             {
                 if(line == 3)
                 {
-                    throw new System.InvalidOperationException(Messages.LINHAS_INVALIDAS);
+                    GameManager.instance.showErro(Messages.LINHAS_INVALIDAS);
                 }
                 line = line + 1;
                 functions.Add(new Function(commandsLine));
@@ -80,7 +89,7 @@ public class RecognizeCommandManager : MonoBehaviour
             }
         }
         functions.Add(new Function(commandsLine));
-        return functions;
+        GameManager.instance.recognizeCommand(functions);
     }
 
     private static void firstCommandLineCheck(int line, string command)
@@ -89,26 +98,26 @@ public class RecognizeCommandManager : MonoBehaviour
         {
             if (!command.Equals("A"))
             {
-                throw new System.InvalidOperationException(Messages.PRIMEIRA_LINHA_INAVLIDA);
+                GameManager.instance.showErro(Messages.PRIMEIRA_LINHA_INAVLIDA);
             }
         }
         else if (line == 2)
         {
             if (!command.Equals("B"))
             {
-                throw new System.InvalidOperationException(Messages.SEGUNDA_LINHA_INAVLIDA);
+                GameManager.instance.showErro(Messages.SEGUNDA_LINHA_INAVLIDA);
             }
         }
         else if (line == 3)
         {
             if (!command.Equals("C"))
             {
-                throw new System.InvalidOperationException(Messages.TERCEIRA_LINHA_INAVLIDA);
+                GameManager.instance.showErro(Messages.TERCEIRA_LINHA_INAVLIDA);
             }
         }
     }
 
-    public EnumCommand getCommand(string command)
+    public static EnumCommand getCommand(string command)
     {
         switch (command)
         {
