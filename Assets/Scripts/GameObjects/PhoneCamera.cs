@@ -9,7 +9,7 @@ public class PhoneCamera : MonoBehaviour {
         WebCamDevice[] devices = WebCamTexture.devices;
         if(devices.Length == 0)
         {
-            throw new System.InvalidOperationException(Messages.NENHUMA_CAMERA_ENCONTRADA);
+            GameManager.instance.showErro(Messages.NENHUMA_CAMERA_ENCONTRADA);
         }
 
         for(int i = 0; i < devices.Length; i++)
