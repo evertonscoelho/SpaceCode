@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class LevelManager: MonoBehaviour
 {
-    public Button picture, back, help, sound;
+    public Button picture, back, help, sound, refresh;
     public Text TextCommands;
 
     void Awake()

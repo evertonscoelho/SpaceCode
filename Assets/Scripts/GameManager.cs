@@ -132,6 +132,12 @@ public class GameManager : MonoBehaviour
         GameManager.instance.ModalPanelManager.deactiveModal();
     }
 
+    public void reloadLevel()
+    {
+        GameManager.instance.boardScript.StopAllCoroutines();
+        SceneManager.LoadScene(2);
+    }
+
     public void checkEndGameCollectable(Vector2 positionCollectable)
     {
         StatusGame status = boardScript.checkEndGame(0, 1);

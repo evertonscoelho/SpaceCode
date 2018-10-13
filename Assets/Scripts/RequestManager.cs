@@ -14,7 +14,9 @@ public class RequestManager{
         uH.contentType = "application/json";
         www.uploadHandler = uH;
         {
-            yield return www.SendWebRequest();
+            recognizeCommandManager.response("A,UP,A", false);
+            yield return null;
+/*            yield return www.SendWebRequest();
             if (www.isNetworkError)
             {
                 recognizeCommandManager.response(Messages.PROBLEMA_CONEXAO, true);
@@ -26,6 +28,7 @@ public class RequestManager{
             {
                 recognizeCommandManager.response(www.downloadHandler.text, false);
             }
+*/
         }
     }
 

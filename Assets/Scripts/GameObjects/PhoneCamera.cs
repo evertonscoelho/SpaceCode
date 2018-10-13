@@ -22,7 +22,7 @@ public class PhoneCamera : MonoBehaviour {
 
         if(cam == null)
         {
-            throw new System.InvalidOperationException(Messages.NAO_ABRIU_CAMERA);
+            GameManager.instance.showErro(Messages.NAO_ABRIU_CAMERA);
         }
         
         cam.Play();
