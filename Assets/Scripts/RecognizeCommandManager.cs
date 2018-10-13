@@ -21,12 +21,14 @@ public class RecognizeCommandManager : MonoBehaviour
     public void pictureClick()
     {
        phoneCamera = new PhoneCamera(cameraViewManager.GetComponent<RawImage>());
-        cameraViewManager.active();
+       cameraViewManager.active();
     }
 
     public void takePictureClick()
     {
+        cameraViewManager.loading();
         byte[] bytes = phoneCamera.TakePhoto();
+       // byte[] bytes = null;
         request(bytes);
     }
 
@@ -37,12 +39,12 @@ public class RecognizeCommandManager : MonoBehaviour
 
     public void request(byte[] bytes)
     {
-        StartCoroutine(RequestManager.Request(bytes));
-        cameraViewManager.deactivate();
+        StartCoroutine(RequestManager.Request(bytes, this));
     }
 
-    public static void response(string response, bool error)
+    public void response(string response, bool error)
     {
+        cameraViewManager.deactivate();
         if (!error)
         {
             convertToCommand(response);
@@ -52,7 +54,8 @@ public class RecognizeCommandManager : MonoBehaviour
             GameManager.instance.showErro(response);
         }
     }
-    public static void convertToCommand(string response)
+
+    public void convertToCommand(string response)
     {
         if (response.ToUpper().Equals("UNKNOW"))
         {
@@ -63,42 +66,52 @@ public class RecognizeCommandManager : MonoBehaviour
         List<Function> functions= new List<Function>();
         int line = 1;
         bool firstCommandInLine = true;
-        List<EnumCommand> commandsLine = new List<EnumCommand>(); 
+        List<EnumCommand> commandsLine = new List<EnumCommand>();
+        bool error = false;
 
         foreach (string command in commands)
         {
-            if (firstCommandInLine)
+            if (error)
             {
-                firstCommandLineCheck(line, command);
-                firstCommandInLine = false;
-            }
-            else if (command.Equals("NEXT"))
-            {
-                if(line == 3)
-                {
-                    GameManager.instance.showErro(Messages.LINHAS_INVALIDAS);
-                }
-                line = line + 1;
-                functions.Add(new Function(commandsLine));
-                commandsLine = new List<EnumCommand>();
-                firstCommandInLine = true;
+                break;
             }
             else
             {
-                commandsLine.Add(getCommand(command));
+                if (firstCommandInLine)
+                {
+                    error = firstCommandLineCheck(line, command);
+                    firstCommandInLine = false;
+                }
+                else if (command.Equals("NEXT"))
+                {
+                    if(line == 3)
+                    {
+                        GameManager.instance.showErro(Messages.LINHAS_INVALIDAS);
+                        error = true;
+                    }
+                    line = line + 1;
+                    functions.Add(new Function(commandsLine));
+                    commandsLine = new List<EnumCommand>();
+                    firstCommandInLine = true;
+                }
+                else
+                {
+                    commandsLine.Add(getCommand(command));
+                }
             }
         }
         functions.Add(new Function(commandsLine));
         GameManager.instance.recognizeCommand(functions);
     }
 
-    private static void firstCommandLineCheck(int line, string command)
+    private bool firstCommandLineCheck(int line, string command)
     {
         if (line == 1)
         {
             if (!command.Equals("A"))
             {
                 GameManager.instance.showErro(Messages.PRIMEIRA_LINHA_INAVLIDA);
+                return true;
             }
         }
         else if (line == 2)
@@ -106,6 +119,7 @@ public class RecognizeCommandManager : MonoBehaviour
             if (!command.Equals("B"))
             {
                 GameManager.instance.showErro(Messages.SEGUNDA_LINHA_INAVLIDA);
+                return true;
             }
         }
         else if (line == 3)
@@ -113,11 +127,13 @@ public class RecognizeCommandManager : MonoBehaviour
             if (!command.Equals("C"))
             {
                 GameManager.instance.showErro(Messages.TERCEIRA_LINHA_INAVLIDA);
+                return true;
             }
         }
+        return false;
     }
 
-    public static EnumCommand getCommand(string command)
+    public EnumCommand getCommand(string command)
     {
         switch (command)
         {
