@@ -258,6 +258,9 @@ MonoBehaviour:
   C: {fileID: 1586636335638972, guid: d067a5b8bf2effc42b9e7e7e1c12d3c1, type: 2}
   boardCommand: {fileID: 0}
   player: {fileID: 1068185102179462, guid: 9c8d00b4ba8e3de4a92d5091c634ab92, type: 2}
+  A_title: {fileID: 1481184421903076, guid: 97c3df184869ac548a77a4fd7ba3fab8, type: 2}
+  B_title: {fileID: 1483537555471550, guid: fcc76481ebf280041814f33cf53a1cda, type: 2}
+  C_title: {fileID: 1011896048213940, guid: 77fb98c359f8cec41be88a0ce215a59c, type: 2}
 --- !u!4 &515334508
 Transform:
   m_ObjectHideFlags: 0

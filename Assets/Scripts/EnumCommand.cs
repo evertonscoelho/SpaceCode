@@ -9,6 +9,9 @@ public enum EnumCommand
     A,
     B,
     C,
+    A_TITLE,
+    B_TITLE,
+    C_TITLE,
     UNKNOW
 };  
 

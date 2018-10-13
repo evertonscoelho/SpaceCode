@@ -81,7 +81,7 @@ public class ModalPanelManager : MonoBehaviour {
                 commandObject.GetComponent<RectTransform>().SetParent(transformBoardCommand.transform, false);
                 commandObject.GetComponent<RectTransform>().sizeDelta = new Vector2(width, height);
                 image.sprite = toInstantiate.GetComponent<SpriteRenderer>().sprite;
-                commandObject.transform.localPosition = getPositionInstance(x - 5, (y * -1.5f) + 1, width, height);
+                commandObject.transform.localPosition = getPositionInstance(x - 5, (y * -1) + 1, width, height);
             }
         }
     }

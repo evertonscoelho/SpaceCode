@@ -6,7 +6,7 @@ public class BoardManager : MonoBehaviour
 {
     public GameObject Collectable, Floor, Obstacle, Player, Wall;
 
-    public GameObject Up, Down, Left, Right, A, B, C, boardCommand, player;
+    public GameObject Up, Down, Left, Right, A, B, C, boardCommand, player, A_title, B_title, C_title;
 
     private List<Function> functionsBoard;
 
@@ -146,6 +146,12 @@ public class BoardManager : MonoBehaviour
                 case EnumCommand.C:
                     yield return StartCoroutine(DoFunction(functionsBoard[2]));
                     break;
+                case EnumCommand.A_TITLE:
+                    break;
+                case EnumCommand.B_TITLE:
+                    break;
+                case EnumCommand.C_TITLE:
+                    break;
             }
             if (!endGame)
             {
@@ -201,6 +207,12 @@ public class BoardManager : MonoBehaviour
                 return B;
             case EnumCommand.C:
                 return C;
+            case EnumCommand.A_TITLE:
+                return A_title;
+            case EnumCommand.B_TITLE:
+                return B_title;
+            case EnumCommand.C_TITLE:
+                return C_title;
             default:
                 return null;
         }

@@ -81,6 +81,21 @@ public class RecognizeCommandManager : MonoBehaviour
                 {
                     error = firstCommandLineCheck(line, command);
                     firstCommandInLine = false;
+                    if (!error)
+                    {
+                        if(line == 1)
+                        {
+                            commandsLine.Add(EnumCommand.A_TITLE);
+                        }
+                        else if(line == 2)
+                        {
+                            commandsLine.Add(EnumCommand.B_TITLE);
+                        }
+                        else
+                        {
+                            commandsLine.Add(EnumCommand.C_TITLE);
+                        }
+                    }
                 }
                 else if (command.Equals("NEXT"))
                 {
@@ -100,8 +115,11 @@ public class RecognizeCommandManager : MonoBehaviour
                 }
             }
         }
-        functions.Add(new Function(commandsLine));
-        GameManager.instance.recognizeCommand(functions);
+        if (!error)
+        {
+            functions.Add(new Function(commandsLine));
+            GameManager.instance.recognizeCommand(functions);
+        }
     }
 
     private bool firstCommandLineCheck(int line, string command)
