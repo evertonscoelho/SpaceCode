@@ -20,15 +20,14 @@ public class RecognizeCommandManager : MonoBehaviour
 
     public void pictureClick()
     {
-       //phoneCamera = new PhoneCamera(cameraViewManager.GetComponent<RawImage>());
+       phoneCamera = new PhoneCamera(cameraViewManager.GetComponent<RawImage>());
        cameraViewManager.active();
     }
 
     public void takePictureClick()
     {
         cameraViewManager.loading();
-        //byte[] bytes = phoneCamera.TakePhoto();
-        byte[] bytes = null;
+        byte[] bytes = phoneCamera.TakePhoto();
         request(bytes);
     }
 
