@@ -1460,7 +1460,6 @@ GameObject:
   - component: {fileID: 1611482005}
   - component: {fileID: 1611482004}
   - component: {fileID: 1611482003}
-  - component: {fileID: 1611482008}
   - component: {fileID: 1611482007}
   m_Layer: 0
   m_Name: Main Camera
@@ -1548,18 +1547,6 @@ MonoBehaviour:
   help: {fileID: 1858974648}
   sound: {fileID: 1065008535}
   TextCommands: {fileID: 1632250587}
---- !u!114 &1611482008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1611482002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650408253fb4c25498b10b3d4dc8979f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orthoZoomSpeed: 0.5
 --- !u!1 &1632250585
 GameObject:
   m_ObjectHideFlags: 0
