@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class CameraViewManager : UnityEngine.MonoBehaviour
+public class CameraViewModalManager : UnityEngine.MonoBehaviour
 {
     public Button takePicture;
     public GameObject loadingText;

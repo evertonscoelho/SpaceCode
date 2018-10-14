@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class RecognizeCommandManager : MonoBehaviour
 {
     public static RecognizeCommandManager instance = null;
-    private CameraViewManager cameraViewManager;
+    private CameraViewModalManager cameraViewManager;
     PhoneCamera phoneCamera;
 
     void Awake()
@@ -31,7 +31,7 @@ public class RecognizeCommandManager : MonoBehaviour
         request(bytes);
     }
 
-    public void setCameraViewManager(CameraViewManager cameraViewManager)
+    public void setCameraViewManager(CameraViewModalManager cameraViewManager)
     {
         this.cameraViewManager = cameraViewManager;
     }
