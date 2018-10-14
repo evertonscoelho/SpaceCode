@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class BoardManager : MonoBehaviour
 {
     public GameObject Collectable, Floor, Obstacle, Player, Wall;
 
     public GameObject Up, Down, Left, Right, A, B, C, boardCommand, player, A_title, B_title, C_title;
+
+    public Sprite UpMark, rightMark, leftMark, downMark, AMark, BMark, CMark, A_titleMark, B_titleMark, C_TitleMark;
 
     private List<Function> functionsBoard;
 
@@ -95,15 +98,18 @@ public class BoardManager : MonoBehaviour
 
     private IEnumerator DoFunction(Function function)
     {
-        bool endGame = false;
-        foreach (EnumCommand command in function.Commands)
+        bool endGame = false, functionCalled = false;
+        Command previous = null;
+        foreach (Command command in function.Commands)
         {
+            animationCommand(previous, command);
+            previous = command;
             if (endGame)
             {
                 break;
             }
             endGame = gameManager.checkEndGameCommand();
-            switch (command)
+            switch (command.EnumCommand)
             {
                 case EnumCommand.UP:
                     Vector2 targetUp = playerBody.position + new Vector2(0, offsetXBoard);
@@ -138,22 +144,34 @@ public class BoardManager : MonoBehaviour
                     }
                     break;
                 case EnumCommand.A:
+                    yield return new WaitForSeconds(1f);
+                    animationCommand(previous, null);
+                    functionCalled = true;
                     yield return StartCoroutine(DoFunction(functionsBoard[0]));
                     break;
                 case EnumCommand.B:
+                    yield return new WaitForSeconds(1f);
+                    animationCommand(previous, null);
+                    functionCalled = true;
                     yield return StartCoroutine(DoFunction(functionsBoard[1]));
                     break;
                 case EnumCommand.C:
+                    yield return new WaitForSeconds(1f);
+                    animationCommand(previous, null);
+                    functionCalled = true;
                     yield return StartCoroutine(DoFunction(functionsBoard[2]));
                     break;
                 case EnumCommand.A_TITLE:
+                    functionCalled = true;
                     break;
                 case EnumCommand.B_TITLE:
+                    functionCalled = true;
                     break;
                 case EnumCommand.C_TITLE:
+                    functionCalled = true;
                     break;
             }
-            if (!endGame)
+            if (!endGame || functionCalled)
             {
                 yield return new WaitForSeconds(1);
             }
@@ -161,6 +179,48 @@ public class BoardManager : MonoBehaviour
         if (!endGame)
         {
             gameManager.doDefeat();
+        }
+    }
+
+    private void animationCommand(Command previous, Command command)
+    {
+        if (previous != null)
+        {
+            GameObject instance =  getObjectToInstantiate(previous.EnumCommand);
+            previous.gameObject.GetComponent<SpriteRenderer>().sprite = instance.GetComponent<SpriteRenderer>().sprite;
+        }
+        if(command != null)
+        {
+            command.gameObject.GetComponent<SpriteRenderer>().sprite = getSpriteCommandMark(command.EnumCommand);
+        }
+    }
+
+    private Sprite getSpriteCommandMark(EnumCommand enumCommand)
+    {
+        switch (enumCommand)
+        {
+            case EnumCommand.UP:
+                return UpMark;
+            case EnumCommand.DOWN:
+                return downMark;
+            case EnumCommand.LEFT:
+                return leftMark;
+            case EnumCommand.RIGHT:
+                return rightMark;
+            case EnumCommand.A:
+                return AMark;
+            case EnumCommand.B:
+                return BMark;
+            case EnumCommand.C:
+                return CMark;
+            case EnumCommand.A_TITLE:
+                return A_titleMark;
+            case EnumCommand.B_TITLE:
+                return B_titleMark;
+            case EnumCommand.C_TITLE:
+                return C_TitleMark;
+            default:
+                return null;
         }
     }
 
@@ -173,9 +233,10 @@ public class BoardManager : MonoBehaviour
         {
             for (int x = 0; x < functions[y].Commands.Count; x++)
             {
-                toInstantiate = getObjectToInstantiate(functions[y].Commands[x]);
+                toInstantiate = getObjectToInstantiate(functions[y].Commands[x].EnumCommand);
                 instance = Instantiate(toInstantiate, transformBoardCommand.transform, true) as GameObject;
                 instance.transform.localPosition = getPositionCommandInstance(x - 3, (y * -1) + 1);
+                functions[y].Commands[x].gameObject = instance;
             }
         }
     }

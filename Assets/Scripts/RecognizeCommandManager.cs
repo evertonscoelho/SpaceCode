@@ -66,7 +66,7 @@ public class RecognizeCommandManager : MonoBehaviour
         List<Function> functions= new List<Function>();
         int line = 1;
         bool firstCommandInLine = true;
-        List<EnumCommand> commandsLine = new List<EnumCommand>();
+        List<Command> commandsLine = new List<Command>();
         bool error = false;
 
         foreach (string command in commands)
@@ -85,15 +85,15 @@ public class RecognizeCommandManager : MonoBehaviour
                     {
                         if(line == 1)
                         {
-                            commandsLine.Add(EnumCommand.A_TITLE);
+                            commandsLine.Add(new Command(EnumCommand.A_TITLE));
                         }
                         else if(line == 2)
                         {
-                            commandsLine.Add(EnumCommand.B_TITLE);
+                            commandsLine.Add(new Command(EnumCommand.B_TITLE));
                         }
                         else
                         {
-                            commandsLine.Add(EnumCommand.C_TITLE);
+                            commandsLine.Add(new Command(EnumCommand.C_TITLE));
                         }
                     }
                 }
@@ -106,12 +106,12 @@ public class RecognizeCommandManager : MonoBehaviour
                     }
                     line = line + 1;
                     functions.Add(new Function(commandsLine));
-                    commandsLine = new List<EnumCommand>();
+                    commandsLine = new List<Command>();
                     firstCommandInLine = true;
                 }
                 else
                 {
-                    commandsLine.Add(getCommand(command));
+                    commandsLine.Add(new Command(getCommand(command)));
                 }
             }
         }

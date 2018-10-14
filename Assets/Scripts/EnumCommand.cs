@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public enum EnumCommand
 {
@@ -24,12 +25,24 @@ public enum StatusGame
 
 public class Function
 {
-    public List<EnumCommand> Commands;
+    public List<Command> Commands;
 
-    public Function(List<EnumCommand> commands)
+    public Function(List<Command> commands)
     {
         this.Commands = commands;
     }
+}
+
+public class Command
+{
+    public EnumCommand EnumCommand;
+    public GameObject gameObject;
+
+    public Command(EnumCommand command)
+    {
+        this.EnumCommand = command;
+    }
+
 }
 
 [System.Serializable]

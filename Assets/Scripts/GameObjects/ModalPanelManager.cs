@@ -75,7 +75,7 @@ public class ModalPanelManager : MonoBehaviour {
         {
             for (int x = 0; x < functions[y].Commands.Count; x++)
             {
-                toInstantiate = boardManager.getObjectToInstantiate(functions[y].Commands[x]);
+                toInstantiate = boardManager.getObjectToInstantiate(functions[y].Commands[x].EnumCommand);
                 commandObject = new GameObject();
                 Image image = commandObject.AddComponent<Image>();
                 commandObject.GetComponent<RectTransform>().SetParent(transformBoardCommand.transform, false);
