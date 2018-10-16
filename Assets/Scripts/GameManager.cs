@@ -53,10 +53,11 @@ public class GameManager : MonoBehaviour
         ModalPanelManager.setTitleCommands(Messages.TITULO_PAINEL_COMANDOS);
     }
 
-    public void showErro(string erro)
+    public void showErro(string erro, bool buttonOkVisible, bool buttonTryAgainVisible)
     {
         ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_ERRO, false, false, true, false, false);
         ModalPanelManager.setDescriptionError(erro);
+        ModalPanelManager.setVisibleButtonsErro(buttonOkVisible, buttonTryAgainVisible);
     }
 
     public void functionsCorrect()

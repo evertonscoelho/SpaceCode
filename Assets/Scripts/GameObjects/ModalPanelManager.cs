@@ -9,7 +9,7 @@ public class ModalPanelManager : MonoBehaviour {
     public GameObject panelHelp, panelEndGame, panelErrorCommand, panelCommands, panelLastLevel;
    
     public GameObject boardCommand;
-    public Button buttonNext;
+    public Button buttonNext, buttonTryAgainError, buttonOkError;
 
     void Start()
     {
@@ -20,6 +20,14 @@ public class ModalPanelManager : MonoBehaviour {
     public void interactableButtonNext(Boolean interactable)
     {
         buttonNext.interactable = interactable;
+    }
+
+    public void setVisibleButtonsErro(bool buttonOkVisible, bool buttonTryAgainVisible)
+    {
+        buttonTryAgainError.gameObject.SetActive(buttonTryAgainVisible);
+        buttonOkError.gameObject.SetActive(buttonOkVisible);
+
+
     }
 
     public void activeModal(Boolean active, string title, Boolean panelHelp, Boolean panelEndGame, Boolean panelErrorCommand, Boolean panelCommands, Boolean panelLastLevel)

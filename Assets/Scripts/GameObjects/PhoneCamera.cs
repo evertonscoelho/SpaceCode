@@ -9,7 +9,7 @@ public class PhoneCamera : MonoBehaviour {
         WebCamDevice[] devices = WebCamTexture.devices;
         if(devices.Length == 0)
         {
-            GameManager.instance.showErro(Messages.NENHUMA_CAMERA_ENCONTRADA);
+            GameManager.instance.showErro(Messages.NENHUMA_CAMERA_ENCONTRADA, false, true);
         }
 
         for(int i = 0; i < devices.Length; i++)
@@ -22,7 +22,7 @@ public class PhoneCamera : MonoBehaviour {
 
         if(cam == null)
         {
-            GameManager.instance.showErro(Messages.NAO_ABRIU_CAMERA);
+            GameManager.instance.showErro(Messages.NAO_ABRIU_CAMERA, true, false);
         }
         
         cam.Play();

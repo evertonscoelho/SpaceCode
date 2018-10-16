@@ -50,15 +50,17 @@ public class RecognizeCommandManager : MonoBehaviour
         }
         else
         {
-            GameManager.instance.showErro(response);
+            GameManager.instance.showErro(response, false, true);
         }
     }
 
     public void convertToCommand(string response)
     {
-        if (response.ToUpper().Equals("UNKNOW"))
+        bool error = false;
+        if (response.ToUpper().Equals("UNKNOWN"))
         {
-            GameManager.instance.showErro(Messages.NENHUM_COMANDO_RECONHECIDO);
+            GameManager.instance.showErro(Messages.NENHUM_COMANDO_RECONHECIDO, false, true);
+            error = true;
         }
         response = response.ToUpper();
         string[] commands = response.Split(',');
@@ -66,7 +68,6 @@ public class RecognizeCommandManager : MonoBehaviour
         int line = 1;
         bool firstCommandInLine = true;
         List<Command> commandsLine = new List<Command>();
-        bool error = false;
 
         foreach (string command in commands)
         {
@@ -100,7 +101,7 @@ public class RecognizeCommandManager : MonoBehaviour
                 {
                     if(line == 3)
                     {
-                        GameManager.instance.showErro(Messages.LINHAS_INVALIDAS);
+                        GameManager.instance.showErro(Messages.LINHAS_INVALIDAS, false, true);
                         error = true;
                     }
                     line = line + 1;
@@ -127,7 +128,7 @@ public class RecognizeCommandManager : MonoBehaviour
         {
             if (!command.Equals("A"))
             {
-                GameManager.instance.showErro(Messages.PRIMEIRA_LINHA_INAVLIDA);
+                GameManager.instance.showErro(Messages.PRIMEIRA_LINHA_INAVLIDA, false, true);
                 return true;
             }
         }
@@ -135,7 +136,7 @@ public class RecognizeCommandManager : MonoBehaviour
         {
             if (!command.Equals("B"))
             {
-                GameManager.instance.showErro(Messages.SEGUNDA_LINHA_INAVLIDA);
+                GameManager.instance.showErro(Messages.SEGUNDA_LINHA_INAVLIDA, false, true);
                 return true;
             }
         }
@@ -143,7 +144,7 @@ public class RecognizeCommandManager : MonoBehaviour
         {
             if (!command.Equals("C"))
             {
-                GameManager.instance.showErro(Messages.TERCEIRA_LINHA_INAVLIDA);
+                GameManager.instance.showErro(Messages.TERCEIRA_LINHA_INAVLIDA, false, true);
                 return true;
             }
         }

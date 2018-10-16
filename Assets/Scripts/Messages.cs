@@ -21,4 +21,8 @@
     public static string ERRO_SERVIDOR = "Ocorreu um erro ao tentar conectar ao servidor: ";
     public static string PROBLEMA_CONEXAO = "Ocorreu um problema de conexão com o servidor: ";
 
+    public static string ERRO_FUNCAO_B_NAO_EXISTE = "Ih rapaz, você não criou a função B";
+    public static string ERRO_FUNCAO_C_NAO_EXISTE = "Ih rapaz, você não criou a função C";
+
+
 }

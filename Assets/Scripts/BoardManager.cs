@@ -152,13 +152,30 @@ public class BoardManager : MonoBehaviour
                     yield return new WaitForSeconds(1f);
                     animationCommand(previous, null);
                     functionCalled = true;
-                    yield return StartCoroutine(DoFunction(functionsBoard[1]));
+                    if (functionsBoard.Count > 1) { 
+                        yield return StartCoroutine(DoFunction(functionsBoard[1]));
+                    }
+                    else
+                    {
+                        this.StopAllCoroutines();
+                        gameManager.showErro(Messages.ERRO_FUNCAO_B_NAO_EXISTE, true, false);
+                        endGame = true;
+                    }
                     break;
                 case EnumCommand.C:
                     yield return new WaitForSeconds(1f);
                     animationCommand(previous, null);
                     functionCalled = true;
-                    yield return StartCoroutine(DoFunction(functionsBoard[2]));
+                    if (functionsBoard.Count > 2)
+                    {
+                        yield return StartCoroutine(DoFunction(functionsBoard[2]));
+                    }
+                    else
+                    {
+                        this.StopAllCoroutines();
+                        gameManager.showErro(Messages.ERRO_FUNCAO_C_NAO_EXISTE, true, false);
+                        endGame = true;
+                    }
                     break;
                 case EnumCommand.A_TITLE:
                     functionCalled = true;
