@@ -31,6 +31,7 @@ public class PhoneCamera : MonoBehaviour {
 	
     public byte[] TakePhoto()
     {
+        cam.Pause();
         Texture2D photo = new Texture2D(cam.width, cam.height);
         photo.SetPixels(cam.GetPixels());
         photo.Apply();

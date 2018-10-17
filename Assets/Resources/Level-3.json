@@ -16,7 +16,27 @@
 				"positionY": -1,
 				"objectType": "Floor"
 			},
-				{
+			{
+				"positionX": -2,
+				"positionY": -1,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": 1,
+				"positionY": -1,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": 0,
+				"positionY": -2,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": -1,
+				"positionY": -2,
+				"objectType": "Wall"
+			},
+			{
 				"positionX": -1,
 				"positionY": 0,
 				"objectType": "Floor"
@@ -29,7 +49,7 @@
 			{
 				"positionX": 0,
 				"positionY": 0,
-				"objectType": "Wall"
+				"objectType": "Obstacle"
 			},
 			{
 				"positionX": 0,

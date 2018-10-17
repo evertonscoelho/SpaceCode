@@ -159,7 +159,10 @@ public class GameManager : MonoBehaviour
     {
         boardScript.StopAllCoroutines();
         yield return StartCoroutine(boardScript.terminateMovement(positionCollectable));
-        if (Int32.Parse(levelId) < maxLevel)
+
+        int level = Int32.Parse(levelId);
+
+        if (level < maxLevel)
         {
             ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_FIM_JOGO_VITORIA, false, true, false, false, false);
         }
@@ -167,6 +170,11 @@ public class GameManager : MonoBehaviour
         {
             ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_FIM_JOGO_VITORIA, false, false, false, false, true);
             ModalPanelManager.setDescriptionLastLevel(Messages.MENSAGEM_ULTIMA_FASE);
+        }
+        int levelReached = PlayerPrefs.GetInt("levelReached", 1);
+        if (level > levelReached)
+        {
+            PlayerPrefs.GetInt("levelReached", level);
         }
         
         ModalPanelManager.interactableButtonNext(true);

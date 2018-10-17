@@ -101,95 +101,132 @@ public class BoardManager : MonoBehaviour
         Command previous = null;
         foreach (Command command in function.Commands)
         {
-            animationCommand(previous, command);
-            previous = command;
-            if (endGame)
+            bool blocked = false;
+            float diff, attempts = 0;
+            Vector2 target;
+            animationCommand(ref previous, command);
+            if (!endGame)
             {
-                break;
+                endGame = gameManager.checkEndGameCommand();
+                switch (command.EnumCommand)
+                {
+                    case EnumCommand.UP:
+                        target = playerBody.position + new Vector2(0, offsetXBoard);
+                        diff = playerBody.position.y - target.y + 20;
+                        while (playerBody.position.y < target.y && attempts < diff)
+                        {
+                            playerBody.MovePosition(new Vector2(playerBody.position.x, playerBody.position.y + 0.1f));
+                            attempts += 0.1f;
+                            yield return null;
+                        }
+                        if (attempts >= diff)
+                        {
+                            blocked = true;
+                            yield return new WaitForSeconds(0.5f);
+                        }
+                        break;
+                    case EnumCommand.DOWN:
+                        target = playerBody.position - new Vector2(0, offsetXBoard);
+                        diff = playerBody.position.y - target.y - 20;
+                        while (playerBody.position.y > target.y && attempts > diff)
+                        {
+                            playerBody.MovePosition(new Vector2(playerBody.position.x, playerBody.position.y - 0.1f));
+                            attempts -= 0.1f;
+                            yield return null;
+                        }
+                        if (attempts <= diff)
+                        {
+                            blocked = true;
+                            yield return new WaitForSeconds(0.5f);
+                        }
+                        break;
+                    case EnumCommand.LEFT:
+                        target = playerBody.position - new Vector2(offsetYBoard, 0);
+                        diff = playerBody.position.x - target.x - 20;
+                        while (playerBody.position.x > target.x && attempts > diff)
+                        {
+                            playerBody.MovePosition(new Vector2(playerBody.position.x - 0.1f, playerBody.position.y));
+                            attempts -= 0.1f;
+                            yield return null;
+                        }
+                        if (attempts <= diff)
+                        {
+                            blocked = true;
+                            yield return new WaitForSeconds(0.5f);
+                        }
+                        break;
+                    case EnumCommand.RIGHT:
+                        target = playerBody.position + new Vector2(offsetYBoard, 0);
+                        diff = playerBody.position.x - target.x + 20;
+                        while (playerBody.position.x < target.x && attempts < diff)
+                        {
+                            playerBody.MovePosition(new Vector2(playerBody.position.x + 0.1f, playerBody.position.y));
+                            attempts += 0.1f;
+                            yield return null;
+                        }
+                        if (attempts >= diff)
+                        {
+                            blocked = true;
+                            yield return new WaitForSeconds(0.5f);
+                        }
+                        break;
+                    case EnumCommand.A:
+                        yield return new WaitForSeconds(1f);
+                        animationCommand(ref previous, null);
+                        functionCalled = true;
+                        yield return StartCoroutine(DoFunction(functionsBoard[0]));
+                        break;
+                    case EnumCommand.B:
+                        yield return new WaitForSeconds(1f);
+                        animationCommand(ref previous, null);
+                        functionCalled = true;
+                        if (functionsBoard.Count > 1)
+                        {
+                            yield return StartCoroutine(DoFunction(functionsBoard[1]));
+                        }
+                        else
+                        {
+                            this.StopAllCoroutines();
+                            gameManager.showErro(Messages.ERRO_FUNCAO_B_NAO_EXISTE, true, false);
+                            endGame = true;
+                        }
+                        break;
+                    case EnumCommand.C:
+                        yield return new WaitForSeconds(1f);
+                        animationCommand(ref previous, null);
+                        functionCalled = true;
+                        if (functionsBoard.Count > 2)
+                        {
+                            yield return StartCoroutine(DoFunction(functionsBoard[2]));
+                        }
+                        else
+                        {
+                            this.StopAllCoroutines();
+                            gameManager.showErro(Messages.ERRO_FUNCAO_C_NAO_EXISTE, true, false);
+                            endGame = true;
+                        }
+                        break;
+                    case EnumCommand.A_TITLE:
+                        functionCalled = true;
+                        commands--;
+                        break;
+                    case EnumCommand.B_TITLE:
+                        functionCalled = true;
+                        commands--;
+                        break;
+                    case EnumCommand.C_TITLE:
+                        functionCalled = true;
+                        commands--;
+                        break;
+                }
+                if (!endGame || functionCalled || !blocked)
+                {
+                    yield return new WaitForSeconds(1);
+                }
             }
-            endGame = gameManager.checkEndGameCommand();
-            switch (command.EnumCommand)
+            else
             {
-                case EnumCommand.UP:
-                    Vector2 targetUp = playerBody.position + new Vector2(0, offsetXBoard);
-                    while (playerBody.position.y < targetUp.y)
-                    {
-                        playerBody.MovePosition(new Vector2(playerBody.position.x, playerBody.position.y + 0.1f));
-                        yield return null;
-                    }
-                    break;
-                case EnumCommand.DOWN:
-                    Vector2 targetDown = playerBody.position - new Vector2(0, offsetXBoard);
-                    while (playerBody.position.y > targetDown.y)
-                    {
-                        playerBody.MovePosition(new Vector2(playerBody.position.x, playerBody.position.y - 0.1f));
-                        yield return null;
-                    }
-                    break;
-                case EnumCommand.LEFT:
-                    Vector2 targetLeft = playerBody.position - new Vector2(offsetYBoard, 0);
-                    while (playerBody.position.x > targetLeft.x)
-                    {
-                        playerBody.MovePosition(new Vector2(playerBody.position.x - 0.1f, playerBody.position.y));
-                        yield return null;
-                    }
-                    break;
-                case EnumCommand.RIGHT:
-                    Vector2 targetRight = playerBody.position + new Vector2(offsetYBoard, 0);
-                    while (playerBody.position.x < targetRight.x)
-                    {
-                        playerBody.MovePosition(new Vector2(playerBody.position.x + 0.1f, playerBody.position.y));
-                        yield return null;
-                    }
-                    break;
-                case EnumCommand.A:
-                    yield return new WaitForSeconds(1f);
-                    animationCommand(previous, null);
-                    functionCalled = true;
-                    yield return StartCoroutine(DoFunction(functionsBoard[0]));
-                    break;
-                case EnumCommand.B:
-                    yield return new WaitForSeconds(1f);
-                    animationCommand(previous, null);
-                    functionCalled = true;
-                    if (functionsBoard.Count > 1) { 
-                        yield return StartCoroutine(DoFunction(functionsBoard[1]));
-                    }
-                    else
-                    {
-                        this.StopAllCoroutines();
-                        gameManager.showErro(Messages.ERRO_FUNCAO_B_NAO_EXISTE, true, false);
-                        endGame = true;
-                    }
-                    break;
-                case EnumCommand.C:
-                    yield return new WaitForSeconds(1f);
-                    animationCommand(previous, null);
-                    functionCalled = true;
-                    if (functionsBoard.Count > 2)
-                    {
-                        yield return StartCoroutine(DoFunction(functionsBoard[2]));
-                    }
-                    else
-                    {
-                        this.StopAllCoroutines();
-                        gameManager.showErro(Messages.ERRO_FUNCAO_C_NAO_EXISTE, true, false);
-                        endGame = true;
-                    }
-                    break;
-                case EnumCommand.A_TITLE:
-                    functionCalled = true;
-                    break;
-                case EnumCommand.B_TITLE:
-                    functionCalled = true;
-                    break;
-                case EnumCommand.C_TITLE:
-                    functionCalled = true;
-                    break;
-            }
-            if (!endGame || functionCalled)
-            {
-                yield return new WaitForSeconds(1);
+                gameManager.doDefeat();
             }
         }
         if (!endGame)
@@ -198,7 +235,7 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    private void animationCommand(Command previous, Command command)
+    private void animationCommand(ref Command previous, Command command)
     {
         if (previous != null)
         {
@@ -209,6 +246,7 @@ public class BoardManager : MonoBehaviour
         {
             command.gameObject.GetComponent<SpriteRenderer>().sprite = getSpriteCommandMark(command.EnumCommand);
         }
+        previous = command;
     }
 
     private Sprite getSpriteCommandMark(EnumCommand enumCommand)
