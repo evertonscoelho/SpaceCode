@@ -172,9 +172,9 @@ public class GameManager : MonoBehaviour
             ModalPanelManager.setDescriptionLastLevel(Messages.MENSAGEM_ULTIMA_FASE);
         }
         int levelReached = PlayerPrefs.GetInt("levelReached", 1);
-        if (level > levelReached)
+        if (level >= levelReached)
         {
-            PlayerPrefs.GetInt("levelReached", level);
+            PlayerPrefs.SetInt("levelReached", level+1);
         }
         
         ModalPanelManager.interactableButtonNext(true);
