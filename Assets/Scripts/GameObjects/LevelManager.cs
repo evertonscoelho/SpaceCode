@@ -6,7 +6,7 @@ public class LevelManager: MonoBehaviour
     public Button picture, back, help, sound;
     public Text TextCommands;
 
-    void Awake()
+    void Start()
     {
        GameManager.instance.setupSceneLevel(this);
     }
