@@ -1,8 +1,8 @@
 {
-	"name": "Level 3",
-	"levelID": "3",
+	"name": "Level 5",
+	"levelID": "5",
 	"author": "Everton/Yuri",
-	"difficulty": 1,
+	"difficulty": 2,
 	"maxCommands": 40,
 	"board": {
 		"data": [
@@ -22,6 +22,11 @@
 				"objectType": "Wall"
 			},
 			{
+				"positionX": -5,
+				"positionY": -2,
+				"objectType": "Wall"
+			},
+			{
 				"positionX": -4,
 				"positionY": 2,
 				"objectType": "Wall"
@@ -29,12 +34,12 @@
 			{
 				"positionX": -4,
 				"positionY": 1,
-				"objectType": "Collectable"
+				"objectType": "Floor"
 			},
 			{
 				"positionX": -4,
 				"positionY": 0,
-				"objectType": "Floor"
+				"objectType": "Obstacle"
 			},
 			{
 				"positionX": -4,
@@ -44,46 +49,91 @@
 			{
 				"positionX": -4,
 				"positionY": -2,
+				"objectType": "Floor"
+			},
+			{
+				"positionX": -4,
+				"positionY": -3,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": -3,
+				"positionY": 2,
 				"objectType": "Wall"
 			},
 			{
 				"positionX": -3,
 				"positionY": 1,
-				"objectType": "Wall"
+				"objectType": "Collectable"
 			},
 			{
 				"positionX": -3,
 				"positionY": 0,
-				"objectType": "Wall"
-			},
-			{
-				"positionX": -3,
-				"positionY": -1,
 				"objectType": "Floor"
 			},
 			{
 				"positionX": -3,
+				"positionY": -1,
+				"objectType": "Obstacle"
+			},
+			{
+				"positionX": -3,
 				"positionY": -2,
+				"objectType": "Player"
+			},
+			{
+				"positionX": -3,
+				"positionY": -3,
 				"objectType": "Wall"
+			},			
+			{
+				"positionX": -2,
+				"positionY": 2,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": -2,
+				"positionY": 1,
+				"objectType": "Floor"
 			},
 			{
 				"positionX": -2,
 				"positionY": 0,
-				"objectType": "Wall"
+				"objectType": "Floor"
 			},
 			{
 				"positionX": -2,
 				"positionY": -1,
-				"objectType": "Player"
+				"objectType": "Floor"
 			},
 			{
 				"positionX": -2,
 				"positionY": -2,
+				"objectType": "Floor"
+			},
+			{
+				"positionX": -2,
+				"positionY": -3,
 				"objectType": "Wall"
 			},
 			{
 				"positionX": -1,
 				"positionY": -1,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": -1,
+				"positionY": 1,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": -1,
+				"positionY": 0,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": -1,
+				"positionY": -2,
 				"objectType": "Wall"
 			}
 		]

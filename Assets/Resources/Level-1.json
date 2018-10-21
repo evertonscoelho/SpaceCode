@@ -7,6 +7,26 @@
 	"board": {
 		"data": [
 			{
+				"positionX": -1,
+				"positionY": 1,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": -1,
+				"positionY": 0,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": -1,
+				"positionY": -1,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": 0,
+				"positionY": -2,
+				"objectType": "Wall"
+			},
+			{
 				"positionX": 0,
 				"positionY": -1,
 				"objectType": "Player"
@@ -18,23 +38,28 @@
 			},
 			{
 				"positionX": 0,
-				"positionY": 1,
-				"objectType": "Floor"
-			},
-			{
-				"positionX": 0,
 				"positionY": 2,
-				"objectType": "Floor"
+				"objectType": "Wall"
 			},
 			{
 				"positionX": 0,
-				"positionY": 3,
-				"objectType": "Floor"
+				"positionY": 1,
+				"objectType": "Collectable"
 			},
 			{
-				"positionX": -1,
-				"positionY": 3,
-				"objectType": "Collectable"
+				"positionX": 1,
+				"positionY": -1,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": 1,
+				"positionY": 0,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": 1,
+				"positionY": 1,
+				"objectType": "Wall"
 			}
 		]
 	}
