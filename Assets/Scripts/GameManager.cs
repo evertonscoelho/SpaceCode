@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
     {
         GameManager gameManager = GameManager.instance;
         gameManager.ModalPanelManager.deactiveModal();
-        gameManager.boardScript.doCommands(gameManager.functions);
+        gameManager.StartCoroutine(gameManager.boardScript.doCommands(gameManager.functions));
         gameManager.levelManager.deactivateButtons();
     }
 

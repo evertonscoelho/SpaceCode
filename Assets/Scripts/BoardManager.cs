@@ -20,6 +20,8 @@ public class BoardManager : MonoBehaviour
     private Level level;
     private int commands = 0, collectables = 0;
 
+    bool endGame = false;
+
     public void initValues()
     {
         offsetXCommand = Up.GetComponent<SpriteRenderer>().bounds.size.x;
@@ -88,20 +90,23 @@ public class BoardManager : MonoBehaviour
         return (level.maxCommands - commands).ToString();
     }
 
-    public void doCommands(List<Function> functions)
+    public IEnumerator doCommands(List<Function> functions)
     {
         functionsBoard = functions;
         printActionsInBoard(functions);
-        StartCoroutine(DoFunction(functions[0]));
+        yield return StartCoroutine(DoFunction(functions[0]));
+        if (!endGame)
+        {
+            gameManager.doDefeat();
+        }
     }
 
     private IEnumerator DoFunction(Function function)
     {
-        bool endGame = false, functionCalled = false;
         Command previous = null;
         foreach (Command command in function.Commands)
         {
-            bool blocked = false;
+            bool blocked = false,  functionCalled = false;
             float diff, attempts = 0;
             Vector2 target;
             animationCommand(ref previous, command);
@@ -219,7 +224,7 @@ public class BoardManager : MonoBehaviour
                         commands--;
                         break;
                 }
-                if (!endGame || functionCalled || !blocked)
+                if (!endGame || !functionCalled || !blocked)
                 {
                     yield return new WaitForSeconds(1);
                 }
@@ -229,10 +234,7 @@ public class BoardManager : MonoBehaviour
                 gameManager.doDefeat();
             }
         }
-        if (!endGame)
-        {
-            gameManager.doDefeat();
-        }
+        animationCommand(ref previous, null);
     }
 
     private void animationCommand(ref Command previous, Command command)
