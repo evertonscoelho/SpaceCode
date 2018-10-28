@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class ModalPanelManager : MonoBehaviour {
 
-    public Text title, descriptionError, descriptionHelp, titleCommands, descriptionLastLevel;
+    public Text title, descriptionError, descriptionHelp, titleCommands, descriptionLastLevel, descriptionButtonFases, descriptionButtonTryAgain, descriptionButtonNext;
+    public Text descriptionTryAgainError, descriptionOkError, descriptionButtonYes, descriptionButtonNoTryAgain, descriptionLevelPanelLastLevel;
     public GameObject panelHelp, panelEndGame, panelErrorCommand, panelCommands, panelLastLevel;
    
     public GameObject boardCommand;
@@ -15,6 +16,14 @@ public class ModalPanelManager : MonoBehaviour {
     {
         GameManager.instance.ModalPanelManager = this;
         deactiveModal();
+        descriptionButtonFases.text = Messages.BOTAO_FASES;
+        descriptionButtonTryAgain.text = Messages.BOTAO_TENTAR_NOVAMENTE;
+        descriptionButtonNext.text = Messages.BOTAO_PROXIMA_FASE;
+        descriptionTryAgainError.text = Messages.BOTAO_TENTAR_NOVAMENTE;
+        descriptionOkError.text = Messages.BOTAO_OK;
+        descriptionButtonYes.text = Messages.BOTAO_SIM;
+        descriptionButtonNoTryAgain.text = Messages.BOTAO_NAO_TENTAR_NOVAMENTE;
+        descriptionLevelPanelLastLevel.text = Messages.BOTAO_FASES;
     }
 
     public void interactableButtonNext(Boolean interactable)
