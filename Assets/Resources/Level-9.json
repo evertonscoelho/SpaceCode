@@ -4,6 +4,8 @@
 	"author": "Everton/Yuri",
 	"difficulty": 3,
 	"maxCommands": 40,
+	"maxCommandsUse": 40,
+	"playerDirection": "Left",
 	"board": {
 		"data": [
 			{

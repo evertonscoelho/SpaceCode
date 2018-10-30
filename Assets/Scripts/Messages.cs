@@ -14,7 +14,8 @@
     public static string TITULO_PAINEL_FIM_JOGO_DERROTA = "Perdeu :/";
     public static string TITULO_PAINEL_AJUDA = "Ajuda";
 
-    public static string TITULO_COMANDOS_RESTANTES = "Comandos restantes";
+    public static string TITULO_COMANDOS_RESTANTES = "Comandos restantes:";
+    public static string TITULO_COMANDOS_USO = "Comandos disponíveis:";
     public static string CARREGANDO = "Carregando...";
 
     public static string BOTAO_FASES = "Fases";
@@ -34,5 +35,5 @@
     public static string ERRO_FUNCAO_B_NAO_EXISTE = "Ih rapaz, você não criou a função B";
     public static string ERRO_FUNCAO_C_NAO_EXISTE = "Ih rapaz, você não criou a função C";
 
-
+    public static string ERRO_QUANTIDADE_COMANDOS = "São permitidos para essa fase apenas {0} comandos, e você colocou {1}";
 }

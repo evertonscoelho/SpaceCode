@@ -3,18 +3,26 @@ using UnityEngine;
 
 public enum EnumCommand
 {
-    UP, 
-    DOWN,
+    CIRCLE, 
+    CIRCLE_TITLE,
+    STAR,
+    STAR_TITLE,
+    TRIANGLE,
+    TRIANGLE_TITLE,
+    LOOP,
     LEFT,
     RIGHT,
-    A,
-    B,
-    C,
-    A_TITLE,
-    B_TITLE,
-    C_TITLE,
+    MOVE,
     UNKNOW
 };  
+
+public enum PlayerDirection
+{
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT
+}
 
 public enum StatusGame
 {
@@ -37,6 +45,8 @@ public class Command
 {
     public EnumCommand EnumCommand;
     public GameObject gameObject;
+    public List<Command> loop;
+    public int repeatLoop;
 
     public Command(EnumCommand command)
     {
@@ -54,6 +64,8 @@ public class Level
     public int difficulty;
     public int collectable;
     public int maxCommands;
+    public int maxCommandsUse;
+    public string playerDirection;
     public Board board;
 }
 

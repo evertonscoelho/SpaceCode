@@ -42,7 +42,9 @@ public class GameManager : MonoBehaviour
 
     public void takePictureClick()
     {
-        RecognizeCommandManager.instance.takePictureClick();
+        GameManager gameManager = GameManager.instance;
+        Level level = gameManager.boardScript.getLevel();
+        RecognizeCommandManager.instance.takePictureClick(level.maxCommandsUse);
     }
 
     public void recognizeCommand(List<Function> functions)
@@ -95,6 +97,7 @@ public class GameManager : MonoBehaviour
         boardScript.SetupScene(levelId);
         boardScript.initValues();
         levelManager.setTextCommands(boardScript.getCommandsRemaining());
+        levelManager.setTextCommandsUse(boardScript.getLevel().maxCommandsUse);
     }
 
     public void loadScene(int sceneIndex)

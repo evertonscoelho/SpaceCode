@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +7,7 @@ public class RecognizeCommandManager : MonoBehaviour
 {
     public static RecognizeCommandManager instance = null;
     private CameraViewModalManager cameraViewManager;
+    private int maxCommandsUse;
     PhoneCamera phoneCamera;
 
     void Awake()
@@ -20,15 +22,17 @@ public class RecognizeCommandManager : MonoBehaviour
 
     public void pictureClick()
     {
-       phoneCamera = new PhoneCamera(cameraViewManager.GetComponent<RawImage>());
+       //phoneCamera = new PhoneCamera(cameraViewManager.GetComponent<RawImage>());
        cameraViewManager.active();
     }
 
-    public void takePictureClick()
+    public void takePictureClick(int maxCommandsUse)
     {
         cameraViewManager.loading();
-        byte[] bytes = phoneCamera.TakePhoto();
-        request(bytes);
+        //byte[] bytes = phoneCamera.TakePhoto();
+        this.maxCommandsUse = maxCommandsUse;
+        response("A,LEFT,DOWN,B,NEXT,B,DOWN,UP,C,DOWN,C,UP,UP,UP,UP,UP,UP", false);
+        //StartCoroutine(RequestManager.Request(bytes, this));
     }
 
     public void setCameraViewManager(CameraViewModalManager cameraViewManager)
@@ -36,10 +40,6 @@ public class RecognizeCommandManager : MonoBehaviour
         this.cameraViewManager = cameraViewManager;
     }
 
-    public void request(byte[] bytes)
-    {
-        StartCoroutine(RequestManager.Request(bytes, this));
-    }
 
     public void response(string response, bool error)
     {
@@ -71,31 +71,13 @@ public class RecognizeCommandManager : MonoBehaviour
 
         foreach (string command in commands)
         {
-            if (error)
-            {
-                break;
-            }
-            else
+            if (!error)
             {
                 if (firstCommandInLine)
                 {
                     error = firstCommandLineCheck(line, command);
                     firstCommandInLine = false;
-                    if (!error)
-                    {
-                        if(line == 1)
-                        {
-                            commandsLine.Add(new Command(EnumCommand.A_TITLE));
-                        }
-                        else if(line == 2)
-                        {
-                            commandsLine.Add(new Command(EnumCommand.B_TITLE));
-                        }
-                        else
-                        {
-                            commandsLine.Add(new Command(EnumCommand.C_TITLE));
-                        }
-                    }
+                    commandsLine.Add(title(line));
                 }
                 else if (command.Equals("NEXT"))
                 {
@@ -118,7 +100,42 @@ public class RecognizeCommandManager : MonoBehaviour
         if (!error)
         {
             functions.Add(new Function(commandsLine));
+            if (!checkErrorCommandUse(functions, line))
+            { 
             GameManager.instance.recognizeCommand(functions);
+            }
+        }
+    }
+
+    private bool checkErrorCommandUse(List<Function> functions, int line)
+    {
+        int commands = line * -1;
+        for(int x = 0; x < line; x++)
+        {
+            commands += functions[x].Commands.Count;
+        }
+        if (maxCommandsUse < commands)
+        { 
+            string message = String.Format(Messages.ERRO_QUANTIDADE_COMANDOS, maxCommandsUse, commands);
+            GameManager.instance.showErro(message, false, true);
+            return true;  
+        }
+        return false;
+    }
+
+    private Command title(int line)
+    {
+        if (line == 1)
+        {
+            return new Command(EnumCommand.A_TITLE);
+        }
+        else if (line == 2)
+        {
+            return new Command(EnumCommand.B_TITLE);
+        }
+        else
+        {
+            return new Command(EnumCommand.C_TITLE);
         }
     }
 
