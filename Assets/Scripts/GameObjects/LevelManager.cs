@@ -9,9 +9,9 @@ public class LevelManager: MonoBehaviour
     void Start()
     {
         GameManager.instance.setupSceneLevel(this);
-        TextTitleCommands.text = Messages.TITULO_COMANDOS_RESTANTES;
-        TextTitleCommandsUse.text = Messages.TITULO_COMANDOS_USO;
-        TextLoading.text = Messages.CARREGANDO;
+        TextTitleCommands.text = Messages.LABEL_COMANDOS_RESTANTES;
+        TextTitleCommandsUse.text = Messages.LABEL_COMANDOS_USO;
+        TextLoading.text = Messages.LABEL_CARREGANDO;
     }
     
     public void deactivateButtons()

@@ -31,7 +31,7 @@ public class RecognizeCommandManager : MonoBehaviour
         cameraViewManager.loading();
         //byte[] bytes = phoneCamera.TakePhoto();
         this.maxCommandsUse = maxCommandsUse;
-        response("A,LEFT,DOWN,B,NEXT,B,DOWN,UP,C,DOWN,C,UP,UP,UP,UP,UP,UP", false);
+        response("loop,6,5,4,2,9,NEXT,star,right,right,left,left,3,NEXT,triangle,move,triangle,circle,move,8,NEXT,circle,move,star,loop,7", false);
         //StartCoroutine(RequestManager.Request(bytes, this));
     }
 
@@ -59,52 +59,100 @@ public class RecognizeCommandManager : MonoBehaviour
         bool error = false;
         if (response.ToUpper().Equals("UNKNOWN"))
         {
-            GameManager.instance.showErro(Messages.NENHUM_COMANDO_RECONHECIDO, false, true);
+            GameManager.instance.showErro(Messages.ERRO_NENHUM_COMANDO_RECONHECIDO, false, true);
             error = true;
         }
         response = response.ToUpper();
         string[] commands = response.Split(',');
         List<Function> functions= new List<Function>();
-        int line = 1;
-        bool firstCommandInLine = true;
+        int line = 1, indexCircle = -1, indexStar = -1, indexTriangle = -1;
+        bool firstCommandInLine = true, refCircle = false, refStar = false, refTriangle = false;
         List<Command> commandsLine = new List<Command>();
+        EnumCommand enumCommand;
 
-        foreach (string command in commands)
+        foreach (string commandString in commands)
         {
             if (!error)
             {
+                enumCommand = getCommand(commandString);
                 if (firstCommandInLine)
                 {
-                    error = firstCommandLineCheck(line, command);
+                    error = firstCommandLineCheckError(enumCommand, ref indexCircle, ref indexStar, ref indexTriangle, line);
                     firstCommandInLine = false;
-                    commandsLine.Add(title(line));
+                    commandsLine.Add(title(enumCommand));
                 }
-                else if (command.Equals("NEXT"))
+                else if (commandString.Equals("NEXT"))
                 {
                     if(line == 3)
                     {
-                        GameManager.instance.showErro(Messages.LINHAS_INVALIDAS, false, true);
+                        GameManager.instance.showErro(String.Format(Messages.ERRO_LINHAS_INVALIDAS, line), false, true);
                         error = true;
                     }
-                    line = line + 1;
+                    line++;
                     functions.Add(new Function(commandsLine));
                     commandsLine = new List<Command>();
                     firstCommandInLine = true;
                 }
+                else if (enumCommand.Equals(EnumCommand.CIRCLE))
+                {
+                    refCircle = true;
+                }
+                else if (enumCommand.Equals(EnumCommand.TRIANGLE))
+                {
+                    refTriangle = true;
+                }
+                else if (enumCommand.Equals(EnumCommand.STAR))
+                {
+                    refStar = true;
+                }
+                else if (enumCommand.Equals("UNKNOW"))
+                {
+                    GameManager.instance.showErro(Messages.ERRO_AO_RECONHECER_COMANDO, false, true);
+                    error = true;
+                }
                 else
                 {
-                    commandsLine.Add(new Command(getCommand(command)));
+                    commandsLine.Add(new Command(enumCommand));
                 }
             }
         }
         if (!error)
         {
             functions.Add(new Function(commandsLine));
-            if (!checkErrorCommandUse(functions, line))
+            if (!checkErrorCommandUse(functions, line) && !checkErrorFucntionReference(indexCircle, indexTriangle, indexStar, refCircle, refStar, refTriangle))
             { 
-            GameManager.instance.recognizeCommand(functions);
+                GameManager.instance.recognizeCommand(functions, indexCircle, indexStar, indexTriangle);
             }
         }
+    }
+
+    private bool checkErrorFucntionReference(int indexCircle, int indexTriangle, int indexStar, bool refCircle, bool refStar, bool refTriangle)
+    {
+        if (refCircle)
+        {
+            if(indexCircle == -1)
+            {
+                GameManager.instance.showErro(String.Format(Messages.ERRO_FUNCAO_NAO_IMPLEMENTADA, Messages.FUNCAO_CIRCULO), false, true);
+                return true;
+            }
+        }
+        if (refStar)
+        {
+            if (indexStar == -1)
+            {
+                GameManager.instance.showErro(String.Format(Messages.ERRO_FUNCAO_NAO_IMPLEMENTADA, Messages.FUNCAO_ESTRELA), false, true);
+                return true;
+            }
+        }
+        if (refTriangle)
+        {
+            if (indexTriangle == -1)
+            {
+                GameManager.instance.showErro(String.Format(Messages.ERRO_FUNCAO_NAO_IMPLEMENTADA, Messages.FUNCAO_TRIANGULO), false, true);
+                return true;
+            }
+        }
+        return false;
     }
 
     private bool checkErrorCommandUse(List<Function> functions, int line)
@@ -116,54 +164,69 @@ public class RecognizeCommandManager : MonoBehaviour
         }
         if (maxCommandsUse < commands)
         { 
-            string message = String.Format(Messages.ERRO_QUANTIDADE_COMANDOS, maxCommandsUse, commands);
-            GameManager.instance.showErro(message, false, true);
+            GameManager.instance.showErro(String.Format(Messages.ERRO_QUANTIDADE_COMANDOS, maxCommandsUse, commands), false, true);
             return true;  
         }
         return false;
     }
 
-    private Command title(int line)
+    private Command title(EnumCommand enumCommand)
     {
-        if (line == 1)
+        if (enumCommand.Equals(EnumCommand.CIRCLE))
         {
-            return new Command(EnumCommand.A_TITLE);
+            return new Command(EnumCommand.CIRCLE_TITLE);
         }
-        else if (line == 2)
+        else if (enumCommand.Equals(EnumCommand.TRIANGLE))
         {
-            return new Command(EnumCommand.B_TITLE);
+            return new Command(EnumCommand.TRIANGLE_TITLE);
         }
         else
         {
-            return new Command(EnumCommand.C_TITLE);
+            return new Command(EnumCommand.STAR_TITLE);
         }
     }
 
-    private bool firstCommandLineCheck(int line, string command)
+    private bool firstCommandLineCheckError(EnumCommand enumCommand, ref int indexCircle, ref int indexStar, ref int indexTriangle, int line)
     {
-        if (line == 1)
+        if (EnumCommand.CIRCLE.Equals(enumCommand))
         {
-            if (!command.Equals("A"))
+            if(indexCircle > -1)
             {
-                GameManager.instance.showErro(Messages.PRIMEIRA_LINHA_INAVLIDA, false, true);
+                GameManager.instance.showErro(String.Format(Messages.ERRO_FUNCAO_DEFINIDA_DUAS_VEZES, Messages.FUNCAO_CIRCULO), false, true);
                 return true;
+            }
+            else
+            {
+                indexCircle = line;
+            }
+        }else if (EnumCommand.TRIANGLE.Equals(enumCommand))
+        {
+            if (indexTriangle > -1)
+            {
+                GameManager.instance.showErro(String.Format(Messages.ERRO_FUNCAO_DEFINIDA_DUAS_VEZES, Messages.FUNCAO_TRIANGULO), false, true);
+                return true;
+            }
+            else
+            {
+                indexTriangle = line;
             }
         }
-        else if (line == 2)
+        else if (EnumCommand.STAR.Equals(enumCommand))
         {
-            if (!command.Equals("B"))
+            if (indexStar > -1)
             {
-                GameManager.instance.showErro(Messages.SEGUNDA_LINHA_INAVLIDA, false, true);
+                GameManager.instance.showErro(String.Format(Messages.ERRO_FUNCAO_DEFINIDA_DUAS_VEZES, Messages.FUNCAO_ESTRELA), false, true);
                 return true;
+            }
+            else
+            {
+                indexStar = line;
             }
         }
-        else if (line == 3)
+        else
         {
-            if (!command.Equals("C"))
-            {
-                GameManager.instance.showErro(Messages.TERCEIRA_LINHA_INAVLIDA, false, true);
-                return true;
-            }
+            GameManager.instance.showErro(String.Format(Messages.ERRO_PRIMEIRO_COMANDO_LINHA, line), false, true);
+            return true;
         }
         return false;
     }
@@ -172,23 +235,22 @@ public class RecognizeCommandManager : MonoBehaviour
     {
         switch (command)
         {
-            case "UP":
-                return EnumCommand.UP;
-            case "DOWN":
-                return EnumCommand.DOWN;
+            case "CIRCLE":
+                return EnumCommand.CIRCLE;
+            case "STAR":
+                return EnumCommand.STAR;
+            case "TRIANGLE":
+                return EnumCommand.TRIANGLE;
+            case "LOOP":
+                return EnumCommand.LOOP;
             case "LEFT":
                 return EnumCommand.LEFT;
             case "RIGHT":
                 return EnumCommand.RIGHT;
-            case "A":
-                return EnumCommand.A;
-            case "B":
-                return EnumCommand.B;
-            case "C":
-                return EnumCommand.C;
+            case "MOVE":
+                return EnumCommand.MOVE;
             default:
                 return EnumCommand.UNKNOW;
         }
-
     }
 }

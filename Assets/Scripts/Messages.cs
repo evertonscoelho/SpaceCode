@@ -1,12 +1,15 @@
 ﻿public static class Messages{
-
-    public static string NENHUMA_CAMERA_ENCONTRADA = "Nenhuma câmera encontrada";
-    public static string NAO_ABRIU_CAMERA = "Não foi possível abrir a câmera";
-    public static string NENHUM_COMANDO_RECONHECIDO = "Nenhum comando reconhecido";
-    public static string LINHAS_INVALIDAS = "É permitido apenas 3 linhas de comandos";
-    public static string PRIMEIRA_LINHA_INAVLIDA = "A primeira linha deve começar com o comando A";
-    public static string SEGUNDA_LINHA_INAVLIDA = "A segunda linha deve começar com o comando B";
-    public static string TERCEIRA_LINHA_INAVLIDA = "A terceira linha deve começar com o comando C";
+    public static string ERRO_NENHUMA_CAMERA_ENCONTRADA = "Nenhuma câmera encontrada";
+    public static string ERRO_ABRIR_CAMERA = "Não foi possível abrir a câmera";
+    public static string ERRO_NENHUM_COMANDO_RECONHECIDO = "Nenhum comando reconhecido";
+    public static string ERRO_LINHAS_INVALIDAS = "É permitido apenas {0} linhas de comandos";
+    public static string ERRO_QUANTIDADE_COMANDOS = "São permitidos para essa fase apenas {0} comandos, e você colocou {1}";
+    public static string ERRO_AO_RECONHECER_COMANDO = "Ocorreu um erro ao reconhecer os comandos: Comando inválido";
+    public static string ERRO_SERVIDOR = "Ocorreu um erro ({0}) ao tentar conectar ao servidor: {1}";
+    public static string ERRO_PROBLEMA_CONEXAO = "Ocorreu um problema de conexão com o servidor: ";
+    public static string ERRO_PRIMEIRO_COMANDO_LINHA = "O primeiro comando da linha {0} deve ser uma função";
+    public static string ERRO_FUNCAO_DEFINIDA_DUAS_VEZES = "A função {0} foi definida em duas ou mais linhas";
+    public static string ERRO_FUNCAO_NAO_IMPLEMENTADA = "A função {0} foi chamada, mas não implementada";
 
     public static string TITULO_PAINEL_COMANDOS = "Eu reconheci essas peças, estão corretas?";
     public static string TITULO_PAINEL_ERRO = "Ocorreu um erro :/";
@@ -14,9 +17,9 @@
     public static string TITULO_PAINEL_FIM_JOGO_DERROTA = "Perdeu :/";
     public static string TITULO_PAINEL_AJUDA = "Ajuda";
 
-    public static string TITULO_COMANDOS_RESTANTES = "Comandos restantes:";
-    public static string TITULO_COMANDOS_USO = "Comandos disponíveis:";
-    public static string CARREGANDO = "Carregando...";
+    public static string LABEL_COMANDOS_RESTANTES = "Comandos restantes:";
+    public static string LABEL_COMANDOS_USO = "Comandos disponíveis:";
+    public static string LABEL_CARREGANDO = "Carregando...";
 
     public static string BOTAO_FASES = "Fases";
     public static string BOTAO_TENTAR_NOVAMENTE = "Tentar Novamente";
@@ -29,11 +32,7 @@
     public static string DESCRICAO_AJUDA_SOBRE_FASE = "fase";
     public static string MENSAGEM_ULTIMA_FASE = "Huhul, você passou todas as fases :)";
 
-    public static string ERRO_SERVIDOR = "Ocorreu um erro ao tentar conectar ao servidor: ";
-    public static string PROBLEMA_CONEXAO = "Ocorreu um problema de conexão com o servidor: ";
-
-    public static string ERRO_FUNCAO_B_NAO_EXISTE = "Ih rapaz, você não criou a função B";
-    public static string ERRO_FUNCAO_C_NAO_EXISTE = "Ih rapaz, você não criou a função C";
-
-    public static string ERRO_QUANTIDADE_COMANDOS = "São permitidos para essa fase apenas {0} comandos, e você colocou {1}";
+    public static string FUNCAO_CIRCULO = "círculo";
+    public static string FUNCAO_ESTRELA = "estrela";
+    public static string FUNCAO_TRIANGULO = "triangulo";
 }

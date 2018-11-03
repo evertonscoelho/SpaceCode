@@ -60,13 +60,13 @@ public class BoardManager : MonoBehaviour
                 if(dataBoard.objectType == "Player")
                 {
                     playerBody = instance.GetComponent<Rigidbody2D>();
-                    turnPlayerDirection(instance, playerDirection);
+                    setPlayerDirection(instance, playerDirection);
                 }
             }
         }
     }
  
-    private void turnPlayerDirection(GameObject instance, string direction)
+    private void setPlayerDirection(GameObject instance, string direction)
     {
         //TODO
         switch (direction)
@@ -104,11 +104,8 @@ public class BoardManager : MonoBehaviour
         }      
     }
 
-    public IEnumerator doCommands(List<Function> functions, int indexCircle, int indexTriangle, int indexStar)
+    public IEnumerator execute(List<Function> functions)
     {
-        this.indexCircle = indexCircle;
-        this.indexTriangle = indexTriangle;
-        this.indexStar = indexStar;
         functionsBoard = functions;
         printActionsInBoard(functions);
         yield return StartCoroutine(DoFunction(functions[0]));
@@ -189,8 +186,11 @@ public class BoardManager : MonoBehaviour
 
     private IEnumerator Loop(Command command)
     {
-        //TODO
-        throw new NotImplementedException();
+        Function function = new Function(command.loop);
+        for(int x = 0; x < command.numRepeatLoop; x++)
+        {
+            yield return StartCoroutine(DoFunction(function));
+        }
     }
 
     private IEnumerator Move()
@@ -312,18 +312,39 @@ public class BoardManager : MonoBehaviour
     {
         boardCommand = GameObject.Find("BoardCommand");
         Transform transformBoardCommand = boardCommand.transform;
-        GameObject toInstantiate, instance;
-        //TODO
         for (int y = 0; y < functions.Count; y++)
         {
+            int positionBoard = 0;
             for (int x = 0; x < functions[y].Commands.Count; x++)
             {
-                toInstantiate = getObjectToInstantiate(functions[y].Commands[x].EnumCommand);
-                instance = Instantiate(toInstantiate, transformBoardCommand.transform, true) as GameObject;
-                instance.transform.localPosition = getPositionCommandInstance(x - 3, (y * -1) + 1);
-                functions[y].Commands[x].gameObject = instance;
+                printCommandOnBoard(functions[y].Commands[x], ref positionBoard, y, transformBoardCommand.transform, false);
+                if (EnumCommand.LOOP.Equals(functions[y].Commands[x].EnumCommand))
+                {
+                    for (int a = 0; a < functions[y].Commands[x].loop.Count; a++)
+                    {
+                        printCommandOnBoard(functions[y].Commands[x].loop[a], ref positionBoard, y, transformBoardCommand.transform, false);
+                    }
+                    printCommandOnBoard(functions[y].Commands[x], ref positionBoard, y, transformBoardCommand.transform, true);
+                }
+
             }
         }
+    }
+
+    private void printCommandOnBoard(Command command, ref int positionX, int positionY, Transform transform, bool numberRepeat)
+    {
+        GameObject toInstantiate, instance;
+        if (numberRepeat) { 
+            toInstantiate = getNumberLoop(command.numRepeatLoop);
+        }
+        else
+        {
+            toInstantiate = getObjectToInstantiate(command.EnumCommand);
+        }
+        instance = Instantiate(toInstantiate, transform, true) as GameObject;
+        instance.transform.localPosition = getPositionCommandInstance(positionX - 3, (positionY * -1) + 1);
+        command.gameObject = instance;
+        positionX++;
     }
 
     public IEnumerator terminateMovement(Vector2 positionCollectable)
@@ -371,10 +392,76 @@ public class BoardManager : MonoBehaviour
     {
         switch (enumCommand)
         {
-            //TODO
-            //case EnumCommand.UP:
-            //    return UpMark;
-            
+            case EnumCommand.CIRCLE:
+                return circleMark;
+            case EnumCommand.CIRCLE_TITLE:
+                return circle_titleMark;
+            case EnumCommand.STAR:
+                return starMark;
+            case EnumCommand.STAR_TITLE:
+                return star_titleMark;
+            case EnumCommand.TRIANGLE:
+                return triangleMark;
+            case EnumCommand.TRIANGLE_TITLE:
+                return triangle_titleMark;
+            case EnumCommand.LOOP:
+                return loopMark;
+            case EnumCommand.LEFT:
+                return leftMark;
+            case EnumCommand.RIGHT:
+                return rightMark;
+            case EnumCommand.MOVE:
+                return moveMark;
+            default:
+                return null;
+        }
+    }
+
+    public Sprite getNumberMarkLoop(int number)
+    {
+        switch (number)
+        {
+            case 2:
+                return _2Mark;
+            case 3:
+                return _3Mark;
+            case 4:
+                return _4Mark;
+            case 5:
+                return _5Mark;
+            case 6:
+                return _6Mark;
+            case 7:
+                return _7Mark;
+            case 8:
+                return _8Mark;
+            case 9:
+                return _9Mark;
+            default:
+                return null;
+        }
+    }
+
+    public GameObject getNumberLoop(int number)
+    {
+        switch (number)
+        {
+            case 2:
+                return _2;
+            case 3:
+                return _3;
+            case 4:
+                return _4;
+            case 5:
+                return _5;
+            case 6:
+                return _6;
+            case 7:
+                return _7;
+            case 8:
+                return _8;
+            case 9:
+                return _9;
             default:
                 return null;
         }
@@ -382,11 +469,28 @@ public class BoardManager : MonoBehaviour
 
     public GameObject getObjectToInstantiate(EnumCommand command)
     {
-        //TODO
         switch (command)
         {
-           // case EnumCommand.UP:
-           //     return Up;
+            case EnumCommand.CIRCLE:
+                return circle;
+            case EnumCommand.CIRCLE_TITLE:
+                return circle_title;
+            case EnumCommand.STAR:
+                return star;
+            case EnumCommand.STAR_TITLE:
+                return star_title;
+            case EnumCommand.TRIANGLE:
+                return triangle;
+            case EnumCommand.TRIANGLE_TITLE:
+                return triangle_title;
+            case EnumCommand.LOOP:
+                return loop;
+            case EnumCommand.LEFT:
+                return left;
+            case EnumCommand.RIGHT:
+                return right;
+            case EnumCommand.MOVE:
+                return move;
             default:
                 return null;
         }
@@ -409,4 +513,10 @@ public class BoardManager : MonoBehaviour
         return (level.maxCommands - commands).ToString();
     }
 
+    public void setIndex(int indexCircle, int indexStar, int indexTriangle)
+    {
+        this.indexCircle = indexCircle;
+        this.indexStar = indexStar;
+        this.indexTriangle = indexStar;
+    }
 }

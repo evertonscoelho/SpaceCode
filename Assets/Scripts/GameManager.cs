@@ -47,12 +47,13 @@ public class GameManager : MonoBehaviour
         RecognizeCommandManager.instance.takePictureClick(level.maxCommandsUse);
     }
 
-    public void recognizeCommand(List<Function> functions)
+    public void recognizeCommand(List<Function> functions, int indexCircle, int indexStar, int indexTriangle)
     {
         this.functions = functions;
         ModalPanelManager.setCommands(functions, boardScript);
         ModalPanelManager.activeModal(true, "", false, false, false, true, false);
         ModalPanelManager.setTitleCommands(Messages.TITULO_PAINEL_COMANDOS);
+        boardScript.setIndex(indexCircle, indexStar, indexTriangle);
     }
 
     public void showErro(string erro, bool buttonOkVisible, bool buttonTryAgainVisible)
@@ -66,7 +67,7 @@ public class GameManager : MonoBehaviour
     {
         GameManager gameManager = GameManager.instance;
         gameManager.ModalPanelManager.deactiveModal();
-        gameManager.StartCoroutine(gameManager.boardScript.doCommands(gameManager.functions));
+        gameManager.StartCoroutine(gameManager.boardScript.execute(gameManager.functions));
         gameManager.levelManager.deactivateButtons();
     }
 
