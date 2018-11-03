@@ -38,4 +38,6 @@
     public static string FUNCAO_CIRCULO = "círculo";
     public static string FUNCAO_ESTRELA = "estrela";
     public static string FUNCAO_TRIANGULO = "triangulo";
+
+    public static string NOME_JOGO = "Jogo \n TOPZEIRA";
 }
