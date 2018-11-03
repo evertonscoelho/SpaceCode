@@ -56,7 +56,7 @@ public class RecognizeCommandManager : MonoBehaviour
 
     public void convertToCommand(string response)
     {
-        bool error = false;
+        bool error = false, firstCommandInLine = true, refCircle = false, refStar = false, refTriangle = false, loop = false; 
         if (response.ToUpper().Equals("UNKNOWN"))
         {
             GameManager.instance.showErro(Messages.ERRO_NENHUM_COMANDO_RECONHECIDO, false, true);
@@ -66,54 +66,81 @@ public class RecognizeCommandManager : MonoBehaviour
         string[] commands = response.Split(',');
         List<Function> functions= new List<Function>();
         int line = 1, indexCircle = -1, indexStar = -1, indexTriangle = -1;
-        bool firstCommandInLine = true, refCircle = false, refStar = false, refTriangle = false;
-        List<Command> commandsLine = new List<Command>();
-        EnumCommand enumCommand;
+        Command commandLoop = new Command(EnumCommand.LOOP);
+        List<Command> commandsLine = new List<Command>(), commandsLoop = new List<Command>();
+        Command command;
 
         foreach (string commandString in commands)
         {
             if (!error)
             {
-                enumCommand = getCommand(commandString);
+                command = getCommand(commandString);
                 if (firstCommandInLine)
                 {
-                    error = firstCommandLineCheckError(enumCommand, ref indexCircle, ref indexStar, ref indexTriangle, line);
+                    error = firstCommandLineCheckError(command.EnumCommand, ref indexCircle, ref indexStar, ref indexTriangle, line);
                     firstCommandInLine = false;
-                    commandsLine.Add(title(enumCommand));
+                    commandsLine.Add(title(command.EnumCommand));
                 }
                 else if (commandString.Equals("NEXT"))
                 {
-                    if(line == 3)
-                    {
-                        GameManager.instance.showErro(String.Format(Messages.ERRO_LINHAS_INVALIDAS, line), false, true);
-                        error = true;
-                    }
+                    error = nextLineCheckError(line, loop);
                     line++;
                     functions.Add(new Function(commandsLine));
                     commandsLine = new List<Command>();
                     firstCommandInLine = true;
                 }
-                else if (enumCommand.Equals(EnumCommand.CIRCLE))
+                else if (command.EnumCommand.Equals(EnumCommand.LOOP))
                 {
-                    refCircle = true;
+                    if (loop)
+                    {
+                        GameManager.instance.showErro(String.Format(Messages.ERRO_LOOP, line), false, true);
+                        error = true;
+                    }
+                    else
+                    {
+                        loop = true;
+                        commandLoop = command;
+                        commandsLoop = new List<Command>();
+                    }
                 }
-                else if (enumCommand.Equals(EnumCommand.TRIANGLE))
+                else if (command.EnumCommand.Equals("UNKNOW") && commandNumber(commandString))
                 {
-                    refTriangle = true;
+                    if (loop)
+                    {
+                        if (commandsLoop.Count > 0) { 
+                            commandLoop.loop = commandsLoop;
+                            commandLoop.numRepeatLoop = numRepeat(commandString);
+                            loop = false;
+                            commandsLine.Add(commandLoop);
+                        }
+                        else
+                        {
+                            GameManager.instance.showErro(String.Format(Messages.ERRO_LOOP_SEM_COMANDO, line), false, true);
+                            error = true;
+                        }
+                    }
+                    else
+                    {
+                        GameManager.instance.showErro(String.Format(Messages.ERRO_NUMERO, line), false, true);
+                        error = true;
+                    }
                 }
-                else if (enumCommand.Equals(EnumCommand.STAR))
-                {
-                    refStar = true;
-                }
-                else if (enumCommand.Equals("UNKNOW"))
+                else if (command.EnumCommand.Equals("UNKNOW"))
                 {
                     GameManager.instance.showErro(Messages.ERRO_AO_RECONHECER_COMANDO, false, true);
                     error = true;
                 }
                 else
                 {
-                    commandsLine.Add(new Command(enumCommand));
+                    if (loop)
+                    {
+                        commandsLoop.Add(command);
+                    }
+                    else { 
+                        commandsLine.Add(command);
+                    }
                 }
+                refFuncion(command.EnumCommand, ref refCircle, ref refTriangle, ref refStar);
             }
         }
         if (!error)
@@ -124,6 +151,50 @@ public class RecognizeCommandManager : MonoBehaviour
                 GameManager.instance.recognizeCommand(functions, indexCircle, indexStar, indexTriangle);
             }
         }
+    }
+
+    private int numRepeat(string commandString)
+    {
+        int r = -1;
+        int.TryParse(commandString, out r);
+        return r;
+    }
+
+    private bool commandNumber(string commandString)
+    {
+        int num = numRepeat(commandString);
+        return (num > 1 && num < 9);   
+    }
+
+    private void refFuncion(EnumCommand enumCommand, ref bool refCircle, ref bool refTriangle, ref bool refStar)
+    {
+        if (!refCircle && enumCommand.Equals(EnumCommand.CIRCLE))
+        {
+            refCircle = true;
+        }
+        else if (!refTriangle && enumCommand.Equals(EnumCommand.TRIANGLE))
+        {
+            refTriangle = true;
+        }
+        else if (!refStar && enumCommand.Equals(EnumCommand.STAR))
+        {
+            refStar = true;
+        }
+    }
+
+    private bool nextLineCheckError(int line, bool loop)
+    {
+        if (line == 3)
+        {
+            GameManager.instance.showErro(String.Format(Messages.ERRO_LINHAS_INVALIDAS, line), false, true);
+            return true;
+        }
+        if (loop)
+        {
+            GameManager.instance.showErro(String.Format(Messages.ERRO_LOOP, line), false, true);
+            return true;
+        }
+        return false;
     }
 
     private bool checkErrorFucntionReference(int indexCircle, int indexTriangle, int indexStar, bool refCircle, bool refStar, bool refTriangle)
@@ -231,26 +302,26 @@ public class RecognizeCommandManager : MonoBehaviour
         return false;
     }
 
-    public EnumCommand getCommand(string command)
+    public Command getCommand(string command)
     {
         switch (command)
         {
             case "CIRCLE":
-                return EnumCommand.CIRCLE;
+                return new Command(EnumCommand.CIRCLE);
             case "STAR":
-                return EnumCommand.STAR;
+                return new Command(EnumCommand.STAR);
             case "TRIANGLE":
-                return EnumCommand.TRIANGLE;
+                return new Command(EnumCommand.TRIANGLE);
             case "LOOP":
-                return EnumCommand.LOOP;
+                return new Command(EnumCommand.LOOP);
             case "LEFT":
-                return EnumCommand.LEFT;
+                return new Command(EnumCommand.LEFT);
             case "RIGHT":
-                return EnumCommand.RIGHT;
+                return new Command(EnumCommand.RIGHT);
             case "MOVE":
-                return EnumCommand.MOVE;
+                return new Command(EnumCommand.MOVE);
             default:
-                return EnumCommand.UNKNOW;
+                return new Command(EnumCommand.UNKNOW);
         }
     }
 }

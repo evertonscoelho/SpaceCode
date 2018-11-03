@@ -10,6 +10,9 @@
     public static string ERRO_PRIMEIRO_COMANDO_LINHA = "O primeiro comando da linha {0} deve ser uma função";
     public static string ERRO_FUNCAO_DEFINIDA_DUAS_VEZES = "A função {0} foi definida em duas ou mais linhas";
     public static string ERRO_FUNCAO_NAO_IMPLEMENTADA = "A função {0} foi chamada, mas não implementada";
+    public static string ERRO_LOOP = "Na linha {0} existe um loop definido de forma incorreta";
+    public static string ERRO_NUMERO = "Na linha {0} existe um número sem comando de loop";
+    public static string ERRO_LOOP_SEM_COMANDO = "Na linha {0} existe um loop sem nenhum comando";
 
     public static string TITULO_PAINEL_COMANDOS = "Eu reconheci essas peças, estão corretas?";
     public static string TITULO_PAINEL_ERRO = "Ocorreu um erro :/";
