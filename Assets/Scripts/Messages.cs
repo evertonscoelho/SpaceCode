@@ -19,6 +19,7 @@
     public static string TITULO_PAINEL_FIM_JOGO_VITORIA = "Ganhou :)";
     public static string TITULO_PAINEL_FIM_JOGO_DERROTA = "Perdeu :/";
     public static string TITULO_PAINEL_AJUDA = "Ajuda";
+    public static string TITULO_TELA_SELECAO = "Escolha a fase";
 
     public static string LABEL_COMANDOS_RESTANTES = "Comandos restantes:";
     public static string LABEL_COMANDOS_USO = "Comandos disponíveis:";
