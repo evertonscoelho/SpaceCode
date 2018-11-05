@@ -95,10 +95,9 @@ public class GameManager : MonoBehaviour
     public void setupSceneLevel(LevelManager levelManager)
     {
         this.levelManager = levelManager;
-        boardScript.SetupScene(levelId);
-        boardScript.initValues();
+        this.boardScript.SetupScene(levelId);
         levelManager.setTextCommands(boardScript.getCommandsRemaining());
-        levelManager.setTextCommandsUse(boardScript.getLevel().maxCommandsUse);
+        levelManager.setTitle(levelId);
     }
 
     public void loadScene(int sceneIndex)

@@ -7,7 +7,7 @@ public class BoardManager : MonoBehaviour
 {
     public GameObject Collectable, Floor, Obstacle, Player, Wall;
 
-    public GameObject boardCommand, player, circle_title, star_title, triangle_title, circle, star, triangle, loop, left, right, move, _2, _3, _4, _5, _6, _7, _8, _9;
+    public GameObject player, circle_title, star_title, triangle_title, circle, star, triangle, loop, left, right, move, _2, _3, _4, _5, _6, _7, _8, _9;
 
     public Sprite circle_titleMark, star_titleMark, triangle_titleMark, circleMark, starMark, triangleMark, loopMark, leftMark, rightMark, moveMark, _2Mark, _3Mark, _4Mark, _5Mark, _6Mark, _7Mark, _8Mark, _9Mark;
 
@@ -29,11 +29,13 @@ public class BoardManager : MonoBehaviour
 
     public void initValues()
     {
-        offsetXCommand = circle.GetComponent<SpriteRenderer>().bounds.size.x;
-        offsetYCommand = circle.GetComponent<SpriteRenderer>().bounds.size.y;
+       // offsetXCommand = circle.GetComponent<SpriteRenderer>().bounds.size.x;
+       // offsetYCommand = circle.GetComponent<SpriteRenderer>().bounds.size.y;
         offsetXBoard = Floor.GetComponent<SpriteRenderer>().bounds.size.x;
         offsetYBoard = Floor.GetComponent<SpriteRenderer>().bounds.size.y;
         gameManager = GameManager.instance;
+        print("a");
+        print(offsetXBoard);
     }
 
     public void SetupScene(string idLevel)
@@ -46,7 +48,7 @@ public class BoardManager : MonoBehaviour
 
     public void boardSetup(Board board, string playerDirection)
     {
-        Transform boardHolder = new GameObject("Board").transform;
+        Transform boardHolder = GameObject.Find("Board").transform;
         GameObject floor, toInstantiate, instance;
         foreach (DataBoard dataBoard in board.data)
         {
@@ -310,8 +312,7 @@ public class BoardManager : MonoBehaviour
 
     public void printActionsInBoard(List<Function> functions)
     {
-        boardCommand = GameObject.Find("BoardCommand");
-        Transform transformBoardCommand = boardCommand.transform;
+        Transform transformBoardCommand = GameObject.Find("BoardCommand").transform;
         for (int y = 0; y < functions.Count; y++)
         {
             int positionBoard = 0;

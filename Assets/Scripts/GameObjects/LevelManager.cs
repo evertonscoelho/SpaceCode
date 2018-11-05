@@ -4,13 +4,13 @@ using UnityEngine.UI;
 public class LevelManager: MonoBehaviour
 {
     public Button picture, back, help, sound;
-    public Text TextCommands, TextLoading, TextTitleCommandsUse, TextCommandsUse;
+    public Text TextCommands, TextLoading, TextTitle, TextTitleBoardCommand;
 
     void Start()
     {
         GameManager.instance.setupSceneLevel(this);
-        TextTitleCommandsUse.text = Messages.LABEL_COMANDOS_USO;
         TextLoading.text = Messages.LABEL_CARREGANDO;
+        TextTitleBoardCommand.text = Messages.TITULO_BOARD_COMANDOS;
     }
     
     public void deactivateButtons()
@@ -26,8 +26,8 @@ public class LevelManager: MonoBehaviour
         TextCommands.text = commands;
     }
 
-    public void setTextCommandsUse(int commands)
+    public void setTitle(string level)
     {
-        TextCommandsUse.text = commands.ToString();
+        TextTitle.text = string.Format(Messages.TITULO_TELA_FASES, level);
     }
 }
