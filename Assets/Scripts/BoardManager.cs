@@ -510,7 +510,7 @@ public class BoardManager : MonoBehaviour
 
     public string getCommandsRemaining()
     {
-        return (level.maxCommands - commands).ToString();
+        return string.Format(Messages.LABEL_MOVIMENTOS, commands, level.maxCommands);
     }
 
     public void setIndex(int indexCircle, int indexStar, int indexTriangle)

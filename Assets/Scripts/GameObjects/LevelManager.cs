@@ -4,12 +4,11 @@ using UnityEngine.UI;
 public class LevelManager: MonoBehaviour
 {
     public Button picture, back, help, sound;
-    public Text TextCommands, TextTitleCommands, TextLoading, TextTitleCommandsUse, TextCommandsUse;
+    public Text TextCommands, TextLoading, TextTitleCommandsUse, TextCommandsUse;
 
     void Start()
     {
         GameManager.instance.setupSceneLevel(this);
-        TextTitleCommands.text = Messages.LABEL_COMANDOS_RESTANTES;
         TextTitleCommandsUse.text = Messages.LABEL_COMANDOS_USO;
         TextLoading.text = Messages.LABEL_CARREGANDO;
     }
