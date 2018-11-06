@@ -31,6 +31,11 @@ public class ModalPanelManager : MonoBehaviour {
         buttonNext.interactable = interactable;
     }
 
+    public void setCommands(List<Function> functions, GameManager gameManager)
+    {
+        gameManager.setCommands(functions, boardCommand.transform, 44, 44, -5, 1, true);
+    }
+
     public void setVisibleButtonsErro(bool buttonOkVisible, bool buttonTryAgainVisible)
     {
         buttonTryAgainError.gameObject.SetActive(buttonTryAgainVisible);
@@ -78,57 +83,4 @@ public class ModalPanelManager : MonoBehaviour {
         gameObject.SetActive(false);
     }
 
-    public void setCommands(List<Function> functions, BoardManager boardManager)
-    {
-        Transform transformBoardCommand = boardCommand.transform;
-        foreach (Transform child in transformBoardCommand)
-        {
-            GameObject.Destroy(child.gameObject);
-        }
-
-        for (int y = 0; y < functions.Count; y++)
-        {
-            int positionBoard = 0;
-            for (int x = 0; x < functions[y].Commands.Count; x++)
-            {
-                printCommandOnBoard(functions[y].Commands[x], ref positionBoard, y, transformBoardCommand.transform, false, boardManager);
-                if (EnumCommand.LOOP.Equals(functions[y].Commands[x].EnumCommand))
-                {
-                    for (int a = 0; a < functions[y].Commands[x].loop.Count; a++)
-                    {
-                        printCommandOnBoard(functions[y].Commands[x].loop[a], ref positionBoard, y, transformBoardCommand.transform, false, boardManager);
-                    }
-                    printCommandOnBoard(functions[y].Commands[x], ref positionBoard, y, transformBoardCommand.transform, true, boardManager);
-                }
-
-            }
-        }
-    }
-
-    private void printCommandOnBoard(Command command, ref int positionX, int positionY, Transform transform, bool numberRepeat, BoardManager boardManager)
-    {
-        int width = 44;
-        int height = 44;
-        GameObject toInstantiate, commandObject;
-        if (numberRepeat)
-        {
-            toInstantiate = boardManager.getNumberLoop(command.numRepeatLoop);
-        }
-        else
-        {
-            toInstantiate = boardManager.getObjectToInstantiate(command.EnumCommand);
-        }
-        commandObject = new GameObject();
-        Image image = commandObject.AddComponent<Image>();
-        commandObject.GetComponent<RectTransform>().SetParent(transform.transform, false);
-        commandObject.GetComponent<RectTransform>().sizeDelta = new Vector2(width, height);
-        image.sprite = toInstantiate.GetComponent<Image>().sprite;
-        commandObject.transform.localPosition = getPositionInstance(positionX - 5, (positionY * -1) + 1, width, height);
-        positionX++;    
-    }
-
-    private Vector3 getPositionInstance(int x, float y, float offsetX, float offsetY)
-    {
-        return new Vector3(x * offsetX-5, y * offsetY-5, 0f);
-    }
 }

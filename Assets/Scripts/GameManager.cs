@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using System;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -50,7 +51,7 @@ public class GameManager : MonoBehaviour
     public void recognizeCommand(List<Function> functions, int indexCircle, int indexStar, int indexTriangle)
     {
         this.functions = functions;
-        ModalPanelManager.setCommands(functions, boardScript);
+        ModalPanelManager.setCommands(functions, this);
         ModalPanelManager.activeModal(true, "", false, false, false, true, false);
         ModalPanelManager.setTitleCommands(Messages.TITULO_PAINEL_COMANDOS);
         boardScript.setIndex(indexCircle, indexStar, indexTriangle);
@@ -183,4 +184,59 @@ public class GameManager : MonoBehaviour
         
         ModalPanelManager.interactableButtonNext(true);
     }
+
+    public void setCommands(List<Function> functions, Transform transformBoardCommand, int width, int height, float diffX, float diffY, bool clearTransform)
+    {
+        if (clearTransform)
+        {
+            foreach (Transform child in transformBoardCommand)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
+        }
+
+        for (int y = 0; y < functions.Count; y++)
+        {
+            int positionBoard = 0;
+            for (int x = 0; x < functions[y].Commands.Count; x++)
+            {
+                printCommandOnBoard(functions[y].Commands[x], ref positionBoard, y, transformBoardCommand.transform, false, width, height, diffX, diffY);
+                if (EnumCommand.LOOP.Equals(functions[y].Commands[x].EnumCommand))
+                {
+                    for (int a = 0; a < functions[y].Commands[x].loop.Count; a++)
+                    {
+                        printCommandOnBoard(functions[y].Commands[x].loop[a], ref positionBoard, y, transformBoardCommand.transform, false, width, height, diffX, diffY);
+                    }
+                    printCommandOnBoard(functions[y].Commands[x], ref positionBoard, y, transformBoardCommand.transform, true, width, height, diffX, diffY);
+                }
+
+            }
+        }
+    }
+
+    private void printCommandOnBoard(Command command, ref int positionX, int positionY, Transform transform, bool numberRepeat, int width, int height, float diffX, float diffY)
+    {
+        GameObject toInstantiate, commandObject;
+        if (numberRepeat)
+        {
+            toInstantiate = boardScript.getNumberLoop(command.numRepeatLoop);
+        }
+        else
+        {
+            toInstantiate = boardScript.getObjectToInstantiate(command.EnumCommand);
+        }
+        commandObject = new GameObject();
+        Image image = commandObject.AddComponent<Image>();
+        commandObject.GetComponent<RectTransform>().SetParent(transform.transform, false);
+        commandObject.GetComponent<RectTransform>().sizeDelta = new Vector2(width, height);
+        image.sprite = toInstantiate.GetComponent<Image>().sprite;
+        commandObject.transform.localPosition = getPositionInstance(positionX + diffX, (positionY * -1) + diffY, width, height);
+        positionX++;
+    }
+
+    private Vector3 getPositionInstance(float x, float y, float offsetX, float offsetY)
+    {
+        return new Vector3(x * offsetX - 5, y * offsetY - 5, 0f);
+    }
+
 }

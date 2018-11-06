@@ -58,7 +58,7 @@ public class BoardManager : MonoBehaviour
                 toInstantiate = getObjectToInstantiate(dataBoard.objectType);
                 instance = Instantiate(toInstantiate, getPositionBoardInstance(dataBoard.positionX, dataBoard.positionY), Quaternion.identity) as GameObject;
                 instance.transform.SetParent(boardHolder);
-                if(dataBoard.objectType == "Player")
+                if (dataBoard.objectType == "Player")
                 {
                     playerBody = instance.GetComponent<Rigidbody2D>();
                     setPlayerDirection(instance, playerDirection);
@@ -66,7 +66,7 @@ public class BoardManager : MonoBehaviour
             }
         }
     }
- 
+
     private void setPlayerDirection(GameObject instance, string direction)
     {
         //TODO
@@ -95,20 +95,20 @@ public class BoardManager : MonoBehaviour
         {
             return StatusGame.DEFEAT;
         }
-        else if(collectables >= level.collectable)
+        else if (collectables >= level.collectable)
         {
             return StatusGame.VICTORY;
         }
         else
         {
             return StatusGame.CONTINUE;
-        }      
+        }
     }
 
     public IEnumerator execute(List<Function> functions)
     {
         functionsBoard = functions;
-        printActionsInBoard(functions);
+        gameManager.setCommands(functions, GameObject.Find("BoardCommand").transform, 48, 48, -4.5f, -3.0f, false);
         yield return StartCoroutine(DoFunction(functions[0]));
         if (!endGame)
         {
@@ -175,20 +175,21 @@ public class BoardManager : MonoBehaviour
     private IEnumerator Turn(PlayerDirection direction)
     {
         //TODO
-        switch (playerDirection) { 
+        switch (playerDirection)
+        {
             case PlayerDirection.LEFT:
                 yield return StartCoroutine(MoveLeft());
                 break;
             case PlayerDirection.RIGHT:
                 yield return StartCoroutine(MoveRight());
                 break;
-        }   
+        }
     }
 
     private IEnumerator Loop(Command command)
     {
         Function function = new Function(command.loop);
-        for(int x = 0; x < command.numRepeatLoop; x++)
+        for (int x = 0; x < command.numRepeatLoop; x++)
         {
             yield return StartCoroutine(DoFunction(function));
         }
@@ -197,7 +198,7 @@ public class BoardManager : MonoBehaviour
     private IEnumerator Move()
     {
         switch (playerDirection)
-        {     
+        {
             case PlayerDirection.UP:
                 yield return StartCoroutine(MoveUp());
                 break;
@@ -270,7 +271,7 @@ public class BoardManager : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         else
-        { 
+        {
             yield return new WaitForSeconds(1);
         }
     }
@@ -299,52 +300,14 @@ public class BoardManager : MonoBehaviour
     {
         if (previous != null)
         {
-            GameObject instance =  getObjectToInstantiate(previous.EnumCommand);
+            GameObject instance = getObjectToInstantiate(previous.EnumCommand);
             previous.gameObject.GetComponent<SpriteRenderer>().sprite = instance.GetComponent<SpriteRenderer>().sprite;
         }
-        if(command != null)
+        if (command != null)
         {
             command.gameObject.GetComponent<SpriteRenderer>().sprite = getSpriteCommandMark(command.EnumCommand);
         }
         previous = command;
-    }
-
-    public void printActionsInBoard(List<Function> functions)
-    {
-        Transform transformBoardCommand = GameObject.Find("BoardCommand").transform;
-        for (int y = 0; y < functions.Count; y++)
-        {
-            int positionBoard = 0;
-            for (int x = 0; x < functions[y].Commands.Count; x++)
-            {
-                printCommandOnBoard(functions[y].Commands[x], ref positionBoard, y, transformBoardCommand.transform, false);
-                if (EnumCommand.LOOP.Equals(functions[y].Commands[x].EnumCommand))
-                {
-                    for (int a = 0; a < functions[y].Commands[x].loop.Count; a++)
-                    {
-                        printCommandOnBoard(functions[y].Commands[x].loop[a], ref positionBoard, y, transformBoardCommand.transform, false);
-                    }
-                    printCommandOnBoard(functions[y].Commands[x], ref positionBoard, y, transformBoardCommand.transform, true);
-                }
-
-            }
-        }
-    }
-
-    private void printCommandOnBoard(Command command, ref int positionX, int positionY, Transform transform, bool numberRepeat)
-    {
-        GameObject toInstantiate, instance;
-        if (numberRepeat) { 
-            toInstantiate = getNumberLoop(command.numRepeatLoop);
-        }
-        else
-        {
-            toInstantiate = getObjectToInstantiate(command.EnumCommand);
-        }
-        instance = Instantiate(toInstantiate, transform, true) as GameObject;
-        instance.transform.localPosition = getPositionCommandInstance(positionX - 3, (positionY * -1) + 1);
-        command.gameObject = instance;
-        positionX++;
     }
 
     public IEnumerator terminateMovement(Vector2 positionCollectable)
@@ -432,6 +395,31 @@ public class BoardManager : MonoBehaviour
         }
     }
 
+
+    public Level getLevel()
+    {
+        return level;
+    }
+
+    private string getJsonFileById(string idLevel)
+    {
+        TextAsset file = Resources.Load("Level-" + idLevel) as TextAsset;
+        string json = file.ToString();
+        return json;
+    }
+
+    public string getCommandsRemaining()
+    {
+        return string.Format(Messages.LABEL_MOVIMENTOS, commands, level.maxCommands);
+    }
+
+    public void setIndex(int indexCircle, int indexStar, int indexTriangle)
+    {
+        this.indexCircle = indexCircle;
+        this.indexStar = indexStar;
+        this.indexTriangle = indexStar;
+    }
+
     public GameObject getNumberLoop(int number)
     {
         switch (number)
@@ -484,29 +472,5 @@ public class BoardManager : MonoBehaviour
             default:
                 return null;
         }
-    }
-
-    public Level getLevel()
-    {
-        return level;
-    }
-
-    private string getJsonFileById(string idLevel)
-    {
-        TextAsset file = Resources.Load("Level-" + idLevel) as TextAsset;
-        string json = file.ToString();
-        return json;
-    }
-
-    public string getCommandsRemaining()
-    {
-        return string.Format(Messages.LABEL_MOVIMENTOS, commands, level.maxCommands);
-    }
-
-    public void setIndex(int indexCircle, int indexStar, int indexTriangle)
-    {
-        this.indexCircle = indexCircle;
-        this.indexStar = indexStar;
-        this.indexTriangle = indexStar;
     }
 }
