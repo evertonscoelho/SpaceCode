@@ -31,7 +31,7 @@ public class RecognizeCommandManager : MonoBehaviour
         cameraViewManager.loading();
         //byte[] bytes = phoneCamera.TakePhoto();
         this.maxCommandsUse = maxCommandsUse;
-        response("loop,6,5,4,2,9,NEXT,star,right,right,left,left,3,NEXT,triangle,move,triangle,circle,move,8,NEXT,circle,move,star,loop,7", false);
+        response("star,loop,move,star,7,next,circle,loop,move,2,NEXT,triangle,right", false);
         //StartCoroutine(RequestManager.Request(bytes, this));
     }
 
@@ -103,7 +103,7 @@ public class RecognizeCommandManager : MonoBehaviour
                         commandsLoop = new List<Command>();
                     }
                 }
-                else if (command.EnumCommand.Equals("UNKNOW") && commandNumber(commandString))
+                else if (command.EnumCommand.Equals(EnumCommand.UNKNOW) && commandNumber(commandString))
                 {
                     if (loop)
                     {
@@ -125,7 +125,7 @@ public class RecognizeCommandManager : MonoBehaviour
                         error = true;
                     }
                 }
-                else if (command.EnumCommand.Equals("UNKNOW"))
+                else if (command.EnumCommand.Equals(EnumCommand.UNKNOW))
                 {
                     GameManager.instance.showErro(Messages.ERRO_AO_RECONHECER_COMANDO, false, true);
                     error = true;
@@ -163,7 +163,7 @@ public class RecognizeCommandManager : MonoBehaviour
     private bool commandNumber(string commandString)
     {
         int num = numRepeat(commandString);
-        return (num > 1 && num < 9);   
+        return (num > 1 && num <= 9);   
     }
 
     private void refFuncion(EnumCommand enumCommand, ref bool refCircle, ref bool refTriangle, ref bool refStar)

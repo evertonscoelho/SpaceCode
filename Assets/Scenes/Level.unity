@@ -258,6 +258,53 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1126593768322552, guid: 9d10bc40564381d468f4e8f0145fd818, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224761203877756838, guid: 9d10bc40564381d468f4e8f0145fd818,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 224761203877756838, guid: 9d10bc40564381d468f4e8f0145fd818,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 87
+      objectReference: {fileID: 0}
+    - target: {fileID: 224761203877756838, guid: 9d10bc40564381d468f4e8f0145fd818,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 503.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 224761203877756838, guid: 9d10bc40564381d468f4e8f0145fd818,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 139.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114956578685561796, guid: 9d10bc40564381d468f4e8f0145fd818,
+        type: 2}
+      propertyPath: m_FontData.m_Alignment
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1263496431082800, guid: 9d10bc40564381d468f4e8f0145fd818, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1730047196632648, guid: 9d10bc40564381d468f4e8f0145fd818, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224732468842635518, guid: 9d10bc40564381d468f4e8f0145fd818,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224732468842635518, guid: 9d10bc40564381d468f4e8f0145fd818,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 155.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9d10bc40564381d468f4e8f0145fd818, type: 2}
   m_IsPrefabParent: 0
@@ -321,12 +368,12 @@ Prefab:
     - target: {fileID: 224456712405242292, guid: 1825dcac2c509054d879a0b44e9dd9dc,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -51
+      value: -23.06137
       objectReference: {fileID: 0}
     - target: {fileID: 224456712405242292, guid: 1825dcac2c509054d879a0b44e9dd9dc,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -418
+      value: 39.999996
       objectReference: {fileID: 0}
     - target: {fileID: 224456712405242292, guid: 1825dcac2c509054d879a0b44e9dd9dc,
         type: 2}
@@ -346,7 +393,7 @@ Prefab:
     - target: {fileID: 224456712405242292, guid: 1825dcac2c509054d879a0b44e9dd9dc,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 224456712405242292, guid: 1825dcac2c509054d879a0b44e9dd9dc,
         type: 2}
@@ -356,17 +403,17 @@ Prefab:
     - target: {fileID: 224456712405242292, guid: 1825dcac2c509054d879a0b44e9dd9dc,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 224456712405242292, guid: 1825dcac2c509054d879a0b44e9dd9dc,
         type: 2}
       propertyPath: m_Pivot.x
-      value: 1.2882662
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224456712405242292, guid: 1825dcac2c509054d879a0b44e9dd9dc,
         type: 2}
       propertyPath: m_Pivot.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114381450485955928, guid: 1825dcac2c509054d879a0b44e9dd9dc,
         type: 2}
@@ -393,6 +440,12 @@ Prefab:
       propertyPath: m_Name
       value: TakePicture
       objectReference: {fileID: 0}
+    - target: {fileID: 114944593802392744, guid: 1825dcac2c509054d879a0b44e9dd9dc,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: cedc197eadfe20f4daae902f65b304e4,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1825dcac2c509054d879a0b44e9dd9dc, type: 2}
   m_IsPrefabParent: 0
@@ -1340,7 +1393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   takePicture: {fileID: 494741369}
-  loadingText: {fileID: 1582510662}
+  loadingText: {fileID: 1582510664}
 --- !u!1 &1582510662
 GameObject:
   m_ObjectHideFlags: 0
@@ -1371,10 +1424,10 @@ RectTransform:
   m_Father: {fileID: 1311889316}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 31, y: 14}
-  m_SizeDelta: {x: 483.2, y: 140.8}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -381.00064, y: -0.0010834}
+  m_SizeDelta: {x: 761.74, y: 544.79}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1582510664
 MonoBehaviour:
@@ -1396,19 +1449,19 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 8508151b3a44f164a822490b9874780b, type: 3}
     m_FontSize: 72
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 7
     m_MaxSize: 72
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: '...'
 --- !u!222 &1582510665
 CanvasRenderer:
   m_ObjectHideFlags: 0

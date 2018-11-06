@@ -383,7 +383,7 @@ public class BoardManager : MonoBehaviour
         return new Vector3(x * offsetXBoard, y * offsetYBoard, 0f);
     }
 
-    private Vector3 getPositionCommandInstance(int x, float y)
+    public Vector3 getPositionCommandInstance(int x, float y)
     {
         return new Vector3(x * offsetXCommand, y * offsetYCommand, 0f);
     }
