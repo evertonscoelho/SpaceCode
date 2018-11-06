@@ -133,6 +133,7 @@ public class GameManager : MonoBehaviour
 
     public void clickCloseModal()
     {
+        print("oii");
         GameManager.instance.ModalPanelManager.deactiveModal();
     }
 
