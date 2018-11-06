@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class LevelManager: MonoBehaviour
 {
-    public Button picture, back, help, sound;
+    public Button picture, help, sound;
     public Text TextCommands, TextLoading, TextTitle, TextTitleBoardCommand;
 
     void Start()
@@ -16,7 +16,6 @@ public class LevelManager: MonoBehaviour
     public void deactivateButtons()
     {
         picture.interactable = false;
-        back.interactable = false;
         help.interactable = false;
         sound.interactable = false;
     }

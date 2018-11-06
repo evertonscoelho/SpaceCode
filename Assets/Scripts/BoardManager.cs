@@ -71,7 +71,6 @@ public class BoardManager : MonoBehaviour
 
     private void setPlayerDirection(string direction)
     {
-        //TODO
         direction = direction.ToUpper();
         switch (direction)
         {
@@ -145,7 +144,6 @@ public class BoardManager : MonoBehaviour
                     case EnumCommand.STAR:
                         yield return new WaitForSeconds(1f);
                         animationCommand(null);
-                        print(indexStar);
                         yield return StartCoroutine(DoFunction(functionsBoard[indexStar]));
                         break;
                     case EnumCommand.TRIANGLE:
@@ -163,12 +161,17 @@ public class BoardManager : MonoBehaviour
                         yield return StartCoroutine(Turn(PlayerDirection.RIGHT));
                         break;
                     case EnumCommand.CIRCLE_TITLE:
+                        yield return new WaitForSeconds(1f);
                         commands--;
                         break;
                     case EnumCommand.STAR_TITLE:
+                        yield return new WaitForSeconds(1f);
+                        animationCommand(null);
                         commands--;
                         break;
                     case EnumCommand.TRIANGLE_TITLE:
+                        yield return new WaitForSeconds(1f);
+                        animationCommand(null);
                         commands--;
                         break;
                 }
@@ -183,46 +186,79 @@ public class BoardManager : MonoBehaviour
 
     private IEnumerator Turn(PlayerDirection direction)
     {
-        yield return new WaitForSeconds(1f);
         if (PlayerDirection.LEFT.Equals(direction))
         {
-            if (PlayerDirection.UP.Equals(playerDirection))
-            {
-                playerDirection = PlayerDirection.LEFT;
-            }
-            else if (PlayerDirection.DOWN.Equals(playerDirection))
-            {
-                playerDirection = PlayerDirection.RIGHT;
-            }
-            else if (PlayerDirection.LEFT.Equals(playerDirection))
-            {
-                playerDirection = PlayerDirection.DOWN;
-            }
-            else if (PlayerDirection.RIGHT.Equals(playerDirection))
-            {
-                playerDirection = PlayerDirection.UP;
-            }
-            playerTransform.rotation *= Quaternion.Euler(0, 0, 90);
+            setPlayerDirectionTurnLeft();
+            yield return StartCoroutine(rotationLeft());
         }
         else if (PlayerDirection.RIGHT.Equals(direction))
         {
-            if (PlayerDirection.UP.Equals(playerDirection))
-            {
-                playerDirection = PlayerDirection.RIGHT;
-            }
-            else if (PlayerDirection.DOWN.Equals(playerDirection))
-            {
-                playerDirection = PlayerDirection.LEFT;
-            }
-            else if (PlayerDirection.LEFT.Equals(playerDirection))
-            {
-                playerDirection = PlayerDirection.UP;
-            }
-            else if (PlayerDirection.RIGHT.Equals(playerDirection))
-            {
-                playerDirection = PlayerDirection.DOWN;
-            }
-            playerTransform.rotation *= Quaternion.Euler(0, 0, -90);
+            setPlayerDirectionTurnRight();
+            yield return StartCoroutine(rotationRight());
+        }
+        yield return new WaitForSeconds(1f);
+
+    }
+
+    private IEnumerator rotationRight()
+    {
+        var fromAngle = playerTransform.rotation;
+        var toAngle = Quaternion.Euler(playerTransform.eulerAngles + new Vector3(0, 0, -90));
+        for (var t = 0f; t < 1; t += Time.deltaTime / 1)
+        {
+            playerTransform.rotation = Quaternion.Slerp(fromAngle, toAngle, t);
+            yield return null;
+        }
+    }
+
+    private IEnumerator rotationLeft()
+    {
+        var fromAngle = playerTransform.rotation;
+        var toAngle = Quaternion.Euler(playerTransform.eulerAngles + new Vector3(0, 0, 90));
+        for (var t = 0f; t < 1; t += Time.deltaTime / 1)
+        {
+            playerTransform.rotation = Quaternion.Slerp(fromAngle, toAngle, t);
+            yield return null;
+        }
+    }
+
+    private void setPlayerDirectionTurnRight()
+    {
+        if (PlayerDirection.UP.Equals(playerDirection))
+        {
+            playerDirection = PlayerDirection.RIGHT;
+        }
+        else if (PlayerDirection.DOWN.Equals(playerDirection))
+        {
+            playerDirection = PlayerDirection.LEFT;
+        }
+        else if (PlayerDirection.LEFT.Equals(playerDirection))
+        {
+            playerDirection = PlayerDirection.UP;
+        }
+        else if (PlayerDirection.RIGHT.Equals(playerDirection))
+        {
+            playerDirection = PlayerDirection.DOWN;
+        }
+    }
+
+    private void setPlayerDirectionTurnLeft()
+    {
+        if (PlayerDirection.UP.Equals(playerDirection))
+        {
+            playerDirection = PlayerDirection.LEFT;
+        }
+        else if (PlayerDirection.DOWN.Equals(playerDirection))
+        {
+            playerDirection = PlayerDirection.RIGHT;
+        }
+        else if (PlayerDirection.LEFT.Equals(playerDirection))
+        {
+            playerDirection = PlayerDirection.DOWN;
+        }
+        else if (PlayerDirection.RIGHT.Equals(playerDirection))
+        {
+            playerDirection = PlayerDirection.UP;
         }
     }
 
@@ -402,15 +438,15 @@ public class BoardManager : MonoBehaviour
             case EnumCommand.CIRCLE:
                 return circleMark;
             case EnumCommand.CIRCLE_TITLE:
-                return circle_title.GetComponent<Image>().sprite;
+                return circleMark;
             case EnumCommand.STAR:
                 return starMark;
             case EnumCommand.STAR_TITLE:
-                return star_title.GetComponent<Image>().sprite;
+                return starMark;
             case EnumCommand.TRIANGLE:
                 return triangleMark;
             case EnumCommand.TRIANGLE_TITLE:
-                return triangle_title.GetComponent<Image>().sprite;
+                return triangleMark;
             case EnumCommand.LOOP:
                 return loopMark;
             case EnumCommand.LEFT:
