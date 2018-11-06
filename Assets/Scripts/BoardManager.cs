@@ -18,6 +18,7 @@ public class BoardManager : MonoBehaviour
 
     private GameManager gameManager;
     private Rigidbody2D playerBody;
+    private Transform playerTransform;
 
     private Level level;
     private int commands = 0, collectables = 0, indexCircle, indexTriangle, indexStar;
@@ -61,29 +62,34 @@ public class BoardManager : MonoBehaviour
                 if (dataBoard.objectType == "Player")
                 {
                     playerBody = instance.GetComponent<Rigidbody2D>();
-                    setPlayerDirection(instance, playerDirection);
+                    playerTransform = instance.transform;
+                    setPlayerDirection(playerDirection);
                 }
             }
         }
     }
 
-    private void setPlayerDirection(GameObject instance, string direction)
+    private void setPlayerDirection(string direction)
     {
         //TODO
         direction = direction.ToUpper();
         switch (direction)
         {
             case "UP":
+                playerTransform.Rotate(new Vector3(0,0,0));
                 playerDirection = PlayerDirection.UP;
                 break;
             case "DOWN":
                 playerDirection = PlayerDirection.DOWN;
+                playerTransform.Rotate(new Vector3(0, 0, -180));
                 break;
             case "LEFT":
                 playerDirection = PlayerDirection.LEFT;
+                playerTransform.Rotate(new Vector3(0, 0, 90));
                 break;
             case "RIGHT":
                 playerDirection = PlayerDirection.RIGHT;
+                playerTransform.Rotate(new Vector3(0, 0, -90));
                 break;
         }
     }
@@ -177,16 +183,46 @@ public class BoardManager : MonoBehaviour
 
     private IEnumerator Turn(PlayerDirection direction)
     {
-        //TODO
         yield return new WaitForSeconds(1f);
-        switch (playerDirection)
+        if (PlayerDirection.LEFT.Equals(direction))
         {
-            case PlayerDirection.LEFT:
-                yield return StartCoroutine(MoveLeft());
-                break;
-            case PlayerDirection.RIGHT:
-                yield return StartCoroutine(MoveRight());
-                break;
+            if (PlayerDirection.UP.Equals(playerDirection))
+            {
+                playerDirection = PlayerDirection.LEFT;
+            }
+            else if (PlayerDirection.DOWN.Equals(playerDirection))
+            {
+                playerDirection = PlayerDirection.RIGHT;
+            }
+            else if (PlayerDirection.LEFT.Equals(playerDirection))
+            {
+                playerDirection = PlayerDirection.DOWN;
+            }
+            else if (PlayerDirection.RIGHT.Equals(playerDirection))
+            {
+                playerDirection = PlayerDirection.UP;
+            }
+            playerTransform.rotation *= Quaternion.Euler(0, 0, 90);
+        }
+        else if (PlayerDirection.RIGHT.Equals(direction))
+        {
+            if (PlayerDirection.UP.Equals(playerDirection))
+            {
+                playerDirection = PlayerDirection.RIGHT;
+            }
+            else if (PlayerDirection.DOWN.Equals(playerDirection))
+            {
+                playerDirection = PlayerDirection.LEFT;
+            }
+            else if (PlayerDirection.LEFT.Equals(playerDirection))
+            {
+                playerDirection = PlayerDirection.UP;
+            }
+            else if (PlayerDirection.RIGHT.Equals(playerDirection))
+            {
+                playerDirection = PlayerDirection.DOWN;
+            }
+            playerTransform.rotation *= Quaternion.Euler(0, 0, -90);
         }
     }
 

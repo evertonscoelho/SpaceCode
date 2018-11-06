@@ -31,7 +31,7 @@ public class RecognizeCommandManager : MonoBehaviour
         cameraViewManager.loading();
         //byte[] bytes = phoneCamera.TakePhoto();
         this.maxCommandsUse = maxCommandsUse;
-        response("star,loop,move,star,7,next,circle,loop,move,2,NEXT,triangle,right", false);
+        response("star,loop,move,7,next,circle,loop,move,2,NEXT,triangle,right", false);
         //StartCoroutine(RequestManager.Request(bytes, this));
     }
 
