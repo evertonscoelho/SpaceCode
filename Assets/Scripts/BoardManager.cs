@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using System;
 
 public class BoardManager : MonoBehaviour
@@ -9,7 +10,7 @@ public class BoardManager : MonoBehaviour
 
     public GameObject player, circle_title, star_title, triangle_title, circle, star, triangle, loop, left, right, move, _2, _3, _4, _5, _6, _7, _8, _9;
 
-    public Sprite circle_titleMark, star_titleMark, triangle_titleMark, circleMark, starMark, triangleMark, loopMark, leftMark, rightMark, moveMark, _2Mark, _3Mark, _4Mark, _5Mark, _6Mark, _7Mark, _8Mark, _9Mark;
+    public Sprite circleMark, starMark, triangleMark, loopMark, leftMark, rightMark, moveMark, _2Mark, _3Mark, _4Mark, _5Mark, _6Mark, _7Mark, _8Mark, _9Mark;
 
     private List<Function> functionsBoard;
 
@@ -29,13 +30,11 @@ public class BoardManager : MonoBehaviour
 
     public void initValues()
     {
-       // offsetXCommand = circle.GetComponent<SpriteRenderer>().bounds.size.x;
-       // offsetYCommand = circle.GetComponent<SpriteRenderer>().bounds.size.y;
+        offsetXCommand = circle.GetComponent<Image>().sprite.bounds.size.x;
+        offsetYCommand = circle.GetComponent<Image>().sprite.bounds.size.y;
         offsetXBoard = Floor.GetComponent<SpriteRenderer>().bounds.size.x;
         offsetYBoard = Floor.GetComponent<SpriteRenderer>().bounds.size.y;
         gameManager = GameManager.instance;
-        print("a");
-        print(offsetXBoard);
     }
 
     public void SetupScene(string idLevel)
@@ -395,16 +394,6 @@ public class BoardManager : MonoBehaviour
         {
             case EnumCommand.CIRCLE:
                 return circleMark;
-            case EnumCommand.CIRCLE_TITLE:
-                return circle_titleMark;
-            case EnumCommand.STAR:
-                return starMark;
-            case EnumCommand.STAR_TITLE:
-                return star_titleMark;
-            case EnumCommand.TRIANGLE:
-                return triangleMark;
-            case EnumCommand.TRIANGLE_TITLE:
-                return triangle_titleMark;
             case EnumCommand.LOOP:
                 return loopMark;
             case EnumCommand.LEFT:

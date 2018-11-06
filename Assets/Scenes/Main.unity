@@ -293,44 +293,42 @@ MonoBehaviour:
   Obstacle: {fileID: 1858006639062768, guid: 4d164a24570999444b4f9b66b693ad03, type: 2}
   Player: {fileID: 1068185102179462, guid: 9c8d00b4ba8e3de4a92d5091c634ab92, type: 2}
   Wall: {fileID: 1261921265851540, guid: dc1897bfbef7a894eb57704a74c57ae2, type: 2}
-  boardCommand: {fileID: 0}
   player: {fileID: 1068185102179462, guid: 9c8d00b4ba8e3de4a92d5091c634ab92, type: 2}
-  circle_title: {fileID: 0}
-  star_title: {fileID: 0}
-  triangle_title: {fileID: 0}
-  circle: {fileID: 0}
-  star: {fileID: 0}
-  triangle: {fileID: 0}
-  loop: {fileID: 0}
-  left: {fileID: 0}
-  right: {fileID: 0}
-  move: {fileID: 0}
-  _2: {fileID: 0}
-  _3: {fileID: 0}
-  _4: {fileID: 0}
-  _5: {fileID: 0}
-  _6: {fileID: 0}
-  _7: {fileID: 0}
-  _8: {fileID: 0}
-  _9: {fileID: 0}
-  circle_titleMark: {fileID: 0}
-  star_titleMark: {fileID: 0}
-  triangle_titleMark: {fileID: 0}
-  circleMark: {fileID: 0}
-  starMark: {fileID: 0}
-  triangleMark: {fileID: 0}
-  loopMark: {fileID: 0}
-  leftMark: {fileID: 21300000, guid: bf80e0309ff4bbc4bbd4218be8d545d6, type: 3}
-  rightMark: {fileID: 21300000, guid: 3e34e602cfd276d4aab6dee627f7d17f, type: 3}
-  moveMark: {fileID: 0}
-  _2Mark: {fileID: 0}
-  _3Mark: {fileID: 0}
-  _4Mark: {fileID: 0}
-  _5Mark: {fileID: 0}
-  _6Mark: {fileID: 0}
-  _7Mark: {fileID: 0}
-  _8Mark: {fileID: 0}
-  _9Mark: {fileID: 0}
+  circle_title: {fileID: 1985589692787102, guid: 9c800b1801986fa4fb56169d0fb0aff4,
+    type: 2}
+  star_title: {fileID: 1574136618341574, guid: c787e173ce560d040a14cecb30aee6b7, type: 2}
+  triangle_title: {fileID: 1392182578105902, guid: fb6dab5dec75f0e4abf3f34077eaa6e6,
+    type: 2}
+  circle: {fileID: 1014118007378830, guid: 0ed1e43199fbba745be1272414452441, type: 2}
+  star: {fileID: 1015326096124774, guid: ecfea4e1c90d7974f88fcd50ce2031f7, type: 2}
+  triangle: {fileID: 1120209807965760, guid: eaba2ae118a1692488827be5d69384bd, type: 2}
+  loop: {fileID: 1604479107794830, guid: e4c4b1b9447eaa04d88cd48813bb9bb7, type: 2}
+  left: {fileID: 1428366511312002, guid: f12bc95d25700eb4abdd55f04430e45b, type: 2}
+  right: {fileID: 1790934124840782, guid: 123ac91f50e245948a349bbc1a6865ae, type: 2}
+  move: {fileID: 1425729420699492, guid: 027edc99389d0d64ca7dec928c1f1de8, type: 2}
+  _2: {fileID: 1338480097682236, guid: 4b320b02194a63b45ba99d08402e8e2e, type: 2}
+  _3: {fileID: 1285124419379738, guid: 756deb038ceeb6045998e266144a1829, type: 2}
+  _4: {fileID: 1003272184590736, guid: 2268b5d3ec1be9c41b188de61f5d710f, type: 2}
+  _5: {fileID: 1959119939822952, guid: 0aa7e8f564e610f49841ba1dcefd347a, type: 2}
+  _6: {fileID: 1836095776760674, guid: 57c1272df1eae5546b18fbddec431dc6, type: 2}
+  _7: {fileID: 1660423887976746, guid: 5c9e9d5d33ee0314ea61c7d428ac4cc0, type: 2}
+  _8: {fileID: 1824658308071228, guid: 87b960cd566d8d44e83f693badd0a107, type: 2}
+  _9: {fileID: 1732043767113846, guid: 5c204be54f5958c4288e8fcca992d778, type: 2}
+  circleMark: {fileID: 21300000, guid: a2b71b6b65dc5fc4bb3d039c4c66d7c4, type: 3}
+  starMark: {fileID: 21300000, guid: 981c115bd2f7d1543937ca19bc4c4819, type: 3}
+  triangleMark: {fileID: 21300000, guid: 81423f48dd6fa8e4bbcf67f0092e851a, type: 3}
+  loopMark: {fileID: 21300000, guid: 961c22b7f2661534b89b8cd4fad57431, type: 3}
+  leftMark: {fileID: 21300000, guid: bb206e5d41c2e394687c4ee130bc9ea4, type: 3}
+  rightMark: {fileID: 21300000, guid: 88e5fef3f1fc0404aac7329da0402817, type: 3}
+  moveMark: {fileID: 21300000, guid: 1c6d5b089d1dde5498d385872ad0c5d0, type: 3}
+  _2Mark: {fileID: 21300000, guid: a79f1c2741404b445be4683504032683, type: 3}
+  _3Mark: {fileID: 21300000, guid: 9e85e568d0be43f49bd974231ea5f758, type: 3}
+  _4Mark: {fileID: 21300000, guid: 43a8109c40ee0eb4fae250a0f9bacecd, type: 3}
+  _5Mark: {fileID: 21300000, guid: de387ff00841b3f4c825b4ea541163e3, type: 3}
+  _6Mark: {fileID: 21300000, guid: 9407f86ddab134849a943f3e600d39ab, type: 3}
+  _7Mark: {fileID: 21300000, guid: 13492f616f08f414a89078c83fb45c75, type: 3}
+  _8Mark: {fileID: 21300000, guid: 5bf80269aa0173a418ade7e881ae5309, type: 3}
+  _9Mark: {fileID: 21300000, guid: 8b1bdc636e9452a49bf7d356a7c14b63, type: 3}
 --- !u!4 &515334508
 Transform:
   m_ObjectHideFlags: 0
