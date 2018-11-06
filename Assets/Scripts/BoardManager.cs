@@ -14,7 +14,7 @@ public class BoardManager : MonoBehaviour
 
     private List<Function> functionsBoard;
 
-    private float offsetXBoard, offsetYBoard, offsetXCommand, offsetYCommand;
+    private float offsetXBoard, offsetYBoard, offsetXCommand, offsetYCommand, speed = 0.01f;
 
     private GameManager gameManager;
     private Rigidbody2D playerBody;
@@ -32,8 +32,8 @@ public class BoardManager : MonoBehaviour
     {
         offsetXCommand = circle.GetComponent<Image>().sprite.bounds.size.x;
         offsetYCommand = circle.GetComponent<Image>().sprite.bounds.size.y;
-        offsetXBoard = Floor.GetComponent<SpriteRenderer>().bounds.size.x;
-        offsetYBoard = Floor.GetComponent<SpriteRenderer>().bounds.size.y;
+        offsetXBoard = Floor.GetComponent<SpriteRenderer>().sprite.bounds.size.x;
+        offsetYBoard = Floor.GetComponent<SpriteRenderer>().sprite.bounds.size.y;
         gameManager = GameManager.instance;
     }
 
@@ -70,6 +70,7 @@ public class BoardManager : MonoBehaviour
     private void setPlayerDirection(GameObject instance, string direction)
     {
         //TODO
+        direction = direction.ToUpper();
         switch (direction)
         {
             case "UP":
@@ -118,6 +119,7 @@ public class BoardManager : MonoBehaviour
 
     private IEnumerator DoFunction(Function function)
     {
+        previous = null;
         foreach (Command command in function.Commands)
         {
             animationCommand(command);
@@ -137,6 +139,7 @@ public class BoardManager : MonoBehaviour
                     case EnumCommand.STAR:
                         yield return new WaitForSeconds(1f);
                         animationCommand(null);
+                        print(indexStar);
                         yield return StartCoroutine(DoFunction(functionsBoard[indexStar]));
                         break;
                     case EnumCommand.TRIANGLE:
@@ -175,6 +178,7 @@ public class BoardManager : MonoBehaviour
     private IEnumerator Turn(PlayerDirection direction)
     {
         //TODO
+        yield return new WaitForSeconds(1f);
         switch (playerDirection)
         {
             case PlayerDirection.LEFT:
@@ -188,6 +192,8 @@ public class BoardManager : MonoBehaviour
 
     private IEnumerator Loop(Command command)
     {
+        yield return new WaitForSeconds(1f);
+        animationCommand(null);
         Function function = new Function(command.loop);
         for (int x = 0; x < command.numRepeatLoop; x++)
         {
@@ -222,8 +228,8 @@ public class BoardManager : MonoBehaviour
         diff = playerBody.position.x - target.x + 20;
         while (playerBody.position.x < target.x && attempts < diff)
         {
-            playerBody.MovePosition(new Vector2(playerBody.position.x + 0.1f, playerBody.position.y));
-            attempts += 0.1f;
+            playerBody.MovePosition(new Vector2(playerBody.position.x + speed, playerBody.position.y));
+            attempts += speed;
             yield return null;
         }
         if (attempts >= diff)
@@ -242,8 +248,8 @@ public class BoardManager : MonoBehaviour
         float diff = playerBody.position.x - target.x - 20, attempts = 0;
         while (playerBody.position.x > target.x && attempts > diff)
         {
-            playerBody.MovePosition(new Vector2(playerBody.position.x - 0.1f, playerBody.position.y));
-            attempts -= 0.1f;
+            playerBody.MovePosition(new Vector2(playerBody.position.x - speed, playerBody.position.y));
+            attempts -= speed;
             yield return null;
         }
         if (attempts <= diff)
@@ -262,8 +268,8 @@ public class BoardManager : MonoBehaviour
         float diff = playerBody.position.y - target.y - 20, attempts = 0;
         while (playerBody.position.y > target.y && attempts > diff)
         {
-            playerBody.MovePosition(new Vector2(playerBody.position.x, playerBody.position.y - 0.1f));
-            attempts -= 0.1f;
+            playerBody.MovePosition(new Vector2(playerBody.position.x, playerBody.position.y - speed));
+            attempts -= speed;
             yield return null;
         }
         if (attempts <= diff)
@@ -278,12 +284,12 @@ public class BoardManager : MonoBehaviour
 
     private IEnumerator MoveUp()
     {
-        Vector2 target = playerBody.position + new Vector2(0, offsetXBoard);
+        Vector2 target = playerBody.position + new Vector2(0, offsetYBoard);
         float diff = playerBody.position.y - target.y + 20, attempts = 0;
         while (playerBody.position.y < target.y && attempts < diff)
         {
-            playerBody.MovePosition(new Vector2(playerBody.position.x, playerBody.position.y + 0.1f));
-            attempts += 0.1f;
+            playerBody.MovePosition(new Vector2(playerBody.position.x, playerBody.position.y + speed));
+            attempts += speed;
             yield return null;
         }
         if (attempts >= diff)
@@ -301,11 +307,11 @@ public class BoardManager : MonoBehaviour
         if (previous != null)
         {
             GameObject instance = getObjectToInstantiate(previous.EnumCommand);
-            previous.gameObject.GetComponent<SpriteRenderer>().sprite = instance.GetComponent<SpriteRenderer>().sprite;
+            previous.gameObject.GetComponent<Image>().sprite = instance.GetComponent<Image>().sprite;
         }
         if (command != null)
         {
-            command.gameObject.GetComponent<SpriteRenderer>().sprite = getSpriteCommandMark(command.EnumCommand);
+            command.gameObject.GetComponent<Image>().sprite = getSpriteCommandMark(command.EnumCommand);
         }
         previous = command;
     }
@@ -314,7 +320,7 @@ public class BoardManager : MonoBehaviour
     {
         while (!playerBody.position.Equals(positionCollectable))
         {
-            playerBody.position = Vector3.MoveTowards(playerBody.position, positionCollectable, 0.1f);
+            playerBody.position = Vector3.MoveTowards(playerBody.position, positionCollectable, speed);
             yield return null;
         }
     }
@@ -355,8 +361,20 @@ public class BoardManager : MonoBehaviour
     {
         switch (enumCommand)
         {
+
+
             case EnumCommand.CIRCLE:
                 return circleMark;
+            case EnumCommand.CIRCLE_TITLE:
+                return circle_title.GetComponent<Image>().sprite;
+            case EnumCommand.STAR:
+                return starMark;
+            case EnumCommand.STAR_TITLE:
+                return star_title.GetComponent<Image>().sprite;
+            case EnumCommand.TRIANGLE:
+                return triangleMark;
+            case EnumCommand.TRIANGLE_TITLE:
+                return triangle_title.GetComponent<Image>().sprite;
             case EnumCommand.LOOP:
                 return loopMark;
             case EnumCommand.LEFT:
@@ -417,7 +435,7 @@ public class BoardManager : MonoBehaviour
     {
         this.indexCircle = indexCircle;
         this.indexStar = indexStar;
-        this.indexTriangle = indexStar;
+        this.indexTriangle = indexTriangle;
     }
 
     public GameObject getNumberLoop(int number)

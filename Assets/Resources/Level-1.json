@@ -5,6 +5,7 @@
 	"difficulty": 1,
 	"maxCommands": 40,
 	"maxCommandsUse": 40,
+	"playerDirection": "up",
 	"board": {
 		"data": [
 			{

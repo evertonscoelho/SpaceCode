@@ -65,7 +65,7 @@ public class RecognizeCommandManager : MonoBehaviour
         response = response.ToUpper();
         string[] commands = response.Split(',');
         List<Function> functions= new List<Function>();
-        int line = 1, indexCircle = -1, indexStar = -1, indexTriangle = -1;
+        int line = 0, indexCircle = -1, indexStar = -1, indexTriangle = -1;
         Command commandLoop = new Command(EnumCommand.LOOP);
         List<Command> commandsLine = new List<Command>(), commandsLoop = new List<Command>();
         Command command;
@@ -184,9 +184,9 @@ public class RecognizeCommandManager : MonoBehaviour
 
     private bool nextLineCheckError(int line, bool loop)
     {
-        if (line == 3)
+        if (line == 2)
         {
-            GameManager.instance.showErro(String.Format(Messages.ERRO_LINHAS_INVALIDAS, line), false, true);
+            GameManager.instance.showErro(String.Format(Messages.ERRO_LINHAS_INVALIDAS, line+1), false, true);
             return true;
         }
         if (loop)

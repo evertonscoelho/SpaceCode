@@ -134,7 +134,6 @@ public class GameManager : MonoBehaviour
 
     public void clickCloseModal()
     {
-        print("oii");
         GameManager.instance.ModalPanelManager.deactiveModal();
     }
 
@@ -231,6 +230,9 @@ public class GameManager : MonoBehaviour
         commandObject.GetComponent<RectTransform>().sizeDelta = new Vector2(width, height);
         image.sprite = toInstantiate.GetComponent<Image>().sprite;
         commandObject.transform.localPosition = getPositionInstance(positionX + diffX, (positionY * -1) + diffY, width, height);
+        if (!numberRepeat) { 
+            command.gameObject = commandObject;
+        }
         positionX++;
     }
 
