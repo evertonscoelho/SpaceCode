@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     private LevelManager levelManager;
     private String levelId;
     public int maxLevel;
+    public Messages messages;
 
     public ModalPanelManager ModalPanelManager;
 
@@ -29,6 +30,20 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         boardScript = GetComponent<BoardManager>();
         boardScript.initValues();
+        messages = getLanguage();
+    }
+
+    private Messages getLanguage()
+    {
+        string language = PlayerPrefs.GetString("language", Messages.languagePTBR);
+        if (language.Equals(Messages.languagePTBR))
+        {
+            return new PT_BR();
+        }
+        else
+        {
+            return new EN_US();
+        }
     }
 
     public void soundClick()
@@ -53,13 +68,13 @@ public class GameManager : MonoBehaviour
         this.functions = functions;
         ModalPanelManager.setCommands(functions, this);
         ModalPanelManager.activeModal(true, "", false, false, false, true, false);
-        ModalPanelManager.setTitleCommands(Messages.TITULO_PAINEL_COMANDOS);
+        ModalPanelManager.setTitleCommands(messages.getTituloPainelComandos());
         boardScript.setIndex(indexCircle, indexStar, indexTriangle);
     }
 
     public void showErro(string erro, bool buttonOkVisible, bool buttonTryAgainVisible)
     {
-        ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_ERRO, false, false, true, false, false);
+        ModalPanelManager.activeModal(true, messages.getTituloPainelErro(), false, false, true, false, false);
         ModalPanelManager.setDescriptionError(erro);
         ModalPanelManager.setVisibleButtonsErro(buttonOkVisible, buttonTryAgainVisible);
     }
@@ -121,14 +136,14 @@ public class GameManager : MonoBehaviour
     public void clickHelp(Boolean mainScene)
     {
         GameManager gameManager = GameManager.instance;
-        gameManager.ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_AJUDA, true, false, false, false, false);
+        gameManager.ModalPanelManager.activeModal(true, gameManager.messages.getTituloPainelAjuda(), true, false, false, false, false);
         if (mainScene)
         {
-            gameManager.ModalPanelManager.setDescriptionHelp(Messages.DESCRICAO_AJUDA_SOBRE_JOGO);
+            gameManager.ModalPanelManager.setDescriptionHelp(gameManager.messages.getDescricaoAjudaSobreJogo());
         }
         else
         {
-            gameManager.ModalPanelManager.setDescriptionHelp(Messages.DESCRICAO_AJUDA_SOBRE_FASE);
+            gameManager.ModalPanelManager.setDescriptionHelp(gameManager.messages.getDescricaoAjudaSobreJogo());
         }
     }
 
@@ -155,7 +170,7 @@ public class GameManager : MonoBehaviour
     public void doDefeat()
     {
         boardScript.StopAllCoroutines();
-        ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_FIM_JOGO_DERROTA, false, true, false, false, false);
+        ModalPanelManager.activeModal(true, messages.getTituloPainelFimJogoDerrota(), false, true, false, false, false);
         ModalPanelManager.interactableButtonNext(false);
     }
 
@@ -168,12 +183,12 @@ public class GameManager : MonoBehaviour
 
         if (level < maxLevel)
         {
-            ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_FIM_JOGO_VITORIA, false, true, false, false, false);
+            ModalPanelManager.activeModal(true, messages.getTituloPainelFimJogoVitoria(), false, true, false, false, false);
         }
         else
         {
-            ModalPanelManager.activeModal(true, Messages.TITULO_PAINEL_FIM_JOGO_VITORIA, false, false, false, false, true);
-            ModalPanelManager.setDescriptionLastLevel(Messages.MENSAGEM_ULTIMA_FASE);
+            ModalPanelManager.activeModal(true, messages.getTituloPainelFimJogoVitoria(), false, false, false, false, true);
+            ModalPanelManager.setDescriptionLastLevel(messages.getMensagemUltimaFase());
         }
         int levelReached = PlayerPrefs.GetInt("levelReached", 1);
         if (level >= levelReached)
@@ -232,6 +247,10 @@ public class GameManager : MonoBehaviour
         commandObject.transform.localPosition = getPositionInstance(positionX + diffX, (positionY * -1) + diffY, width, height);
         if (!numberRepeat) { 
             command.gameObject = commandObject;
+        }
+        else
+        {
+            command.numRepeatLoopGameObject = commandObject;
         }
         positionX++;
     }

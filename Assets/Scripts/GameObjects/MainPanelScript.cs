@@ -6,7 +6,7 @@ public class MainPanelScript : MonoBehaviour {
     public Text nameGame; 
 
     void Start () {
-        nameGame.text = Messages.NOME_JOGO;
+        nameGame.text = GameManager.instance.messages.getNomeJogo();
     }
 	
 }

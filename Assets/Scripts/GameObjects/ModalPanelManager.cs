@@ -14,16 +14,17 @@ public class ModalPanelManager : MonoBehaviour {
 
     void Start()
     {
-        GameManager.instance.ModalPanelManager = this;
+        GameManager gameManager = GameManager.instance;
+        gameManager.ModalPanelManager = this;
         deactiveModal();
-        descriptionButtonFases.text = Messages.BOTAO_FASES;
-        descriptionButtonTryAgain.text = Messages.BOTAO_TENTAR_NOVAMENTE;
-        descriptionButtonNext.text = Messages.BOTAO_PROXIMA_FASE;
-        descriptionTryAgainError.text = Messages.BOTAO_TENTAR_NOVAMENTE;
-        descriptionOkError.text = Messages.BOTAO_OK;
-        descriptionButtonYes.text = Messages.BOTAO_SIM;
-        descriptionButtonNoTryAgain.text = Messages.BOTAO_NAO_TENTAR_NOVAMENTE;
-        descriptionLevelPanelLastLevel.text = Messages.BOTAO_FASES;
+        descriptionButtonFases.text = gameManager.messages.getBotaoFases();
+        descriptionButtonTryAgain.text = gameManager.messages.getBotaoTentarNovamente();
+        descriptionButtonNext.text = gameManager.messages.getBotaoProximaFase();
+        descriptionTryAgainError.text = gameManager.messages.getBotaoTentarNovamente();
+        descriptionOkError.text = gameManager.messages.getBotaoOk();
+        descriptionButtonYes.text = gameManager.messages.getBotaoSim();
+        descriptionButtonNoTryAgain.text = gameManager.messages.getNaoBotaoTentarNovamente();
+        descriptionLevelPanelLastLevel.text = gameManager.messages.getBotaoFases();
     }
 
     public void interactableButtonNext(Boolean interactable)

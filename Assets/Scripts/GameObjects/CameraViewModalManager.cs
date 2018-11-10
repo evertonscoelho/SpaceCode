@@ -9,7 +9,7 @@ public class CameraViewModalManager : UnityEngine.MonoBehaviour
     void Start () {
         deactivate();
         RecognizeCommandManager.instance.setCameraViewManager(this);
-        loadingText.text = Messages.LABEL_CARREGANDO;
+        loadingText.text = GameManager.instance.messages.getLabelCarregando();
     }
 
     public void active()

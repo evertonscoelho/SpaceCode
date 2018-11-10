@@ -10,7 +10,7 @@ public class BoardManager : MonoBehaviour
 
     public GameObject player, circle_title, star_title, triangle_title, circle, star, triangle, loop, left, right, move, _2, _3, _4, _5, _6, _7, _8, _9;
 
-    public Sprite circleMark, starMark, triangleMark, loopMark, leftMark, rightMark, moveMark, _2Mark, _3Mark, _4Mark, _5Mark, _6Mark, _7Mark, _8Mark, _9Mark;
+    public Sprite circleMark, starMark, triangleMark, loopMark, leftMark, rightMark, moveMark, _2Mark, _3Mark, _4Mark, _5Mark, _6Mark, _7Mark, _8Mark, _9Mark, loopExecute;
 
     private List<Function> functionsBoard;
 
@@ -267,10 +267,27 @@ public class BoardManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         animationCommand(null);
         Function function = new Function(command.loop);
+        animationLoop(command, false);
         for (int x = 0; x < command.numRepeatLoop; x++)
         {
             yield return StartCoroutine(DoFunction(function));
         }
+        animationLoop(command, true);
+    }
+
+    private void animationLoop(Command command, bool endAnimation)
+    {
+        if (endAnimation)
+        {
+            command.gameObject.GetComponent<Image>().sprite = loop.GetComponent<Image>().sprite;
+            command.numRepeatLoopGameObject.GetComponent<Image>().sprite = getNumberLoop(command.numRepeatLoop).GetComponent<Image>().sprite;       
+        }
+        else
+        {
+            command.gameObject.GetComponent<Image>().sprite = loopExecute;
+            command.numRepeatLoopGameObject.GetComponent<Image>().sprite = getNumberMarkLoop(command.numRepeatLoop);
+        }
+        previous = command;
     }
 
     private IEnumerator Move()
@@ -397,8 +414,6 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-
-
     private GameObject getObjectToInstantiate(string objectType)
     {
         switch (objectType)
@@ -500,7 +515,7 @@ public class BoardManager : MonoBehaviour
 
     public string getCommandsRemaining()
     {
-        return string.Format(Messages.LABEL_MOVIMENTOS, commands, level.maxCommands);
+        return string.Format(GameManager.instance.messages.getLabelMovimentos(), commands, level.maxCommands);
     }
 
     public void setIndex(int indexCircle, int indexStar, int indexTriangle)

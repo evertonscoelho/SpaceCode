@@ -20,6 +20,6 @@ public class SelectLevelManager : MonoBehaviour {
                 levelButtons[i].interactable = true;
             }
         }
-        title.text = Messages.TITULO_TELA_SELECAO;
+        title.text = GameManager.instance.messages.getTituloTelaSelecao();
 	}
 }

@@ -8,9 +8,10 @@ public class LevelManager: MonoBehaviour
 
     void Start()
     {
-        GameManager.instance.setupSceneLevel(this);
-        TextLoading.text = Messages.LABEL_CARREGANDO;
-        TextTitleBoardCommand.text = Messages.TITULO_BOARD_COMANDOS;
+        GameManager gameManager = GameManager.instance;
+        gameManager.setupSceneLevel(this);
+        TextLoading.text = gameManager.messages.getLabelCarregando();
+        TextTitleBoardCommand.text = gameManager.messages.getTituloBoardComandos();
     }
     
     public void deactivateButtons()
@@ -27,6 +28,6 @@ public class LevelManager: MonoBehaviour
 
     public void setTitle(string level)
     {
-        TextTitle.text = string.Format(Messages.TITULO_TELA_FASES, level);
+        TextTitle.text = string.Format(GameManager.instance.messages.getTituloTelaFases(), level);
     }
 }

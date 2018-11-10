@@ -31,7 +31,7 @@ public class RecognizeCommandManager : MonoBehaviour
         cameraViewManager.loading();
         //byte[] bytes = phoneCamera.TakePhoto();
         this.maxCommandsUse = maxCommandsUse;
-        response("star,loop,right,move,7,next,circle,loop,move,2,NEXT,triangle,right", false);
+        response("star,loop,left,right,3,circle,next,circle,loop,move,2,NEXT,triangle,right", false);
         //StartCoroutine(RequestManager.Request(bytes, this));
     }
 
@@ -56,10 +56,11 @@ public class RecognizeCommandManager : MonoBehaviour
 
     public void convertToCommand(string response)
     {
+        GameManager gameManager = GameManager.instance;
         bool error = false, firstCommandInLine = true, refCircle = false, refStar = false, refTriangle = false, loop = false; 
         if (response.ToUpper().Equals("UNKNOWN"))
         {
-            GameManager.instance.showErro(Messages.ERRO_NENHUM_COMANDO_RECONHECIDO, false, true);
+            gameManager.showErro(gameManager.messages.getErroNenhumComandoReconhecido(), false, true);
             error = true;
         }
         response = response.ToUpper();
@@ -83,7 +84,7 @@ public class RecognizeCommandManager : MonoBehaviour
                 }
                 else if (commandString.Equals("NEXT"))
                 {
-                    error = nextLineCheckError(line, loop);
+                    error = nextLineCheckError(line, loop, getFuncionInLine(line,indexCircle,indexTriangle,indexStar));
                     line++;
                     functions.Add(new Function(commandsLine));
                     commandsLine = new List<Command>();
@@ -93,7 +94,7 @@ public class RecognizeCommandManager : MonoBehaviour
                 {
                     if (loop)
                     {
-                        GameManager.instance.showErro(String.Format(Messages.ERRO_LOOP, line), false, true);
+                        gameManager.showErro(String.Format(gameManager.messages.getErroLoop(), getFuncionInLine(line, indexCircle, indexTriangle, indexStar)), false, true);
                         error = true;
                     }
                     else
@@ -115,19 +116,19 @@ public class RecognizeCommandManager : MonoBehaviour
                         }
                         else
                         {
-                            GameManager.instance.showErro(String.Format(Messages.ERRO_LOOP_SEM_COMANDO, line), false, true);
+                            gameManager.showErro(String.Format(gameManager.messages.getErroLoopSemComando(), getFuncionInLine(line, indexCircle, indexTriangle, indexStar)), false, true);
                             error = true;
                         }
                     }
                     else
                     {
-                        GameManager.instance.showErro(String.Format(Messages.ERRO_NUMERO, line), false, true);
+                        gameManager.showErro(String.Format(gameManager.messages.getErroNumero(), getFuncionInLine(line, indexCircle, indexTriangle, indexStar)), false, true);
                         error = true;
                     }
                 }
                 else if (command.EnumCommand.Equals(EnumCommand.UNKNOW))
                 {
-                    GameManager.instance.showErro(Messages.ERRO_AO_RECONHECER_COMANDO, false, true);
+                    gameManager.showErro(gameManager.messages.getErroAoReconhecerComando(), false, true);
                     error = true;
                 }
                 else
@@ -147,9 +148,26 @@ public class RecognizeCommandManager : MonoBehaviour
         {
             functions.Add(new Function(commandsLine));
             if (!checkErrorCommandUse(functions, line) && !checkErrorFucntionReference(indexCircle, indexTriangle, indexStar, refCircle, refStar, refTriangle))
-            { 
-                GameManager.instance.recognizeCommand(functions, indexCircle, indexStar, indexTriangle);
+            {
+                gameManager.recognizeCommand(functions, indexCircle, indexStar, indexTriangle);
             }
+        }
+    }
+
+    private string getFuncionInLine(int line, int circle, int triangle, int star)
+    {
+        Messages messages = GameManager.instance.messages;
+        if(line == circle)
+        {
+            return messages.getFuncaoCirculo();
+        }
+        else if(line == triangle)
+        {
+            return messages.getFuncaoTriangulo();
+        }
+        else
+        {
+            return messages.getFuncaoEstrela();
         }
     }
 
@@ -182,16 +200,17 @@ public class RecognizeCommandManager : MonoBehaviour
         }
     }
 
-    private bool nextLineCheckError(int line, bool loop)
+    private bool nextLineCheckError(int line, bool loop, string function)
     {
+        GameManager gameManager = GameManager.instance;
         if (line == 2)
         {
-            GameManager.instance.showErro(String.Format(Messages.ERRO_LINHAS_INVALIDAS, line+1), false, true);
+            GameManager.instance.showErro(String.Format(gameManager.messages.getErroLinhasInvalidas(), line+1), false, true);
             return true;
         }
         if (loop)
         {
-            GameManager.instance.showErro(String.Format(Messages.ERRO_LOOP, line), false, true);
+            GameManager.instance.showErro(String.Format(gameManager.messages.getErroLoop(), function), false, true);
             return true;
         }
         return false;
@@ -199,11 +218,12 @@ public class RecognizeCommandManager : MonoBehaviour
 
     private bool checkErrorFucntionReference(int indexCircle, int indexTriangle, int indexStar, bool refCircle, bool refStar, bool refTriangle)
     {
+        GameManager gameManager = GameManager.instance;
         if (refCircle)
         {
             if(indexCircle == -1)
             {
-                GameManager.instance.showErro(String.Format(Messages.ERRO_FUNCAO_NAO_IMPLEMENTADA, Messages.FUNCAO_CIRCULO), false, true);
+                GameManager.instance.showErro(String.Format(gameManager.messages.getErroFuncaoNaoImplementada(), gameManager.messages.getFuncaoCirculo()), false, true);
                 return true;
             }
         }
@@ -211,7 +231,7 @@ public class RecognizeCommandManager : MonoBehaviour
         {
             if (indexStar == -1)
             {
-                GameManager.instance.showErro(String.Format(Messages.ERRO_FUNCAO_NAO_IMPLEMENTADA, Messages.FUNCAO_ESTRELA), false, true);
+                GameManager.instance.showErro(String.Format(gameManager.messages.getErroFuncaoNaoImplementada(), gameManager.messages.getFuncaoEstrela()), false, true);
                 return true;
             }
         }
@@ -219,7 +239,7 @@ public class RecognizeCommandManager : MonoBehaviour
         {
             if (indexTriangle == -1)
             {
-                GameManager.instance.showErro(String.Format(Messages.ERRO_FUNCAO_NAO_IMPLEMENTADA, Messages.FUNCAO_TRIANGULO), false, true);
+                GameManager.instance.showErro(String.Format(gameManager.messages.getErroFuncaoNaoImplementada(), gameManager.messages.getFuncaoTriangulo()), false, true);
                 return true;
             }
         }
@@ -235,7 +255,7 @@ public class RecognizeCommandManager : MonoBehaviour
         }
         if (maxCommandsUse < commands)
         { 
-            GameManager.instance.showErro(String.Format(Messages.ERRO_QUANTIDADE_COMANDOS, maxCommandsUse, commands), false, true);
+            GameManager.instance.showErro(String.Format(GameManager.instance.messages.getErroQuantidadeComandos(), maxCommandsUse, commands), false, true);
             return true;  
         }
         return false;
@@ -259,11 +279,12 @@ public class RecognizeCommandManager : MonoBehaviour
 
     private bool firstCommandLineCheckError(EnumCommand enumCommand, ref int indexCircle, ref int indexStar, ref int indexTriangle, int line)
     {
+        GameManager gameManager = GameManager.instance;
         if (EnumCommand.CIRCLE.Equals(enumCommand))
         {
             if(indexCircle > -1)
             {
-                GameManager.instance.showErro(String.Format(Messages.ERRO_FUNCAO_DEFINIDA_DUAS_VEZES, Messages.FUNCAO_CIRCULO), false, true);
+                gameManager.showErro(String.Format(gameManager.messages.getErroFuncaoDefinidaDuasVezes(), gameManager.messages.getFuncaoCirculo()), false, true);
                 return true;
             }
             else
@@ -274,7 +295,7 @@ public class RecognizeCommandManager : MonoBehaviour
         {
             if (indexTriangle > -1)
             {
-                GameManager.instance.showErro(String.Format(Messages.ERRO_FUNCAO_DEFINIDA_DUAS_VEZES, Messages.FUNCAO_TRIANGULO), false, true);
+                gameManager.showErro(String.Format(gameManager.messages.getErroFuncaoDefinidaDuasVezes(), gameManager.messages.getFuncaoTriangulo()), false, true);
                 return true;
             }
             else
@@ -286,7 +307,7 @@ public class RecognizeCommandManager : MonoBehaviour
         {
             if (indexStar > -1)
             {
-                GameManager.instance.showErro(String.Format(Messages.ERRO_FUNCAO_DEFINIDA_DUAS_VEZES, Messages.FUNCAO_ESTRELA), false, true);
+                gameManager.showErro(String.Format(gameManager.messages.getErroFuncaoDefinidaDuasVezes(), gameManager.messages.getFuncaoEstrela()), false, true);
                 return true;
             }
             else
@@ -296,7 +317,7 @@ public class RecognizeCommandManager : MonoBehaviour
         }
         else
         {
-            GameManager.instance.showErro(String.Format(Messages.ERRO_PRIMEIRO_COMANDO_LINHA, line), false, true);
+            gameManager.showErro(String.Format(gameManager.messages.getPrimeiroComandoLinha(), line), false, true);
             return true;
         }
         return false;

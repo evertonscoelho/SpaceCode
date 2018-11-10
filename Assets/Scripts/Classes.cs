@@ -47,6 +47,8 @@ public class Command
     public GameObject gameObject;
     public List<Command> loop;
     public int numRepeatLoop;
+    public GameObject numRepeatLoopGameObject;
+
 
     public Command(EnumCommand command)
     {
