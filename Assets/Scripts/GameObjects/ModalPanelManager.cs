@@ -6,11 +6,13 @@ using UnityEngine.UI;
 public class ModalPanelManager : MonoBehaviour {
 
     public Text title, descriptionError, descriptionHelp, titleCommands, descriptionLastLevel, descriptionButtonFases, descriptionButtonTryAgain, descriptionButtonNext;
-    public Text descriptionTryAgainError, descriptionOkError, descriptionButtonYes, descriptionButtonNoTryAgain, descriptionLevelPanelLastLevel;
-    public GameObject panelHelp, panelEndGame, panelErrorCommand, panelCommands, panelLastLevel;
+    public Text descriptionTryAgainError, descriptionOkError, descriptionButtonYes, descriptionButtonNoTryAgain, descriptionLevelPanelLastLevel, languageBR, languageUS;
+    public GameObject panelHelp, panelEndGame, panelErrorCommand, panelCommands, panelLastLevel, panelLanguage;
    
     public GameObject boardCommand;
     public Button buttonNext, buttonTryAgainError, buttonOkError;
+
+    public int Scene;
 
     void Start()
     {
@@ -25,6 +27,8 @@ public class ModalPanelManager : MonoBehaviour {
         descriptionButtonYes.text = gameManager.messages.getBotaoSim();
         descriptionButtonNoTryAgain.text = gameManager.messages.getNaoBotaoTentarNovamente();
         descriptionLevelPanelLastLevel.text = gameManager.messages.getBotaoFases();
+        languageBR.text = gameManager.messages.getPortugues();
+        languageUS.text = gameManager.messages.getIngles();
     }
 
     public void interactableButtonNext(Boolean interactable)
@@ -45,18 +49,16 @@ public class ModalPanelManager : MonoBehaviour {
 
     }
 
-    public void activeModal(Boolean active, string title, Boolean panelHelp, Boolean panelEndGame, Boolean panelErrorCommand, Boolean panelCommands, Boolean panelLastLevel)
+    public void activeModal(string title, Boolean panelHelp, Boolean panelEndGame, Boolean panelErrorCommand, Boolean panelCommands, Boolean panelLastLevel, Boolean panelLanguage)
     {
-        if (active)
-        {
-            gameObject.SetActive(true);
-        }
+        gameObject.SetActive(true);
         this.title.text = title;
         this.panelHelp.SetActive(panelHelp);
         this.panelEndGame.SetActive(panelEndGame);
         this.panelErrorCommand.SetActive(panelErrorCommand);
         this.panelCommands.SetActive(panelCommands);
         this.panelLastLevel.SetActive(panelLastLevel);
+        this.panelLanguage.SetActive(panelLanguage);
     }
 
     public void setTitleCommands(string titleCommands)

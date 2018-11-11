@@ -35,8 +35,8 @@ public class GameManager : MonoBehaviour
 
     private Messages getLanguage()
     {
-        string language = PlayerPrefs.GetString("language", Messages.languagePTBR);
-        if (language.Equals(Messages.languagePTBR))
+        string language = PlayerPrefs.GetString("language", Languages.languagePTBR);
+        if (language.Equals(Languages.languagePTBR))
         {
             return new PT_BR();
         }
@@ -67,14 +67,14 @@ public class GameManager : MonoBehaviour
     {
         this.functions = functions;
         ModalPanelManager.setCommands(functions, this);
-        ModalPanelManager.activeModal(true, "", false, false, false, true, false);
+        ModalPanelManager.activeModal("", false, false, false, true, false, false);
         ModalPanelManager.setTitleCommands(messages.getTituloPainelComandos());
         boardScript.setIndex(indexCircle, indexStar, indexTriangle);
     }
 
     public void showErro(string erro, bool buttonOkVisible, bool buttonTryAgainVisible)
     {
-        ModalPanelManager.activeModal(true, messages.getTituloPainelErro(), false, false, true, false, false);
+        ModalPanelManager.activeModal(messages.getTituloPainelErro(), false, false, true, false, false, false);
         ModalPanelManager.setDescriptionError(erro);
         ModalPanelManager.setVisibleButtonsErro(buttonOkVisible, buttonTryAgainVisible);
     }
@@ -136,7 +136,7 @@ public class GameManager : MonoBehaviour
     public void clickHelp(Boolean mainScene)
     {
         GameManager gameManager = GameManager.instance;
-        gameManager.ModalPanelManager.activeModal(true, gameManager.messages.getTituloPainelAjuda(), true, false, false, false, false);
+        gameManager.ModalPanelManager.activeModal(gameManager.messages.getTituloPainelAjuda(), true, false, false, false, false, false);
         if (mainScene)
         {
             gameManager.ModalPanelManager.setDescriptionHelp(gameManager.messages.getDescricaoAjudaSobreJogo());
@@ -170,7 +170,7 @@ public class GameManager : MonoBehaviour
     public void doDefeat()
     {
         boardScript.StopAllCoroutines();
-        ModalPanelManager.activeModal(true, messages.getTituloPainelFimJogoDerrota(), false, true, false, false, false);
+        ModalPanelManager.activeModal(messages.getTituloPainelFimJogoDerrota(), false, true, false, false, false, false);
         ModalPanelManager.interactableButtonNext(false);
     }
 
@@ -183,11 +183,11 @@ public class GameManager : MonoBehaviour
 
         if (level < maxLevel)
         {
-            ModalPanelManager.activeModal(true, messages.getTituloPainelFimJogoVitoria(), false, true, false, false, false);
+            ModalPanelManager.activeModal(messages.getTituloPainelFimJogoVitoria(), false, true, false, false, false, false);
         }
         else
         {
-            ModalPanelManager.activeModal(true, messages.getTituloPainelFimJogoVitoria(), false, false, false, false, true);
+            ModalPanelManager.activeModal(messages.getTituloPainelFimJogoVitoria(), false, false, false, false, true, false);
             ModalPanelManager.setDescriptionLastLevel(messages.getMensagemUltimaFase());
         }
         int levelReached = PlayerPrefs.GetInt("levelReached", 1);
@@ -258,6 +258,32 @@ public class GameManager : MonoBehaviour
     private Vector3 getPositionInstance(float x, float y, float offsetX, float offsetY)
     {
         return new Vector3(x * offsetX - 5, y * offsetY - 5, 0f);
+    }
+
+    public void languageClick(int scene)
+    {
+        GameManager gameManager = GameManager.instance;
+        gameManager.ModalPanelManager.activeModal(gameManager.messages.getTituloPainelEscolherLinguagem(), false, false, false, false, false, true);
+        gameManager.ModalPanelManager.Scene = scene;
+    }
+
+    public void languageSelect(int languageSelect)
+    {
+        GameManager gameManager = GameManager.instance;
+        string language = PlayerPrefs.GetString("language", Languages.languagePTBR);
+        if (!language.Equals(Languages.languagePTBR) && languageSelect == 0)
+        {
+            gameManager.messages = new PT_BR();
+            gameManager.loadScene(gameManager.ModalPanelManager.Scene);
+            PlayerPrefs.SetString("language", Languages.languagePTBR);
+        }
+        else if(!language.Equals(Languages.languageENUS) && languageSelect == 1)
+        {
+            gameManager.messages = new EN_US();
+            gameManager.loadScene(gameManager.ModalPanelManager.Scene);
+            PlayerPrefs.SetString("language", Languages.languageENUS);
+        }
+        gameManager.ModalPanelManager.deactiveModal();
     }
 
 }

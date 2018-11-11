@@ -16,6 +16,12 @@ public enum EnumCommand
     UNKNOW
 };  
 
+public class Languages
+{
+    public static string languagePTBR = "pt-BR";
+    public static string languageENUS = "en-US";
+}
+
 public enum PlayerDirection
 {
     UP,

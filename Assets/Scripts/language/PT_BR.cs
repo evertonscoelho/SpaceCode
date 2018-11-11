@@ -181,4 +181,20 @@
     {
         return "triangulo";
     }
+
+    public override string getPortugues()
+    {
+        return "Português";
+    }
+
+    public override string getIngles()
+    {
+        return "Inglês";
+    }
+
+    public override string getTituloPainelEscolherLinguagem()
+    {
+        return "Escolha a \nlinguagem";
+    }
+
 }

@@ -2,7 +2,7 @@
 
     public override string getNomeJogo()
     {
-        return "hue hue \nbrbr";
+        return "English mother \nfuck";
     }
 
     public override string getErroNenhumaCameraEncontrada()
@@ -95,17 +95,17 @@
 
     public override string getTituloPainelAjuda()
     {
-        return "Ajuda";
+        return "Help";
     }
 
     public override string getTituloTelaSelecao()
     {
-        return "Escolha a fase";
+        return "WOW";
     }
 
     public override string getTituloTelaFases()
     {
-        return "Fase {0}";
+        return "Level {0}";
     }
 
     public override string getTituloBoardComandos()
@@ -180,5 +180,20 @@
     public override string getFuncaoTriangulo()
     {
         return "triangulo";
+    }
+
+    public override string getPortugues()
+    {
+        return "Portuguese";
+    }
+
+    public override string getIngles()
+    {
+        return "English";
+    }
+
+    public override string getTituloPainelEscolherLinguagem()
+    {
+        return "choose your \nlanguage";
     }
 }

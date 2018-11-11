@@ -1,8 +1,5 @@
 ﻿public abstract class Messages{
 
-    public static string languagePTBR = "pt-BR";
-    public static string languageENUS = "en-US";
-
     public abstract string getNomeJogo();
 
     public abstract string getErroNenhumaCameraEncontrada();
@@ -25,6 +22,7 @@
     public abstract string getTituloPainelFimJogoVitoria();
     public abstract string getTituloPainelFimJogoDerrota();
     public abstract string getTituloPainelAjuda();
+    public abstract string getTituloPainelEscolherLinguagem();
     public abstract string getTituloTelaSelecao();
     public abstract string getTituloTelaFases();
     public abstract string getTituloBoardComandos();
@@ -46,4 +44,8 @@
     public abstract string getFuncaoCirculo();
     public abstract string getFuncaoEstrela();
     public abstract string getFuncaoTriangulo();
+
+    public abstract string getPortugues();
+    public abstract string getIngles();
+
 }
