@@ -196,4 +196,9 @@
     {
         return "choose your \nlanguage";
     }
+
+    public override string getMaxUse()
+    {
+        return "Máximo {0} peças";
+    }
 }

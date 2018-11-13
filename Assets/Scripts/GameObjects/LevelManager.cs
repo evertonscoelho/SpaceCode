@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 public class LevelManager: MonoBehaviour
 {
-    public Button picture, help, sound;
-    public Text TextCommands, TextLoading, TextTitle, TextTitleBoardCommand;
+    public Button picture, help, sound, language;
+    public Text TextCommands, TextLoading, TextTitle, TextTitleBoardCommand, TextMaxPieces;
 
     void Start()
     {
@@ -19,6 +19,7 @@ public class LevelManager: MonoBehaviour
         picture.interactable = false;
         help.interactable = false;
         sound.interactable = false;
+        language.interactable = false;
     }
 
     public void setTextCommands(string commands)
@@ -29,5 +30,10 @@ public class LevelManager: MonoBehaviour
     public void setTitle(string level)
     {
         TextTitle.text = string.Format(GameManager.instance.messages.getTituloTelaFases(), level);
+    }
+
+    public void setMaxPieces(string text)
+    {
+        TextMaxPieces.text = text;
     }
 }

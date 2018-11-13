@@ -125,7 +125,7 @@
 
     public override string getBotaoFases()
     {
-        return "Fases";
+        return "Ver fases";
     }
     public override string getBotaoTentarNovamente()
     {
@@ -197,4 +197,8 @@
         return "Escolha a \nlinguagem";
     }
 
+    public override string getMaxUse()
+    {
+        return "Máximo {0} peças";
+    }
 }

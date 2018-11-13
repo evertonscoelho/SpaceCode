@@ -113,6 +113,7 @@ public class GameManager : MonoBehaviour
         this.levelManager = levelManager;
         this.boardScript.SetupScene(levelId);
         levelManager.setTextCommands(boardScript.getCommandsRemaining());
+        levelManager.setMaxPieces(string.Format(messages.getMaxUse(),boardScript.getMaxPiece()));
         levelManager.setTitle(levelId);
     }
 

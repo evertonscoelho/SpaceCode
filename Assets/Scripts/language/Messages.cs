@@ -48,4 +48,5 @@
     public abstract string getPortugues();
     public abstract string getIngles();
 
+    public abstract string getMaxUse();
 }

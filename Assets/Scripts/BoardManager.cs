@@ -114,7 +114,7 @@ public class BoardManager : MonoBehaviour
     public IEnumerator execute(List<Function> functions)
     {
         functionsBoard = functions;
-        gameManager.setCommands(functions, GameObject.Find("BoardCommand").transform, 48, 48, -4.5f, -3.0f, false);
+        gameManager.setCommands(functions, GameObject.Find("BoardCommand").transform, 40, 40, -7f, 0.8f, false);
         yield return StartCoroutine(DoFunction(functions[0]));
         if (!endGame)
         {
@@ -436,7 +436,8 @@ public class BoardManager : MonoBehaviour
 
     private Vector3 getPositionBoardInstance(int x, int y)
     {
-        return new Vector3(x * offsetXBoard, y * offsetYBoard, 0f);
+        float temp = y + 0.4f;
+        return new Vector3(x * offsetXBoard, temp * offsetYBoard, 0f);
     }
 
     public Vector3 getPositionCommandInstance(int x, float y)
@@ -577,5 +578,10 @@ public class BoardManager : MonoBehaviour
             default:
                 return null;
         }
+    }
+
+    public int getMaxPiece()
+    {
+        return level.maxCommands;
     }
 }
