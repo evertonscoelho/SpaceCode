@@ -1170,6 +1170,7 @@ MonoBehaviour:
   - {fileID: 270826629}
   - {fileID: 930456399}
   - {fileID: 736546354}
+  - {fileID: 1228159950}
   title: {fileID: 1034489465}
 --- !u!1001 &1228159948
 Prefab:
@@ -1282,6 +1283,11 @@ Prefab:
       propertyPath: m_Text
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 114452748978646688, guid: b3b1df9ccbc4a5f4f8126fa07a9d95df,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b3b1df9ccbc4a5f4f8126fa07a9d95df, type: 2}
   m_IsPrefabParent: 0
@@ -1290,6 +1296,12 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224716671579901352, guid: b3b1df9ccbc4a5f4f8126fa07a9d95df,
     type: 2}
   m_PrefabInternal: {fileID: 1228159948}
+--- !u!114 &1228159950 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114452748978646688, guid: b3b1df9ccbc4a5f4f8126fa07a9d95df,
+    type: 2}
+  m_PrefabInternal: {fileID: 1228159948}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &1412760661
 Prefab:
   m_ObjectHideFlags: 0
@@ -2312,7 +2324,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1263496431082800, guid: 9d10bc40564381d468f4e8f0145fd818, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9d10bc40564381d468f4e8f0145fd818, type: 2}
