@@ -1,11 +1,9 @@
 {
-	"name": "Level 9",
-	"levelID": "9",
+	"name": "Level 8",
+	"levelID": "8",
 	"author": "Everton/Yuri",
 	"difficulty": 3,
 	"maxCommands": 40,
-	"maxCommandsUse": 40,
-	"playerDirection": "Left",
 	"board": {
 		"data": [
 			{
@@ -81,7 +79,7 @@
 			{
 				"positionX": -3,
 				"positionY": 1,
-				"objectType": "Obstacle"
+				"objectType": "Floor"
 			},
 			{
 				"positionX": -3,
@@ -126,7 +124,7 @@
 			{
 				"positionX": -2,
 				"positionY": -1,
-				"objectType": "Floor"
+				"objectType": "Obstacle"
 			},
 			{
 				"positionX": -2,

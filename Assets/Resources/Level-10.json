@@ -1,9 +1,11 @@
 {
-	"name": "Level 7",
-	"levelID": "7",
+	"name": "Level 9",
+	"levelID": "9",
 	"author": "Everton/Yuri",
 	"difficulty": 3,
 	"maxCommands": 40,
+	"maxCommandsUse": 40,
+	"playerDirection": "Left",
 	"board": {
 		"data": [
 			{
@@ -49,7 +51,7 @@
 			{
 				"positionX": -4,
 				"positionY": 0,
-				"objectType": "Player"
+				"objectType": "Floor"
 			},
 			{
 				"positionX": -4,
@@ -59,7 +61,7 @@
 			{
 				"positionX": -4,
 				"positionY": -2,
-				"objectType": "Collectable"
+				"objectType": "Floor"
 			},
 			{
 				"positionX": -4,
@@ -74,12 +76,12 @@
 			{
 				"positionX": -3,
 				"positionY": 2,
-				"objectType": "Floor"
+				"objectType": "Player"
 			},
 			{
 				"positionX": -3,
 				"positionY": 1,
-				"objectType": "Floor"
+				"objectType": "Obstacle"
 			},
 			{
 				"positionX": -3,
@@ -94,7 +96,7 @@
 			{
 				"positionX": -3,
 				"positionY": -2,
-				"objectType": "Floor"
+				"objectType": "Collectable"
 			},
 			{
 				"positionX": -3,

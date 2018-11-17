@@ -546,6 +546,6 @@ public class BoardManager : MonoBehaviour
 
     public int getMaxPiece()
     {
-        return level.maxCommands;
+        return level.maxCommandsUse;
     }
 }
