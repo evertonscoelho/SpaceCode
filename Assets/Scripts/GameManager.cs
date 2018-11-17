@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
         levelManager.setTextCommands(boardScript.getCommandsRemaining());
         if (status.Equals(StatusGame.DEFEAT))
         {
-            doDefeat();
+            StartCoroutine(doDefeat(false));
             return true;
         }
         return false;
@@ -168,9 +168,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void doDefeat()
+    public IEnumerator doDefeat(Boolean isCrashed)
     {
         boardScript.StopAllCoroutines();
+        if (isCrashed)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
         ModalPanelManager.activeModal(messages.getTituloPainelFimJogoDerrota(), false, true, false, false, false, false);
         ModalPanelManager.interactableButtonNext(false);
     }

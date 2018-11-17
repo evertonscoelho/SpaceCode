@@ -7,7 +7,7 @@ public class ModalPanelManager : MonoBehaviour {
 
     public Text title, descriptionError, descriptionHelp, titleCommands, descriptionLastLevel, descriptionButtonFases, descriptionButtonTryAgain, descriptionButtonNext;
     public Text descriptionTryAgainError, descriptionOkError, descriptionButtonYes, descriptionButtonNoTryAgain, descriptionLevelPanelLastLevel, languageBR, languageUS;
-    public GameObject panelHelp, panelEndGame, panelErrorCommand, panelCommands, panelLastLevel, panelLanguage;
+    public GameObject panelHelp, panelEndGame, panelErrorCommand, panelCommands, panelLastLevel, panelLanguage, icLock;
    
     public GameObject boardCommand;
     public Button buttonNext, buttonTryAgainError, buttonOkError;
@@ -34,6 +34,7 @@ public class ModalPanelManager : MonoBehaviour {
     public void interactableButtonNext(Boolean interactable)
     {
         buttonNext.interactable = interactable;
+        icLock.SetActive(!interactable);
     }
 
     public void setCommands(List<Function> functions, GameManager gameManager)

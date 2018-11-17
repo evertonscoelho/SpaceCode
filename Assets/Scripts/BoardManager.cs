@@ -118,7 +118,7 @@ public class BoardManager : MonoBehaviour
         yield return StartCoroutine(DoFunction(functions[0]));
         if (!endGame)
         {
-            gameManager.doDefeat();
+            StartCoroutine(gameManager.doDefeat(false));
         }
     }
 
@@ -178,7 +178,7 @@ public class BoardManager : MonoBehaviour
             }
             else
             {
-                gameManager.doDefeat();
+                StartCoroutine(gameManager.doDefeat(false));
             }
         }
         animationCommand(null);
@@ -312,83 +312,47 @@ public class BoardManager : MonoBehaviour
     private IEnumerator MoveRight()
     {
         Vector2 target = playerBody.position - new Vector2(offsetYBoard, 0);
-        float diff = playerBody.position.x - target.x - 20, attempts = 0;
         target = playerBody.position + new Vector2(offsetYBoard, 0);
-        diff = playerBody.position.x - target.x + 20;
-        while (playerBody.position.x < target.x && attempts < diff)
+        while (playerBody.position.x < target.x)
         {
             playerBody.MovePosition(new Vector2(playerBody.position.x + speed, playerBody.position.y));
-            attempts += speed;
             yield return null;
         }
-        if (attempts >= diff)
-        {
-            yield return new WaitForSeconds(0.5f);
-        }
-        else
-        {
-            yield return new WaitForSeconds(1);
-        }
+        yield return new WaitForSeconds(1);    
     }
 
     private IEnumerator MoveLeft()
     {
         Vector2 target = playerBody.position - new Vector2(offsetYBoard, 0);
-        float diff = playerBody.position.x - target.x - 20, attempts = 0;
-        while (playerBody.position.x > target.x && attempts > diff)
+        while (playerBody.position.x > target.x)
         {
             playerBody.MovePosition(new Vector2(playerBody.position.x - speed, playerBody.position.y));
-            attempts -= speed;
             yield return null;
         }
-        if (attempts <= diff)
-        {
-            yield return new WaitForSeconds(0.5f);
-        }
-        else
-        {
-            yield return new WaitForSeconds(1);
-        }
+        yield return new WaitForSeconds(1);
     }
 
     private IEnumerator MoveDown()
     {
         Vector2 target = playerBody.position - new Vector2(0, offsetXBoard);
-        float diff = playerBody.position.y - target.y - 20, attempts = 0;
-        while (playerBody.position.y > target.y && attempts > diff)
+        while (playerBody.position.y > target.y)
         {
             playerBody.MovePosition(new Vector2(playerBody.position.x, playerBody.position.y - speed));
-            attempts -= speed;
             yield return null;
         }
-        if (attempts <= diff)
-        {
-            yield return new WaitForSeconds(0.5f);
-        }
-        else
-        {
-            yield return new WaitForSeconds(1);
-        }
+        yield return new WaitForSeconds(1);
+        
     }
 
     private IEnumerator MoveUp()
     {
         Vector2 target = playerBody.position + new Vector2(0, offsetYBoard);
-        float diff = playerBody.position.y - target.y + 20, attempts = 0;
-        while (playerBody.position.y < target.y && attempts < diff)
+        while (playerBody.position.y < target.y)
         {
             playerBody.MovePosition(new Vector2(playerBody.position.x, playerBody.position.y + speed));
-            attempts += speed;
             yield return null;
         }
-        if (attempts >= diff)
-        {
-            yield return new WaitForSeconds(0.5f);
-        }
-        else
-        {
-            yield return new WaitForSeconds(1);
-        }
+        yield return new WaitForSeconds(1);
     }
 
     private void animationCommand(Command command)
