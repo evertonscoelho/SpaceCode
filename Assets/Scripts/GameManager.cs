@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     private BoardManager boardScript;
     private LevelManager levelManager;
+    private SelectLevelManager selectLevelManager;
     private String levelId;
     public int maxLevel;
     public Messages messages;
@@ -291,4 +292,18 @@ public class GameManager : MonoBehaviour
         gameManager.ModalPanelManager.deactiveModal();
     }
 
+    public void setSelectLevel(SelectLevelManager selectLevelManager)
+    {
+        this.selectLevelManager = selectLevelManager;
+    }
+
+    public void nextPageLevelClick()
+    {
+        GameManager.instance.selectLevelManager.nextPageLevelClick();
+    }
+
+    public void backPageSelectLevelClick()
+    {
+        GameManager.instance.selectLevelManager.backPageSelectLevelClick();
+    }
 }

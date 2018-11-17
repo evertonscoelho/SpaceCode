@@ -25,5 +25,15 @@ public class SelectLevelManager : MonoBehaviour {
             }
         }
         title.text = GameManager.instance.messages.getTituloTelaSelecao();
-	}
+        GameManager.instance.setSelectLevel(this);
+
+    }
+
+    public void nextPageLevelClick()
+    {
+    }
+
+    public void backPageSelectLevelClick()
+    {
+    }
 }
