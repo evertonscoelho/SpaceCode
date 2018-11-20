@@ -14,7 +14,7 @@ public class SelectLevelManager : MonoBehaviour {
 
         levelReached = PlayerPrefs.GetInt("levelReached", 1);
         page = 0;
-        levelReached = 9;
+        levelReached = 22;
         title.text = GameManager.instance.messages.getTituloTelaSelecao();
         backPage.interactable = false;
         nextPageInteractable();

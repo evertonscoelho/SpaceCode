@@ -1,4 +1,5 @@
-﻿public class PT_BR : Messages {
+﻿public class PT_BR : Messages
+{
 
     public override string getNomeJogo()
     {
@@ -7,44 +8,44 @@
 
     public override string getErroNenhumaCameraEncontrada()
     {
-        return "Nenhuma câmera encontrada";
+        return "Não encontrei nenhuma câmera";
     }
 
     public override string getErroAbrirCamera()
     {
-        return "Não foi possível abrir a câmera";
+        return "Não consegui abrir a câmera";
     }
 
     public override string getErroNenhumComandoReconhecido()
     {
-        return "Nenhum comando reconhecido";
+        return "Não reconheci nenhum comando";
     }
 
     public override string getErroLinhasInvalidas()
     {
-        return "É permitido apenas {0} linhas de comandos";
+        return "Só consigo ler até {0} linhas de comandos";
     }
 
     public override string getErroQuantidadeComandos()
     {
-        return "São permitidos para essa fase apenas {0} comandos, e você colocou {1}";
+        return "Nessa fase só são permitidos {0} comandos, e você colocou {1}";
     }
 
     public override string getErroAoReconhecerComando()
     {
-        return "Ocorreu um erro ao reconhecer os comandos: Comando inválido";
+        return "Não reconheci os comandos: Comando inválido";
     }
 
     public override string getErroServidor()
     {
-        return "Ocorreu um erro ({0}) ao tentar conectar ao servidor: {1}";
+        return "Não consegui conectar ao servidor: {1}. Ocorreu o erro ({0})";
     }
 
     public override string getErroProblemaConexao()
     {
         return "Ocorreu um problema de conexão com o servidor: ";
     }
-    
+
     public override string getPrimeiroComandoLinha()
     {
         return "O primeiro comando da linha {0} deve ser uma função";
@@ -61,36 +62,36 @@
     }
     public override string getErroLoop()
     {
-        return "Na função {0} existe um loop definido de forma incorreta";
+        return "Na função {0} existe uma repetição definida de forma incorreta";
     }
     public override string getErroNumero()
     {
-        return "Na função {0} existe um número sem comando de loop";
+        return "Na função {0} existe um número sem comando de repetição";
     }
 
     public override string getErroLoopSemComando()
     {
-        return "Na função {0} existe um loop sem nenhum comando";
+        return "Na função {0} existe uma repetição sem nenhum comando";
     }
 
     public override string getTituloPainelComandos()
     {
-        return "Eu reconheci essas peças, estão corretas?";
+        return "Eu reconheci essas peças, é isso mesmo?";
     }
 
     public override string getTituloPainelErro()
     {
-        return "Ocorreu um erro :/";
+        return "Alguma coisa deu errada :/";
     }
 
     public override string getTituloPainelFimJogoVitoria()
     {
-        return "Ganhou :)";
+        return "É isso aí! :)";
     }
 
     public override string getTituloPainelFimJogoDerrota()
     {
-        return "Perdeu :/";
+        return "Dessa vez não deu :/";
     }
 
     public override string getTituloPainelAjuda()
@@ -100,7 +101,7 @@
 
     public override string getTituloTelaSelecao()
     {
-        return "Escolha a fase";
+        return "Qual fase quer jogar?";
     }
 
     public override string getTituloTelaFases()
@@ -125,11 +126,11 @@
 
     public override string getBotaoFases()
     {
-        return "Ver fases";
+        return "Ver as fases";
     }
     public override string getBotaoTentarNovamente()
     {
-        return "Tentar Novamente";
+        return "Tentar de novo";
     }
 
     public override string getBotaoProximaFase()
@@ -149,7 +150,7 @@
 
     public override string getNaoBotaoTentarNovamente()
     {
-        return "Não, tentar novamente";
+        return "Não, vou tentar de novo";
     }
 
     public override string getDescricaoAjudaSobreJogo()
@@ -166,7 +167,7 @@
     {
         return "Huhul, você passou todas as fases :)";
     }
-    
+
     public override string getFuncaoCirculo()
     {
         return "círculo";
@@ -179,7 +180,7 @@
 
     public override string getFuncaoTriangulo()
     {
-        return "triangulo";
+        return "triângulo";
     }
 
     public override string getPortugues()
@@ -194,11 +195,11 @@
 
     public override string getTituloPainelEscolherLinguagem()
     {
-        return "Escolha a \nlinguagem";
+        return "Escolha a \nlíngua";
     }
 
     public override string getMaxUse()
     {
-        return "Máximo {0} peças";
+        return "Use no máximo {0} peças";
     }
 }

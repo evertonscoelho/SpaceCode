@@ -496,7 +496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   title: {fileID: 1034489465}
-  maxLevel: 22
+  maxLevel: 20
   nextPage: {fileID: 2116490024}
   backPage: {fileID: 1476078777}
   buttonLevel: {fileID: 1267423191702484, guid: b3b1df9ccbc4a5f4f8126fa07a9d95df,

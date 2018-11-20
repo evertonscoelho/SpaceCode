@@ -1,96 +1,98 @@
-﻿public class EN_US : Messages{
+﻿public class EN_US : Messages
+{
 
     public override string getNomeJogo()
     {
-        return "English mother \nfuck";
+        return "hue hue \nbrbr";
     }
 
     public override string getErroNenhumaCameraEncontrada()
     {
-        return "Nenhuma câmera encontrada";
+        return "Haven't found any camera";
     }
 
     public override string getErroAbrirCamera()
     {
-        return "Não foi possível abrir a câmera";
+        return "Can't open your camera";
     }
 
     public override string getErroNenhumComandoReconhecido()
     {
-        return "Nenhum comando reconhecido";
+        return "Could not recognize any command";
     }
 
     public override string getErroLinhasInvalidas()
     {
-        return "É permitido apenas {0} linhas de comandos";
+        return "I can only read {0} command lines";
     }
 
     public override string getErroQuantidadeComandos()
     {
-        return "São permitidos para essa fase apenas {0} comandos, e você colocou {1}";
+        return "This level allows only {0} commands, you put {1}";
     }
 
     public override string getErroAoReconhecerComando()
     {
-        return "Ocorreu um erro ao reconhecer os comandos: Comando inválido";
+        return "Couldn`t recognize the commands: Invalid Command";
     }
 
     public override string getErroServidor()
     {
-        return "Ocorreu um erro ({0}) ao tentar conectar ao servidor: {1}";
+        return "Couldn`t connect to server: {1}. Error ({0})";
     }
 
     public override string getErroProblemaConexao()
     {
-        return "Ocorreu um problema de conexão com o servidor: ";
+        return "A problem happened with the server connection: ";
     }
 
     public override string getPrimeiroComandoLinha()
     {
-        return "O primeiro comando da linha {0} deve ser uma função";
+        return "The first command on line {0} must be a function";
     }
 
     public override string getErroFuncaoDefinidaDuasVezes()
     {
-        return "A função {0} foi definida em duas ou mais linhas";
+        return "The function {0} was defined on two or more lines";
     }
 
     public override string getErroFuncaoNaoImplementada()
     {
-        return "A função {0} foi chamada, mas não implementada";
+        return "The function {0} was called, but not implemented";
     }
     public override string getErroLoop()
     {
-        return "Na função {0} existe um loop definido de forma incorreta";
+        return "There is an incorrect defined loop on line {0}";
     }
+
     public override string getErroNumero()
     {
-        return "Na função {0} existe um número sem comando de loop";
+        return "There is a number without any loop command on function {0}";
     }
 
     public override string getErroLoopSemComando()
     {
-        return "Na função {0} existe um loop sem nenhum comando";
+        return "There is a loop without any command on function {0}";
     }
 
     public override string getTituloPainelComandos()
     {
-        return "Eu reconheci essas peças, estão corretas?";
+        return "I recognize this commands, am I correct?";
     }
 
     public override string getTituloPainelErro()
     {
-        return "Ocorreu um erro :/";
+        return "Something went wrong :/";
     }
 
     public override string getTituloPainelFimJogoVitoria()
     {
-        return "Ganhou :)";
+        return "That's it! :)";
     }
 
     public override string getTituloPainelFimJogoDerrota()
     {
-        return "Perdeu :/";
+        return "Not this time :/";
     }
 
     public override string getTituloPainelAjuda()
@@ -100,7 +102,7 @@
 
     public override string getTituloTelaSelecao()
     {
-        return "WOW";
+        return "Which level do you want to play?";
     }
 
     public override string getTituloTelaFases()
@@ -110,31 +112,31 @@
 
     public override string getTituloBoardComandos()
     {
-        return "Peças usadas";
+        return "Used commands";
     }
 
     public override string getLabelMovimentos()
     {
-        return "Movimentos {0}/{1}";
+        return "Moves {0}/{1}";
     }
 
     public override string getLabelCarregando()
     {
-        return "Carregando...";
+        return "Loading...";
     }
 
     public override string getBotaoFases()
     {
-        return "Fases";
+        return "Go to levels";
     }
     public override string getBotaoTentarNovamente()
     {
-        return "Tentar Novamente";
+        return "Try again";
     }
 
     public override string getBotaoProximaFase()
     {
-        return "Próxima fase";
+        return "Next level";
     }
 
     public override string getBotaoOk()
@@ -144,12 +146,12 @@
 
     public override string getBotaoSim()
     {
-        return "Sim";
+        return "Yes";
     }
 
     public override string getNaoBotaoTentarNovamente()
     {
-        return "Não, tentar novamente";
+        return "No, let's try again";
     }
 
     public override string getDescricaoAjudaSobreJogo()
@@ -159,27 +161,27 @@
 
     public override string getDescricaoAjudaSobreFase()
     {
-        return "fase";
+        return "level";
     }
 
     public override string getMensagemUltimaFase()
     {
-        return "Huhul, você passou todas as fases :)";
+        return "Huhul, you've reached the end :)";
     }
 
     public override string getFuncaoCirculo()
     {
-        return "círculo";
+        return "circle";
     }
 
     public override string getFuncaoEstrela()
     {
-        return "estrela";
+        return "star";
     }
 
     public override string getFuncaoTriangulo()
     {
-        return "triangulo";
+        return "triangle";
     }
 
     public override string getPortugues()
@@ -194,11 +196,11 @@
 
     public override string getTituloPainelEscolherLinguagem()
     {
-        return "choose your \nlanguage";
+        return "Chose a  \nlanguage";
     }
 
     public override string getMaxUse()
     {
-        return "Máximo {0} peças";
+        return "Use a maximum of {0} pieces";
     }
 }
