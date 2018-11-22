@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class LevelManager: MonoBehaviour
@@ -35,5 +36,10 @@ public class LevelManager: MonoBehaviour
     public void setMaxPieces(string text)
     {
         TextMaxPieces.text = text;
+    }
+
+    public void setHelp(int helpDifficult)
+    {
+        help.onClick.AddListener(delegate { GameManager.instance.clickHelp(helpDifficult); });
     }
 }

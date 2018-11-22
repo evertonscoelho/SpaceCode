@@ -22,17 +22,17 @@ public class RecognizeCommandManager : MonoBehaviour
 
     public void pictureClick()
     {
-       //phoneCamera = new PhoneCamera(cameraViewManager.GetComponent<RawImage>());
+       phoneCamera = new PhoneCamera(cameraViewManager.GetComponent<RawImage>());
        cameraViewManager.active();
     }
 
     public void takePictureClick(int maxCommandsUse)
     {
         cameraViewManager.loading();
-        //byte[] bytes = phoneCamera.TakePhoto();
+        byte[] bytes = phoneCamera.TakePhoto();
         this.maxCommandsUse = maxCommandsUse;
-        response("star,loop,left,move,move,3,circle,next,circle,loop,move,2,NEXT,triangle,right", false);
-        //StartCoroutine(RequestManager.Request(bytes, this));
+        //response("star,loop,left,move,move,3,circle,next,circle,loop,move,2,NEXT,triangle,right", false);
+        StartCoroutine(RequestManager.Request(bytes, this));
     }
 
     public void setCameraViewManager(CameraViewModalManager cameraViewManager)
@@ -147,7 +147,8 @@ public class RecognizeCommandManager : MonoBehaviour
         if (!error)
         {
             functions.Add(new Function(commandsLine));
-            if (!checkErrorCommandUse(functions, line) && !checkErrorFucntionReference(indexCircle, indexTriangle, indexStar, refCircle, refStar, refTriangle))
+            if (!checkErrorCommandUse(functions, line) && !checkErrorFucntionReference(indexCircle, indexTriangle, indexStar, refCircle, refStar, refTriangle) && 
+                !checkLoop(loop, getFuncionInLine(line, indexCircle, indexTriangle, indexStar)))
             {
                 gameManager.recognizeCommand(functions, indexCircle, indexStar, indexTriangle);
             }
@@ -208,14 +209,18 @@ public class RecognizeCommandManager : MonoBehaviour
             GameManager.instance.showErro(String.Format(gameManager.messages.getErroLinhasInvalidas(), line+1), false, true);
             return true;
         }
+        return checkLoop(loop, function);
+    }
+
+    private bool checkLoop(bool loop, string function)
+    {
         if (loop)
         {
-            GameManager.instance.showErro(String.Format(gameManager.messages.getErroLoop(), function), false, true);
+            GameManager.instance.showErro(String.Format(GameManager.instance.messages.getErroLoop(), function), false, true);
             return true;
         }
         return false;
     }
-
     private bool checkErrorFucntionReference(int indexCircle, int indexTriangle, int indexStar, bool refCircle, bool refStar, bool refTriangle)
     {
         GameManager gameManager = GameManager.instance;
@@ -248,7 +253,7 @@ public class RecognizeCommandManager : MonoBehaviour
 
     private bool checkErrorCommandUse(List<Function> functions, int line)
     {
-        int commands = line * -1;
+        int commands = 0;
         for(int x = 0; x < line; x++)
         {
             commands += functions[x].Commands.Count;
@@ -317,7 +322,7 @@ public class RecognizeCommandManager : MonoBehaviour
         }
         else
         {
-            gameManager.showErro(String.Format(gameManager.messages.getPrimeiroComandoLinha(), line), false, true);
+            gameManager.showErro(String.Format(gameManager.messages.getPrimeiroComandoLinha(), line+1), false, true);
             return true;
         }
         return false;

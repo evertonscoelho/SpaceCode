@@ -38,7 +38,8 @@
     public abstract string getNaoBotaoTentarNovamente();
 
     public abstract string getDescricaoAjudaSobreJogo();
-    public abstract string getDescricaoAjudaSobreFase();
+    public abstract string getDescricaoAjudaMovimentosBasicos();
+    public abstract string getDescricaoAjudaMaisColetaveis();
     public abstract string getMensagemUltimaFase();
 
     public abstract string getFuncaoCirculo();

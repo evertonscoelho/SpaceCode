@@ -25,9 +25,10 @@ public class PhoneCamera : MonoBehaviour {
         {
             gameManager.showErro(gameManager.messages.getErroAbrirCamera(), true, false);
         }
-        
-        cam.Play();
-        cameraImage.texture = cam;
+        else { 
+            cam.Play();
+            cameraImage.texture = cam;
+        }
     }
 	
     public byte[] TakePhoto()

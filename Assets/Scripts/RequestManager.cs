@@ -17,7 +17,7 @@ public class RequestManager{
             yield return www.SendWebRequest();
             if (www.isNetworkError)
             {
-                recognizeCommandManager.response(GameManager.instance.messages.getPrimeiroComandoLinha(), true);
+                recognizeCommandManager.response(GameManager.instance.messages.getErroProblemaConexao(), true);
             }
             else if(www.isHttpError || www.responseCode != 200){
                 recognizeCommandManager.response(string.Format(GameManager.instance.messages.getErroServidor(), www.responseCode, www.error),  true);

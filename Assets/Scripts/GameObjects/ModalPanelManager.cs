@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class ModalPanelManager : MonoBehaviour {
 
-    public Text title, descriptionError, descriptionHelp, titleCommands, descriptionLastLevel, descriptionButtonFases, descriptionButtonTryAgain, descriptionButtonNext;
+    public Text title, descriptionError, titleCommands, descriptionLastLevel, descriptionButtonFases, descriptionButtonTryAgain, descriptionButtonNext;
     public Text descriptionTryAgainError, descriptionOkError, descriptionButtonYes, descriptionButtonNoTryAgain, descriptionLevelPanelLastLevel, languageBR, languageUS;
-    public GameObject panelHelp, panelEndGame, panelErrorCommand, panelCommands, panelLastLevel, panelLanguage, icLock;
+    public GameObject panelEndGame, panelErrorCommand, panelCommands, panelLastLevel, panelLanguage, icLock;
    
     public GameObject boardCommand;
     public Button buttonNext, buttonTryAgainError, buttonOkError;
@@ -50,11 +50,10 @@ public class ModalPanelManager : MonoBehaviour {
 
     }
 
-    public void activeModal(string title, Boolean panelHelp, Boolean panelEndGame, Boolean panelErrorCommand, Boolean panelCommands, Boolean panelLastLevel, Boolean panelLanguage)
+    public void activeModal(string title, Boolean panelEndGame, Boolean panelErrorCommand, Boolean panelCommands, Boolean panelLastLevel, Boolean panelLanguage)
     {
         gameObject.SetActive(true);
         this.title.text = title;
-        this.panelHelp.SetActive(panelHelp);
         this.panelEndGame.SetActive(panelEndGame);
         this.panelErrorCommand.SetActive(panelErrorCommand);
         this.panelCommands.SetActive(panelCommands);
@@ -70,11 +69,6 @@ public class ModalPanelManager : MonoBehaviour {
     public void setDescriptionError(string description)
     {
         descriptionError.text = description;
-    }
-
-    public void setDescriptionHelp(string description)
-    {
-        descriptionHelp.text = description;
     }
 
     public void setDescriptionLastLevel(string description)

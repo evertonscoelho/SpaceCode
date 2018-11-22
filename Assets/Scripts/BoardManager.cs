@@ -10,13 +10,14 @@ public class BoardManager : MonoBehaviour
 
     public GameObject player, circle_title, star_title, triangle_title, circle, star, triangle, loop, left, right, move, _2, _3, _4, _5, _6, _7, _8, _9;
 
-    public Sprite circleMark, starMark, triangleMark, loopMark, leftMark, rightMark, moveMark, _2Mark, _3Mark, _4Mark, _5Mark, _6Mark, _7Mark, _8Mark, _9Mark, loopExecute;
+    public Sprite circleMark, starMark, triangleMark, loopMark, leftMark, rightMark, moveMark, _2Mark, _3Mark, _4Mark, _5Mark, _6Mark, _7Mark, _8Mark, _9Mark, loopExecute, playerCrashedSprite;
 
     private List<Function> functionsBoard;
 
     private float offsetXBoard, offsetYBoard, offsetXCommand, offsetYCommand, speed = 0.01f;
 
     private GameManager gameManager;
+    private GameObject playerObjectLevel;
     private Rigidbody2D playerBody;
     private Transform playerTransform;
 
@@ -61,6 +62,7 @@ public class BoardManager : MonoBehaviour
                 instance.transform.SetParent(boardHolder);
                 if (dataBoard.objectType == "Player")
                 {
+                    playerObjectLevel = instance;
                     playerBody = instance.GetComponent<Rigidbody2D>();
                     playerTransform = instance.transform;
                     setPlayerDirection(playerDirection);
@@ -109,6 +111,11 @@ public class BoardManager : MonoBehaviour
         {
             return StatusGame.CONTINUE;
         }
+    }
+
+    public int getDifficultHelp()
+    {
+        return level.difficulty;
     }
 
     public IEnumerator execute(List<Function> functions)
@@ -466,11 +473,6 @@ public class BoardManager : MonoBehaviour
     }
 
 
-    public Level getLevel()
-    {
-        return level;
-    }
-
     private string getJsonFileById(string idLevel)
     {
         TextAsset file = Resources.Load("Level-" + idLevel) as TextAsset;
@@ -547,5 +549,10 @@ public class BoardManager : MonoBehaviour
     public int getMaxPiece()
     {
         return level.maxCommandsUse;
+    }
+
+    public void playerCrashed()
+    {
+        playerObjectLevel.GetComponent<SpriteRenderer>().sprite = playerCrashedSprite;
     }
 }

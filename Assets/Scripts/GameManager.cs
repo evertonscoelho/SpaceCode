@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public Messages messages;
 
     public ModalPanelManager ModalPanelManager;
+    public ModalPanelHelpManager ModalPanelHelpManager;
 
     private List<Function> functions;
 
@@ -59,23 +60,21 @@ public class GameManager : MonoBehaviour
 
     public void takePictureClick()
     {
-        GameManager gameManager = GameManager.instance;
-        Level level = gameManager.boardScript.getLevel();
-        RecognizeCommandManager.instance.takePictureClick(level.maxCommandsUse);
+        RecognizeCommandManager.instance.takePictureClick(GameManager.instance.boardScript.getMaxPiece());
     }
 
     public void recognizeCommand(List<Function> functions, int indexCircle, int indexStar, int indexTriangle)
     {
         this.functions = functions;
         ModalPanelManager.setCommands(functions, this);
-        ModalPanelManager.activeModal("", false, false, false, true, false, false);
+        ModalPanelManager.activeModal("", false, false, true, false, false);
         ModalPanelManager.setTitleCommands(messages.getTituloPainelComandos());
         boardScript.setIndex(indexCircle, indexStar, indexTriangle);
     }
 
     public void showErro(string erro, bool buttonOkVisible, bool buttonTryAgainVisible)
     {
-        ModalPanelManager.activeModal(messages.getTituloPainelErro(), false, false, true, false, false, false);
+        ModalPanelManager.activeModal(messages.getTituloPainelErro(), false, true, false, false, false);
         ModalPanelManager.setDescriptionError(erro);
         ModalPanelManager.setVisibleButtonsErro(buttonOkVisible, buttonTryAgainVisible);
     }
@@ -116,6 +115,7 @@ public class GameManager : MonoBehaviour
         levelManager.setTextCommands(boardScript.getCommandsRemaining());
         levelManager.setMaxPieces(string.Format(messages.getMaxUse(),boardScript.getMaxPiece()));
         levelManager.setTitle(levelId);
+        levelManager.setHelp(boardScript.getDifficultHelp());
     }
 
     public void loadScene(int sceneIndex)
@@ -135,23 +135,21 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
-    public void clickHelp(Boolean mainScene)
+    public void clickHelp(int helpDifficult)
     {
         GameManager gameManager = GameManager.instance;
-        gameManager.ModalPanelManager.activeModal(gameManager.messages.getTituloPainelAjuda(), true, false, false, false, false, false);
-        if (mainScene)
-        {
-            gameManager.ModalPanelManager.setDescriptionHelp(gameManager.messages.getDescricaoAjudaSobreJogo());
-        }
-        else
-        {
-            gameManager.ModalPanelManager.setDescriptionHelp(gameManager.messages.getDescricaoAjudaSobreJogo());
-        }
+        gameManager.ModalPanelHelpManager.activeModal(helpDifficult);
+      
     }
 
     public void clickCloseModal()
     {
         GameManager.instance.ModalPanelManager.deactiveModal();
+    }
+
+    public void clickCloseModalHelp()
+    {
+        GameManager.instance.ModalPanelHelpManager.deactiveModal();
     }
 
     public void reloadLevel()
@@ -174,9 +172,10 @@ public class GameManager : MonoBehaviour
         boardScript.StopAllCoroutines();
         if (isCrashed)
         {
+            boardScript.playerCrashed();
             yield return new WaitForSeconds(0.5f);
         }
-        ModalPanelManager.activeModal(messages.getTituloPainelFimJogoDerrota(), false, true, false, false, false, false);
+        ModalPanelManager.activeModal(messages.getTituloPainelFimJogoDerrota(), true, false, false, false, false);
         ModalPanelManager.interactableButtonNext(false);
     }
 
@@ -189,11 +188,11 @@ public class GameManager : MonoBehaviour
 
         if (level < maxLevel)
         {
-            ModalPanelManager.activeModal(messages.getTituloPainelFimJogoVitoria(), false, true, false, false, false, false);
+            ModalPanelManager.activeModal(messages.getTituloPainelFimJogoVitoria(), true, false, false, false, false);
         }
         else
         {
-            ModalPanelManager.activeModal(messages.getTituloPainelFimJogoVitoria(), false, false, false, false, true, false);
+            ModalPanelManager.activeModal(messages.getTituloPainelFimJogoVitoria(), false, false, false, true, false);
             ModalPanelManager.setDescriptionLastLevel(messages.getMensagemUltimaFase());
         }
         int levelReached = PlayerPrefs.GetInt("levelReached", 1);
@@ -269,7 +268,7 @@ public class GameManager : MonoBehaviour
     public void languageClick(int scene)
     {
         GameManager gameManager = GameManager.instance;
-        gameManager.ModalPanelManager.activeModal(gameManager.messages.getTituloPainelEscolherLinguagem(), false, false, false, false, false, true);
+        gameManager.ModalPanelManager.activeModal(gameManager.messages.getTituloPainelEscolherLinguagem(), false, false, false, false, true);
         gameManager.ModalPanelManager.Scene = scene;
     }
 

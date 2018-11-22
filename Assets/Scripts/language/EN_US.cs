@@ -3,7 +3,8 @@
 
     public override string getNomeJogo()
     {
-        return "hue hue \nbrbr";
+        return "Space" +
+            "\nCode";
     }
 
     public override string getErroNenhumaCameraEncontrada()
@@ -154,16 +155,6 @@
         return "No, let's try again";
     }
 
-    public override string getDescricaoAjudaSobreJogo()
-    {
-        return "Teste Lorem ipsum dolor sit amet, consectetur adipiscing elit.Mauris lacinia consectetur erat quis tincidunt.Phasellus faucibus urna venenatis, tincidunt ex at, pulvinar nunc. Sed et metus in risus mattis faucibus.Fusce id pulvinar est, id rhoncus dui.Quisque in scelerisque neque. Etiam ut porta odio, et hendrerit massa.Vivamus maximus hendrerit ipsum et elementum. Mauris tempor tempor mi, ullamcorper dignissim lectus accumsan et.Phasellus congue euismod lorem, non pellentesque nulla venenatis ut.Nullam malesuada tellus nec augue facilisis bibendum.Nunc ultrices, orci vitae accumsan venenatis, quam magna dapibus erat, eu posuere sapien lectus et sapien. Sed ut dolor id enim pretium aliquam ac non purus. Curabitur et urna accumsan, dapibus purus nec, tristique ligula. Duis quis elit sed metus venenatis imperdiet nec ac libero. Nulla feugiat imperdiet hendrerit. Phasellus leo nunc, auctor id velit sit amet, posuere congue metus.";
-    }
-
-    public override string getDescricaoAjudaSobreFase()
-    {
-        return "level";
-    }
-
     public override string getMensagemUltimaFase()
     {
         return "Huhul, you've reached the end :)";
@@ -203,4 +194,20 @@
     {
         return "Use a maximum of {0} pieces";
     }
+
+    public override string getDescricaoAjudaSobreJogo()
+    {
+        return "\t\tWelcome young commandant, you are about to enter on a journey through the universe in the pursuit of knowledge. Are you ready to take the controls of our powerful rocket and take all the stars you find? \n" +
+            "\t\tTo guide our vehicle command him step by step, using the pieces you received, and collect all the stars you find.\n" +
+            "\t\tGet ready and start to conquer the galaxy!\n";
+    }
+
+    public override string getDescricaoAjudaMovimentosBasicos()
+    {
+        return "\t\tSua missão é coletar todas as estrelas espalhadas pelo mapa. Para isso, utilize as peças que você recebeu para montar a sequência de passos que levará o foguete até a estrela.\n " +
+            "\t\tComece colocando uma das peças com formas geométricas, e em sequência utilize as peças de movimentação, indicando para que lado o foguete deve se virar e quando ele deve se mover. \n" +
+            "\t\tDepois, clique na câmera, tire uma foto das peças e veja o resultado. \n" +
+            "\t\tAh, cuidado para não tocar nas paredes do caminho.Boa sorte!";
+    }
+
 }
