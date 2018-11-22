@@ -86,7 +86,7 @@
 			{
 				"positionX": 2,
 				"positionY": 1,
-				"objectType": "Floor"
+				"objectType": "Collectable"
 			},
 			{
 				"positionX": 2,

@@ -305,4 +305,9 @@ public class GameManager : MonoBehaviour
     {
         GameManager.instance.selectLevelManager.backPageSelectLevelClick();
     }
+
+    public void downloadPieces()
+    {
+        Application.OpenURL("http://ec2-18-224-2-172.us-east-2.compute.amazonaws.com/pecas");
+    }
 }

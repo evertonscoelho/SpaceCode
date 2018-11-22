@@ -103,7 +103,7 @@
 
     public override string getTituloTelaSelecao()
     {
-        return "Which level do you want to play?";
+        return "Select a level";
     }
 
     public override string getTituloTelaFases()
@@ -202,12 +202,50 @@
             "\t\tGet ready and start to conquer the galaxy!\n";
     }
 
-    public override string getDescricaoAjudaMovimentosBasicos()
+    public override string getDescricaoAjudaMovimentosBasicos1()
     {
-        return "\t\tSua missão é coletar todas as estrelas espalhadas pelo mapa. Para isso, utilize as peças que você recebeu para montar a sequência de passos que levará o foguete até a estrela.\n " +
-            "\t\tComece colocando uma das peças com formas geométricas, e em sequência utilize as peças de movimentação, indicando para que lado o foguete deve se virar e quando ele deve se mover. \n" +
-            "\t\tDepois, clique na câmera, tire uma foto das peças e veja o resultado. \n" +
-            "\t\tAh, cuidado para não tocar nas paredes do caminho.Boa sorte!";
+        return "\t\t Your mission is to collect all the stars in the map.To do so use the pieces you received and organize them in a sequence of steps that will guide the rocket to the star.\n " +
+            "\t\tStart putting one of the geometrica shaped pieces:";
+    }
+    public override string getDescricaoAjudaMaisFuncoes()
+    {
+        return "\t\tUff! the universe is really a big place, isn’t it?\n" +
+            "\t\tYour path to collect all the stars is growing every time.We need to adopt a new strategy.\n" +
+            "\t\tWhat if you break your sequence of steps into small parts? Try to use more than one line to distributed the pieces, creating new functions \n" +
+            "\t\tEach line must begin with a different geometric shape that will be the “name” of your function). But don’t forget, you can only have 3 lines. \n" +
+            "\t\tThe first line will ever be executed.To make another line be executed, you need to “call the line”, which means, put a piece with the same geometric form that that the one of the function you want to call, at the first line at the position you want it to be executed.\n" +
+            "\t\tTake a look at an example:";
     }
 
+    public override string getDescricaoAjudaMovimentosBasicos2()
+    {
+        return " Them the movement pieces, giving the direction which the rocket must face and when to move.\n";
+    }
+
+    public override string getDescricaoAjudaMovimentosBasicos3()
+    {
+        return "\t\t     After you have finished this job, touch on the camera icon, take a picture of your instructions e watch the result. \n" +
+            "\t\tOh, watch out for the walls. Good Luck!";
+    }
+
+    public override string getDescricaoAjudaMaisColetaveis()
+    {
+        return "\t\tCongratulations to have come till here, you are getting it. Lets’s see how you perform with 2 stars to take. \n" +
+            "\t\tTake care with the obstacles in your way, if you touch them, you will have to try again. Good Luck!";
+    }
+
+    public override string getDescricaoAjudaRepeticao()
+    {
+        return "\t\tYou will have to be very smart to conquer the next levels. Search for frequent movements and use the repetition piece to make them. \n" +
+            "\t\tFollow the order: repetition piece, the movements you want to make, and the number of times you want all thos commands to be repeated. \n" +
+            "\t\tBut be aware to the maximum movements you can make and the maximum pieces you can use.\n" +
+            "\t\tTake a look at an example:";
+    }
+
+    public override string getDescricaoAjudaRecursao()
+    {
+        return "\t\tCongratulations commandant! You've come a long way, it's time for your last challenge.\n" +
+            "\t\tOn the next levels you must continue seeking for repetitive movements, but, this time, you will not solve then with repetition pieces.Try to solve it using functions that call thenselves.\n" +
+            "\t\tTake a look at an example:";
+    }
 }

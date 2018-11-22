@@ -2,7 +2,7 @@
 	"name": "Level 20",
 	"levelID": "20",
 	"author": "Everton/Yuri",
-	"difficulty": 4,
+	"difficulty": 5,
 	"maxCommands": 40,
 	"maxCommandsUse": 5,
 	"playerDirection": "right",

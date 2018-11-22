@@ -196,17 +196,57 @@
 
     public override string getDescricaoAjudaSobreJogo()
     {
-        return "\t\tBem vindo jovem Piloto, você está prestes a embarcar em uma aventura pelo espaço em busca de conhecimento. Está pronto para assumir os controles do nosso poderoso foguete e pegar todas as estrelas que encontrar? \n" +
+        return "\t\tBem vindo jovem Comandante, você está prestes a embarcar em uma aventura pelo espaço em busca de conhecimento. Está pronto para assumir os controles do nosso poderoso foguete e pegar todas as estrelas que encontrar? \n" +
             "\t\tPara guiar nosso veículo, diga passo a passo o que ele deve fazer utilizando as peças que você recebeu, e recolha todas as estrelas que encontrar pelo mapa.\n" +
             "\t\tPrepare suas peças e comece a conquistar a galáxia!\n";
     }
 
-    public override string getDescricaoAjudaMovimentosBasicos()
+    public override string getDescricaoAjudaMovimentosBasicos1()
     {
         return "\t\tSua missão é coletar todas as estrelas espalhadas pelo mapa. Para isso, utilize as peças que você recebeu para montar a sequência de passos que levará o foguete até a estrela.\n " +
-            "\t\tComece colocando uma das peças com formas geométricas, e em sequência utilize as peças de movimentação, indicando para que lado o foguete deve se virar e quando ele deve se mover. \n" +
-            "\t\tDepois, clique na câmera, tire uma foto das peças e veja o resultado. \n" +
-            "\t\tAh, cuidado para não tocar nas paredes do caminho.Boa sorte!";
+            "\t\tComece colocando uma das peças com formas geométricas:";
+            
     }
 
+    public override string getDescricaoAjudaMovimentosBasicos2()
+    {
+        return "Em sequência utilize as peças de movimentação, indicando para que lado o foguete deve se virar e quando ele deve se mover:\n";
+    }
+
+    public override string getDescricaoAjudaMovimentosBasicos3()
+    {
+        return "\t\tDepois, clique na câmera, tire uma foto das peças e veja o resultado. \n" +
+            "\t\tAh, cuidado para não tocar nas paredes do caminho. Boa sorte!";
+    }
+
+    public override string getDescricaoAjudaMaisColetaveis()
+    {
+        return "\t\tParabéns por chegar até aqui, você já está pegando o jeito. Vamos ver como você se sai agora com 2 estrelas para pegar. \n" +
+            "\t\tCuidado com os obstáculos pelo caminho, se o foguete tocar neles, precisará tentar novamente. Boa sorte!";
+    }
+
+    public override string getDescricaoAjudaMaisFuncoes()
+    {
+        return "\t\tUfa! O universo é um lugar bem grande, não é mesmo? \n" +
+            "\t\tO seu caminho para buscar todas as estrelas está ficando cada vez maior. Precisamos adotar uma nova estratégia. \n" +
+            "\t\tQue tal se você quebrar suas sequências de comando em pequenos pedaços? Experimente utilizar mais de uma linha para distribuir as peças, criando novas funções. \n" +
+            "\t\tCada linha deve começar por uma figura geométrica diferente, que vai ser o 'nome' da função. Mas lembre-se: você pode ter no máximo 3 linhas. \n" +
+            "\t\tA primeira linha sempre será executada. Para que outra linha seja executada, é preciso 'chamar a linha', quer dizer, colocar uma peça com a figura que é o nome da função na primeira linha, na posição que você quiser executá - la. \n" +
+            "\t\tVeja o Exemplo: ";
+    }
+
+    public override string getDescricaoAjudaRepeticao()
+    {
+        return "\t\tNos próximos desafios você precisará ser esperto. Procure por movimentos frequentes e utilize a peça de repetição para fazê-los. \n" +
+            "\t\tColoque, na ordem: a peça de repetição, os movimentos a serem repetidos e, ao final, a quantidade de vezes que isto deve ser feito. \n" +
+            "\t\tMas fique atento, nesses desafios há um número máximo de peças que você poderá utilizar.\n" +
+            "\t\tVeja o Exemplo:";
+    }
+
+    public override string getDescricaoAjudaRecursao()
+    {
+        return "\t\tMuito bem! Você percorreu um longo caminho Comandante, está na hora do último desafio. \n" +
+            "\t\tNas próximas fases você deve continuar procurando por movimentos repetitivos que podem ser feitos, porém, desta vez, ao invés de utilizar as peças de repetição utilize funções que chamam a elas mesmas. \n" +
+            "\t\tVeja o Exemplo:";
+    }
 }

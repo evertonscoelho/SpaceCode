@@ -38,8 +38,13 @@
     public abstract string getNaoBotaoTentarNovamente();
 
     public abstract string getDescricaoAjudaSobreJogo();
-    public abstract string getDescricaoAjudaMovimentosBasicos();
+    public abstract string getDescricaoAjudaMovimentosBasicos1();
+    public abstract string getDescricaoAjudaMovimentosBasicos2();
+    public abstract string getDescricaoAjudaMovimentosBasicos3();
+    public abstract string getDescricaoAjudaMaisFuncoes();
     public abstract string getDescricaoAjudaMaisColetaveis();
+    public abstract string getDescricaoAjudaRepeticao();
+    public abstract string getDescricaoAjudaRecursao();
     public abstract string getMensagemUltimaFase();
 
     public abstract string getFuncaoCirculo();
