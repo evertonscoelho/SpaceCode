@@ -149,6 +149,11 @@
         return "Sim";
     }
 
+    public override string getBotaoBaixar()
+    {
+        return "Baixar";
+    }
+
     public override string getNaoBotaoTentarNovamente()
     {
         return "Não, vou tentar de novo";
@@ -248,5 +253,12 @@
         return "\t\tMuito bem! Você percorreu um longo caminho Comandante, está na hora do último desafio. \n" +
             "\t\tNas próximas fases você deve continuar procurando por movimentos repetitivos que podem ser feitos, porém, desta vez, ao invés de utilizar as peças de repetição utilize funções que chamam a elas mesmas. \n" +
             "\t\tVeja o Exemplo:";
+    }
+
+    public override string getDescricaoAjudaBaixar()
+    {
+        return "\t\tToque no botão para baixar o conjunto de peças para este jogo. \n" +
+            "\t\tImprima as peças e recorte, tomando cuidadado com as bordas de cada peça.\n\n" +
+            "\t\tBoa diversão :)";
     }
 }

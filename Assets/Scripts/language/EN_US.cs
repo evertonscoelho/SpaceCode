@@ -248,4 +248,16 @@
             "\t\tOn the next levels you must continue seeking for repetitive movements, but, this time, you will not solve then with repetition pieces.Try to solve it using functions that call thenselves.\n" +
             "\t\tTake a look at an example:";
     }
+
+    public override string getBotaoBaixar()
+    {
+        return "Download";
+    }
+
+    public override string getDescricaoAjudaBaixar()
+    {
+        return "\t\tTouch the button to download the set of pieces for this game. \n" +
+            "\t\tPrint the pieces and cut them, but take to not cut the borders.\n\n" +
+            "\t\tHave fun :D";
+    }
 }

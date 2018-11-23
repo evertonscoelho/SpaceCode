@@ -36,6 +36,8 @@
     public abstract string getBotaoOk();
     public abstract string getBotaoSim();
     public abstract string getNaoBotaoTentarNovamente();
+    public abstract string getBotaoBaixar();
+
 
     public abstract string getDescricaoAjudaSobreJogo();
     public abstract string getDescricaoAjudaMovimentosBasicos1();
@@ -45,6 +47,7 @@
     public abstract string getDescricaoAjudaMaisColetaveis();
     public abstract string getDescricaoAjudaRepeticao();
     public abstract string getDescricaoAjudaRecursao();
+    public abstract string getDescricaoAjudaBaixar();
     public abstract string getMensagemUltimaFase();
 
     public abstract string getFuncaoCirculo();

@@ -407,7 +407,7 @@ public class BoardManager : MonoBehaviour
 
     private Vector3 getPositionBoardInstance(int x, int y)
     {
-        float temp = y + 0.4f;
+        float temp = y + 0.8f;
         return new Vector3(x * offsetXBoard, temp * offsetYBoard, 0f);
     }
 

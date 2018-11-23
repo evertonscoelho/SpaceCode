@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class LevelManager: MonoBehaviour
 {
-    public Button picture, help, sound, language;
+    public Button picture, help, sound, language, download;
     public Text TextCommands, TextLoading, TextTitle, TextTitleBoardCommand, TextMaxPieces;
 
     void Start()
@@ -21,6 +21,7 @@ public class LevelManager: MonoBehaviour
         help.interactable = false;
         sound.interactable = false;
         language.interactable = false;
+        download.interactable = false;
     }
 
     public void setTextCommands(string commands)

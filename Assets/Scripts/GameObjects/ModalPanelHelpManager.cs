@@ -3,9 +3,9 @@ using UnityEngine.UI;
 
 public class ModalPanelHelpManager : MonoBehaviour {
 
-    public Text title, descriptionHelp, descriptionMove1, descriptionMove2, descriptionMove3, descriptionLoop, descriptionRecursion, descriptionFunction;
+    public Text title, descriptionHelp, descriptionMove1, descriptionMove2, descriptionMove3, descriptionLoop, descriptionRecursion, descriptionFunction, descriptionButtonDownload, descriptionHelpDownload;
     private GameManager gameManager;
-    public GameObject panelHelp, panelHelpMove, panelHelpLoop, panelHelpRecursion, panelFunction;
+    public GameObject panelHelp, panelHelpMove, panelHelpLoop, panelHelpRecursion, panelFunction, panelDownload;
 
     void Start () {
         gameManager = GameManager.instance;
@@ -27,8 +27,14 @@ public class ModalPanelHelpManager : MonoBehaviour {
         panelHelpLoop.SetActive(false);
         panelHelpRecursion.SetActive(false);
         panelFunction.SetActive(false);
+        panelDownload.SetActive(false);
         switch (helpDifficult)
         {
+            case -1:
+                panelDownload.SetActive(true);
+                descriptionButtonDownload.text = gameManager.messages.getBotaoBaixar();
+                descriptionHelpDownload.text = gameManager.messages.getDescricaoAjudaBaixar();
+                break;
             case 0:
                 descriptionHelp.text = gameManager.messages.getDescricaoAjudaSobreJogo();
                 panelHelp.SetActive(true);

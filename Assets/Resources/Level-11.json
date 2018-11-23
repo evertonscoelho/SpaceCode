@@ -13,6 +13,12 @@
 				"positionY": 0,
 				"objectType": "Wall"
 			},
+
+		    {
+				"positionX": -2,
+				"positionY": 2,
+				"objectType": "Wall"
+			},
 			{
 				"positionX": -2,
 				"positionY": 1,
@@ -28,10 +34,21 @@
 				"positionY": -1,
 				"objectType": "Wall"
 			},
+				
+			{
+				"positionX": -1,
+				"positionY": 3,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": -1,
+				"positionY": 2,
+				"objectType": "Floor"
+			},
 			{
 				"positionX": -1,
 				"positionY": 1,
-				"objectType": "Wall"
+				"objectType": "Floor"
 			},
 			{
 				"positionX": -1,
@@ -41,12 +58,28 @@
 			{
 				"positionX": -1,
 				"positionY": -1,
+				"objectType": "Floor"
+			},
+			{
+				"positionX": -1,
+				"positionY": -2,
+				"objectType": "Wall"
+			},
+
+			{
+				"positionX": 0,
+				"positionY": 3,
 				"objectType": "Wall"
 			},
 			{
 				"positionX": 0,
+				"positionY": 2,
+				"objectType": "Collectable"
+			},
+			{
+				"positionX": 0,
 				"positionY": 1,
-				"objectType": "Wall"
+				"objectType": "Floor"
 			},
 			{
 				"positionX": 0,
@@ -56,12 +89,28 @@
 			{
 				"positionX": 0,
 				"positionY": -1,
+				"objectType": "Collectable"
+			},
+			{
+				"positionX": 0,
+				"positionY": -2,
+				"objectType": "Wall"
+			},
+
+			{
+				"positionX": 1,
+				"positionY": 3,
 				"objectType": "Wall"
 			},
 			{
 				"positionX": 1,
+				"positionY": 2,
+				"objectType": "Floor"
+			},
+			{
+				"positionX": 1,
 				"positionY": 1,
-				"objectType": "Wall"
+				"objectType": "Floor"
 			},
 			{
 				"positionX": 1,
@@ -71,27 +120,28 @@
 			{
 				"positionX": 1,
 				"positionY": -1,
-				"objectType": "Wall"
-			},
-			{
-				"positionX": 1,
-				"positionY": 1,
-				"objectType": "Wall"
-			},
-			{
-				"positionX": 1,
-				"positionY": 0,
 				"objectType": "Floor"
+			},
+			{
+				"positionX": 1,
+				"positionY": -2,
+				"objectType": "Wall"
+			},
+
+			{
+				"positionX": 2,
+				"positionY": 3,
+				"objectType": "Wall"
 			},
 			{
 				"positionX": 2,
-				"positionY": -1,
-				"objectType": "Wall"
+				"positionY": 2,
+				"objectType": "Collectable"
 			},
 			{
 				"positionX": 2,
 				"positionY": 1,
-				"objectType": "Wall"
+				"objectType": "Floor"
 			},
 			{
 				"positionX": 2,
@@ -99,10 +149,36 @@
 				"objectType": "Collectable"
 			},
 			{
+				"positionX": 2,
+				"positionY": -1,
+				"objectType": "Floor"
+			},
+			{
+				"positionX": 2,
+				"positionY": -2,
+				"objectType": "Wall"
+			},
+
+			{
+				"positionX": 3,
+				"positionY": 2,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": 3,
+				"positionY": 1,
+				"objectType": "Wall"
+			},
+			{
 				"positionX": 3,
 				"positionY": 0,
 				"objectType": "Wall"
-			}		
+			},
+			{
+				"positionX": 3,
+				"positionY": -1,
+				"objectType": "Wall"
+			}
 		]
 	}
 }
