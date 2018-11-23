@@ -17,10 +17,10 @@ public class RequestManager{
             yield return www.SendWebRequest();
             if (www.isNetworkError)
             {
-                recognizeCommandManager.response(Messages.PROBLEMA_CONEXAO, true);
+                recognizeCommandManager.response(GameManager.instance.messages.getErroProblemaConexao(), true);
             }
             else if(www.isHttpError || www.responseCode != 200){
-                recognizeCommandManager.response(Messages.ERRO_SERVIDOR + www.responseCode + " " + www.error  ,  true);
+                recognizeCommandManager.response(string.Format(GameManager.instance.messages.getErroServidor(), www.responseCode, www.error),  true);
             }
             else
             {

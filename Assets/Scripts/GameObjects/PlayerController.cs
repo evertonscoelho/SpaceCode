@@ -12,5 +12,9 @@ public class PlayerController : MonoBehaviour
             SoundManager.instance.PlaySingle(collectableAudio);
             GameManager.instance.checkEndGameCollectable(other.transform.position);
         }
+        else
+        {
+            StartCoroutine(GameManager.instance.doDefeat(true));
+        }
     }
 }

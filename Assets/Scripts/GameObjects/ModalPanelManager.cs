@@ -5,30 +5,41 @@ using UnityEngine.UI;
 
 public class ModalPanelManager : MonoBehaviour {
 
-    public Text title, descriptionError, descriptionHelp, titleCommands, descriptionLastLevel, descriptionButtonFases, descriptionButtonTryAgain, descriptionButtonNext;
-    public Text descriptionTryAgainError, descriptionOkError, descriptionButtonYes, descriptionButtonNoTryAgain, descriptionLevelPanelLastLevel;
-    public GameObject panelHelp, panelEndGame, panelErrorCommand, panelCommands, panelLastLevel;
+    public Text title, descriptionError, titleCommands, descriptionLastLevel, descriptionButtonFases, descriptionButtonTryAgain, descriptionButtonNext;
+    public Text descriptionTryAgainError, descriptionOkError, descriptionButtonYes, descriptionButtonNoTryAgain, descriptionLevelPanelLastLevel, languageBR, languageUS;
+    public GameObject panelEndGame, panelErrorCommand, panelCommands, panelLastLevel, panelLanguage, icLock;
    
     public GameObject boardCommand;
     public Button buttonNext, buttonTryAgainError, buttonOkError;
 
+    public int Scene;
+
     void Start()
     {
-        GameManager.instance.ModalPanelManager = this;
+        GameManager gameManager = GameManager.instance;
+        gameManager.ModalPanelManager = this;
         deactiveModal();
-        descriptionButtonFases.text = Messages.BOTAO_FASES;
-        descriptionButtonTryAgain.text = Messages.BOTAO_TENTAR_NOVAMENTE;
-        descriptionButtonNext.text = Messages.BOTAO_PROXIMA_FASE;
-        descriptionTryAgainError.text = Messages.BOTAO_TENTAR_NOVAMENTE;
-        descriptionOkError.text = Messages.BOTAO_OK;
-        descriptionButtonYes.text = Messages.BOTAO_SIM;
-        descriptionButtonNoTryAgain.text = Messages.BOTAO_NAO_TENTAR_NOVAMENTE;
-        descriptionLevelPanelLastLevel.text = Messages.BOTAO_FASES;
+        descriptionButtonFases.text = gameManager.messages.getBotaoFases();
+        descriptionButtonTryAgain.text = gameManager.messages.getBotaoTentarNovamente();
+        descriptionButtonNext.text = gameManager.messages.getBotaoProximaFase();
+        descriptionTryAgainError.text = gameManager.messages.getBotaoTentarNovamente();
+        descriptionOkError.text = gameManager.messages.getBotaoOk();
+        descriptionButtonYes.text = gameManager.messages.getBotaoSim();
+        descriptionButtonNoTryAgain.text = gameManager.messages.getNaoBotaoTentarNovamente();
+        descriptionLevelPanelLastLevel.text = gameManager.messages.getBotaoFases();
+        languageBR.text = gameManager.messages.getPortugues();
+        languageUS.text = gameManager.messages.getIngles();
     }
 
     public void interactableButtonNext(Boolean interactable)
     {
         buttonNext.interactable = interactable;
+        icLock.SetActive(!interactable);
+    }
+
+    public void setCommands(List<Function> functions, GameManager gameManager)
+    {
+        gameManager.setCommands(functions, boardCommand.transform, 44, 44, -5, 1, true);
     }
 
     public void setVisibleButtonsErro(bool buttonOkVisible, bool buttonTryAgainVisible)
@@ -39,18 +50,15 @@ public class ModalPanelManager : MonoBehaviour {
 
     }
 
-    public void activeModal(Boolean active, string title, Boolean panelHelp, Boolean panelEndGame, Boolean panelErrorCommand, Boolean panelCommands, Boolean panelLastLevel)
+    public void activeModal(string title, Boolean panelEndGame, Boolean panelErrorCommand, Boolean panelCommands, Boolean panelLastLevel, Boolean panelLanguage)
     {
-        if (active)
-        {
-            gameObject.SetActive(true);
-        }
+        gameObject.SetActive(true);
         this.title.text = title;
-        this.panelHelp.SetActive(panelHelp);
         this.panelEndGame.SetActive(panelEndGame);
         this.panelErrorCommand.SetActive(panelErrorCommand);
         this.panelCommands.SetActive(panelCommands);
         this.panelLastLevel.SetActive(panelLastLevel);
+        this.panelLanguage.SetActive(panelLanguage);
     }
 
     public void setTitleCommands(string titleCommands)
@@ -63,11 +71,6 @@ public class ModalPanelManager : MonoBehaviour {
         descriptionError.text = description;
     }
 
-    public void setDescriptionHelp(string description)
-    {
-        descriptionHelp.text = description;
-    }
-
     public void setDescriptionLastLevel(string description)
     {
         descriptionLastLevel.text = description;
@@ -78,33 +81,4 @@ public class ModalPanelManager : MonoBehaviour {
         gameObject.SetActive(false);
     }
 
-    public void setCommands(List<Function> functions, BoardManager boardManager)
-    {
-        float width = 50, height = 50;
-        Transform transformBoardCommand = boardCommand.transform;
-        GameObject toInstantiate, commandObject;
-        foreach (Transform child in transformBoardCommand)
-        {
-            GameObject.Destroy(child.gameObject);
-        }
-
-        for (int y = 0; y < functions.Count; y++)
-        {
-            for (int x = 0; x < functions[y].Commands.Count; x++)
-            {
-                toInstantiate = boardManager.getObjectToInstantiate(functions[y].Commands[x].EnumCommand);
-                commandObject = new GameObject();
-                Image image = commandObject.AddComponent<Image>();
-                commandObject.GetComponent<RectTransform>().SetParent(transformBoardCommand.transform, false);
-                commandObject.GetComponent<RectTransform>().sizeDelta = new Vector2(width, height);
-                image.sprite = toInstantiate.GetComponent<SpriteRenderer>().sprite;
-                commandObject.transform.localPosition = getPositionInstance(x - 5, (y * -1) + 1, width, height);
-            }
-        }
-    }
-
-    private Vector3 getPositionInstance(int x, float y, float offsetX, float offsetY)
-    {
-        return new Vector3(x * offsetX, y * offsetY, 0f);
-    }
 }

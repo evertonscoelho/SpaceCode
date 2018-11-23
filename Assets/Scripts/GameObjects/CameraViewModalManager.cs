@@ -4,17 +4,18 @@ using UnityEngine.UI;
 public class CameraViewModalManager : UnityEngine.MonoBehaviour
 {
     public Button takePicture;
-    public GameObject loadingText;
+    public Text loadingText;
 
     void Start () {
         deactivate();
         RecognizeCommandManager.instance.setCameraViewManager(this);
+        loadingText.text = GameManager.instance.messages.getLabelCarregando();
     }
 
     public void active()
     {
         gameObject.SetActive(true);
-        loadingText.SetActive(false);
+        loadingText.gameObject.SetActive(false);
         takePicture.interactable = true;
     }
 
@@ -25,7 +26,7 @@ public class CameraViewModalManager : UnityEngine.MonoBehaviour
 
     public void loading()
     {
-        loadingText.SetActive(true);
+        loadingText.gameObject.SetActive(true);
         takePicture.interactable = false;
     }
 }

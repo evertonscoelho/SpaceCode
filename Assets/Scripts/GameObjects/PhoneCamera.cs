@@ -7,9 +7,10 @@ public class PhoneCamera : MonoBehaviour {
 
 	 public PhoneCamera(RawImage cameraImage) {
         WebCamDevice[] devices = WebCamTexture.devices;
+        GameManager gameManager = GameManager.instance;
         if(devices.Length == 0)
         {
-            GameManager.instance.showErro(Messages.NENHUMA_CAMERA_ENCONTRADA, false, true);
+            gameManager.showErro(gameManager.messages.getErroNenhumaCameraEncontrada(), false, true);
         }
 
         for(int i = 0; i < devices.Length; i++)
@@ -22,11 +23,12 @@ public class PhoneCamera : MonoBehaviour {
 
         if(cam == null)
         {
-            GameManager.instance.showErro(Messages.NAO_ABRIU_CAMERA, true, false);
+            gameManager.showErro(gameManager.messages.getErroAbrirCamera(), true, false);
         }
-        
-        cam.Play();
-        cameraImage.texture = cam;
+        else { 
+            cam.Play();
+            cameraImage.texture = cam;
+        }
     }
 	
     public byte[] TakePhoto()

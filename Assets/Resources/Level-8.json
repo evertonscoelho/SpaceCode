@@ -1,179 +1,181 @@
-{
+	{
 	"name": "Level 8",
 	"levelID": "8",
 	"author": "Everton/Yuri",
 	"difficulty": 3,
 	"maxCommands": 40,
+	"maxCommandsUse": 30,
+	"playerDirection": "up",
 	"board": {
 		"data": [
 			{
-				"positionX": -5,
-				"positionY": 2,
-				"objectType": "Wall"
-			},
-			{
-				"positionX": -5,
-				"positionY": 1,
-				"objectType": "Wall"
-			},
-			{
-				"positionX": -5,
-				"positionY": 0,
-				"objectType": "Wall"
-			},
-			{
-				"positionX": -5,
-				"positionY": -1,
-				"objectType": "Wall"
-			},
-			{
-				"positionX": -5,
-				"positionY": -2,
-				"objectType": "Wall"
-			},
-			{
-				"positionX": -4,
+				"positionX": -2,
 				"positionY": 3,
 				"objectType": "Wall"
 			},
 			{
-				"positionX": -4,
+				"positionX": -2,
 				"positionY": 2,
-				"objectType": "Floor"
+				"objectType": "Wall"
 			},
 			{
-				"positionX": -4,
+				"positionX": -2,
 				"positionY": 1,
-				"objectType": "Floor"
+				"objectType": "Wall"
 			},
 			{
-				"positionX": -4,
+				"positionX": -2,
 				"positionY": 0,
-				"objectType": "Floor"
+				"objectType": "Wall"
 			},
 			{
-				"positionX": -4,
+				"positionX": -2,
 				"positionY": -1,
-				"objectType": "Floor"
-			},
-			{
-				"positionX": -4,
-				"positionY": -2,
-				"objectType": "Floor"
-			},
-			{
-				"positionX": -4,
-				"positionY": -3,
 				"objectType": "Wall"
 			},
 			{
-				"positionX": -3,
+				"positionX": -1,
+				"positionY": 4,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": -1,
 				"positionY": 3,
-				"objectType": "Wall"
+				"objectType": "Floor"
 			},
 			{
-				"positionX": -3,
+				"positionX": -1,
 				"positionY": 2,
+				"objectType": "Floor"
+			},
+			{
+				"positionX": -1,
+				"positionY": 1,
 				"objectType": "Player"
 			},
 			{
-				"positionX": -3,
+				"positionX": -1,
+				"positionY": 0,
+				"objectType": "Floor"
+			},
+			{
+				"positionX": -1,
+				"positionY": -1,
+				"objectType": "Collectable"
+			},
+			{
+				"positionX": -1,
+				"positionY": -2,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": 0,
+				"positionY": 4,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": 0,
+				"positionY": 3,
+				"objectType": "Floor"
+			},
+			{
+				"positionX": 0,
+				"positionY": 2,
+				"objectType": "Floor"
+			},
+			{
+				"positionX": 0,
+				"positionY": 1,
+				"objectType": "Collectable"
+			},
+			{
+				"positionX": 0,
+				"positionY": 0,
+				"objectType": "Obstacle"
+			},
+			{
+				"positionX": 0,
+				"positionY": -1,
+				"objectType": "Floor"
+			},
+			{
+				"positionX": 0,
+				"positionY": -2,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": 1,
+				"positionY": 4,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": 1,
+				"positionY": 3,
+				"objectType": "Floor"
+			},
+			{
+				"positionX": 1,
+				"positionY": 2,
+				"objectType": "Floor"
+			},
+			{
+				"positionX": 1,
 				"positionY": 1,
 				"objectType": "Floor"
 			},
 			{
-				"positionX": -3,
+				"positionX": 1,
 				"positionY": 0,
-				"objectType": "Collectable"
+				"objectType": "Floor"
 			},
 			{
-				"positionX": -3,
+				"positionX": 1,
 				"positionY": -1,
-				"objectType": "Obstacle"
+				"objectType": "Floor"
 			},
 			{
-				"positionX": -3,
+				"positionX": 1,
 				"positionY": -2,
-				"objectType": "Collectable"
-			},
-			{
-				"positionX": -3,
-				"positionY": -3,
 				"objectType": "Wall"
 			},
 			{
-				"positionX": -2,
+				"positionX": 2,
+				"positionY": 2,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": 2,
+				"positionY": 1,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": 2,
+				"positionY": 0,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": 2,
 				"positionY": 3,
 				"objectType": "Wall"
 			},
 			{
-				"positionX": -2,
-				"positionY": 2,
-				"objectType": "Floor"
-			},
-			{
-				"positionX": -2,
-				"positionY": 1,
-				"objectType": "Floor"
-			},
-			{
-				"positionX": -2,
-				"positionY": 0,
-				"objectType": "Floor"
-			},
-			{
-				"positionX": -2,
-				"positionY": -1,
-				"objectType": "Obstacle"
-			},
-			{
-				"positionX": -2,
-				"positionY": -2,
-				"objectType": "Floor"
-			},
-			{
-				"positionX": -2,
-				"positionY": -3,
-				"objectType": "Wall"
-			},
-			{
-				"positionX": -1,
-				"positionY": 1,
-				"objectType": "Wall"
-			},
-			{
-				"positionX": -1,
-				"positionY": 0,
-				"objectType": "Wall"
-			},
-			{
-				"positionX": -1,
-				"positionY": -1,
-				"objectType": "Wall"
-			},
-			{
-				"positionX": -1,
+				"positionX": 2,
 				"positionY": 2,
 				"objectType": "Wall"
 			},
 			{
-				"positionX": -1,
+				"positionX": 2,
 				"positionY": 1,
 				"objectType": "Wall"
 			},
 			{
-				"positionX": -1,
+				"positionX": 2,
 				"positionY": 0,
 				"objectType": "Wall"
 			},
 			{
-				"positionX": -1,
+				"positionX": 2,
 				"positionY": -1,
-				"objectType": "Wall"
-			},
-			{
-				"positionX": -1,
-				"positionY": -2,
 				"objectType": "Wall"
 			}
 		]

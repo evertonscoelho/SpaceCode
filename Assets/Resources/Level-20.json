@@ -1,0 +1,100 @@
+{
+	"name": "Level 20",
+	"levelID": "20",
+	"author": "Everton/Yuri",
+	"difficulty": 5,
+	"maxCommands": 40,
+	"maxCommandsUse": 5,
+	"playerDirection": "right",
+	"board": {
+		"data": [
+		
+			{
+				"positionX": -3,
+				"positionY": -1,
+				"objectType": "Wall"
+			},
+
+			{
+				"positionX": -2,
+				"positionY": 0,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": -2,
+				"positionY": -1,
+				"objectType": "Player"
+			},
+			{
+				"positionX": -2,
+				"positionY": -2,
+				"objectType": "Wall"
+			},
+
+			{
+				"positionX": -1,
+				"positionY": 1,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": -1,
+				"positionY": 0,
+				"objectType": "Collectable"
+			},
+			{
+				"positionX": -1,
+				"positionY": -1,
+				"objectType": "Floor"
+			},
+			{
+				"positionX": -1,
+				"positionY": -2,
+				"objectType": "Wall"
+			},
+
+			{
+				"positionX": 0,
+				"positionY": 2,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": 0,
+				"positionY": 1,
+				"objectType": "Floor"
+			},
+			{
+				"positionX": 0,
+				"positionY": 0,
+				"objectType": "Floor"
+			},
+			{
+				"positionX": 0,
+				"positionY": -1,
+				"objectType": "Wall"
+			},
+		
+			{
+				"positionX": 1,
+				"positionY": 2,
+				"objectType": "Wall"
+			},
+			{
+				"positionX": 1,
+				"positionY": 1,
+				"objectType": "Collectable"
+			},
+			{
+				"positionX": 1,
+				"positionY": 0,
+				"objectType": "Wall"
+			},
+
+			{
+				"positionX": 2,
+				"positionY": 1,
+				"objectType": "Wall"
+			}
+
+		]
+	}
+}
