@@ -16,15 +16,18 @@ public class SoundManager : MonoBehaviour
     public Sprite soundOffImage;
 
     private GameObject sound;
-    private Boolean soundOn;
+    private int soundOn;
 
     void Awake()
     {
         if (instance == null)
         {
             instance = this;
-            soundOn = false;
-            //musicSource.Play();
+            soundOn = PlayerPrefs.GetInt("soundOn", 1);
+            if(soundOn == 1)
+            {
+                musicSource.Play();
+            }
         }
         else if (instance != this)
             Destroy(gameObject);
@@ -40,7 +43,7 @@ public class SoundManager : MonoBehaviour
 
     public void refreshIcon()
     {
-        if (soundOn)
+        if (soundOn == 1)
             sound.GetComponent<Image>().sprite = soundOnImage;
         else
             sound.GetComponent<Image>().sprite = soundOffImage;
@@ -48,19 +51,24 @@ public class SoundManager : MonoBehaviour
 
     public void soundClick()
     {
-        soundOn = !soundOn;
-        if (soundOn)
+        if (soundOn == 0)
+        {
             musicSource.Play();
+            soundOn = 1;
+        }
         else
+        { 
             musicSource.Pause();
+            soundOn = 0;
+        }
+        PlayerPrefs.SetInt("soundOn", soundOn);
 
         refreshIcon();
-
     }
 
     public void PlaySingle(AudioClip clip)
     {
-        if (soundOn)
+        if (soundOn == 1)
         {
             efxSource.clip = clip;
             efxSource.Play();

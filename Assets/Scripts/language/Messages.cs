@@ -37,7 +37,7 @@
     public abstract string getBotaoSim();
     public abstract string getNaoBotaoTentarNovamente();
     public abstract string getBotaoBaixar();
-
+    public abstract string getBotaoBaixarTela();
 
     public abstract string getDescricaoAjudaSobreJogo();
     public abstract string getDescricaoAjudaMovimentosBasicos1();

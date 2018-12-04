@@ -13,11 +13,8 @@ public class SelectLevelManager : MonoBehaviour {
     void Start () {
 
         levelReached = PlayerPrefs.GetInt("levelReached", 1);
-        page = 0;
-        if (levelReached < 19)
-        {
-            levelReached = 19;
-        }
+        page = 0;        
+       
         title.text = GameManager.instance.messages.getTituloTelaSelecao();
         backPage.interactable = false;
         nextPageInteractable();
