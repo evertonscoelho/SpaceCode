@@ -173,7 +173,7 @@ Prefab:
     - target: {fileID: 224709138514310070, guid: 214fc81f21572ba46b576454af42878f,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 56
+      value: 144
       objectReference: {fileID: 0}
     - target: {fileID: 224709138514310070, guid: 214fc81f21572ba46b576454af42878f,
         type: 2}
@@ -229,6 +229,7 @@ GameObject:
   - component: {fileID: 402170904}
   - component: {fileID: 402170903}
   - component: {fileID: 402170902}
+  - component: {fileID: 402170906}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -300,6 +301,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &402170906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 402170901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b59b6d3ded38f438043cf75a697b4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameGame: {fileID: 1971370765}
+  buttonDownload: {fileID: 1297546555}
 --- !u!1 &515334504
 GameObject:
   m_ObjectHideFlags: 0
@@ -471,7 +485,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 535796243}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.014, y: 0.013, z: 10}
+  m_LocalPosition: {x: 0.58, y: 0.013, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 402170905}
@@ -897,6 +911,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7ef8dea67433bff45a5c93d886b98d69, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1297546555 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114669387760741094, guid: 214fc81f21572ba46b576454af42878f,
+    type: 2}
+  m_PrefabInternal: {fileID: 296790496}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &1351921695
 Prefab:
   m_ObjectHideFlags: 0
@@ -1070,7 +1090,6 @@ GameObject:
   - component: {fileID: 1622334414}
   - component: {fileID: 1622334416}
   - component: {fileID: 1622334415}
-  - component: {fileID: 1622334417}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -1095,7 +1114,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -20}
   m_SizeDelta: {x: 334, y: 367.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1622334415
@@ -1131,18 +1150,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1622334413}
---- !u!114 &1622334417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1622334413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 096923ceee16f7e4194fad8c89a576e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameGame: {fileID: 1971370765}
 --- !u!1 &1951369706
 GameObject:
   m_ObjectHideFlags: 0
@@ -1310,7 +1317,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Joguinho \nLegal"
+  m_Text: 'Space
+
+    Code'
 --- !u!222 &1971370766
 CanvasRenderer:
   m_ObjectHideFlags: 0

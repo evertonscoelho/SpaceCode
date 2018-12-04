@@ -154,6 +154,11 @@
         return "Baixar";
     }
 
+    public override string getBotaoBaixarTela()
+    {
+        return "Baixar peças";
+    }
+
     public override string getNaoBotaoTentarNovamente()
     {
         return "Não, vou tentar de novo";
@@ -209,7 +214,7 @@
     public override string getDescricaoAjudaMovimentosBasicos1()
     {
         return "\t\tSua missão é coletar todas as estrelas espalhadas pelo mapa. Para isso, utilize as peças que você recebeu para montar a sequência de passos que levará o foguete até a estrela.\n " +
-            "\t\tComece colocando uma das peças com formas geométricas:";
+            "\t\tColoque as peças sobre um fundo branco, começando com uma das peças em formas geométricas:";
             
     }
 
@@ -220,7 +225,7 @@
 
     public override string getDescricaoAjudaMovimentosBasicos3()
     {
-        return "\t\tDepois, clique na câmera, tire uma foto das peças e veja o resultado. \n" +
+        return "\t\tDepois, clique na câmera, tire uma foto na horizontal das peças e veja o resultado. \n" +
             "\t\tAh, cuidado para não tocar nas paredes do caminho. Boa sorte!";
     }
 

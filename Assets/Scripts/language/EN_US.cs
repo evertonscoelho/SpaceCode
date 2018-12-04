@@ -205,7 +205,7 @@
     public override string getDescricaoAjudaMovimentosBasicos1()
     {
         return "\t\t Your mission is to collect all the stars in the map.To do so use the pieces you received and organize them in a sequence of steps that will guide the rocket to the star.\n " +
-            "\t\tStart putting one of the geometrica shaped pieces:";
+            "\t\t Put the pieces over a white background, starting with putting one of the geometrica shaped pieces:";
     }
     public override string getDescricaoAjudaMaisFuncoes()
     {
@@ -224,7 +224,7 @@
 
     public override string getDescricaoAjudaMovimentosBasicos3()
     {
-        return "\t\t     After you have finished this job, touch on the camera icon, take a picture of your instructions e watch the result. \n" +
+        return "\t\tAfter you have finished this job, touch on the camera icon, take a picture, horizontally, of your instructions e watch the result. \n" +
             "\t\tOh, watch out for the walls. Good Luck!";
     }
 
@@ -252,6 +252,11 @@
     public override string getBotaoBaixar()
     {
         return "Download";
+    }
+
+    public override string getBotaoBaixarTela()
+    {
+        return "Download pieces";
     }
 
     public override string getDescricaoAjudaBaixar()

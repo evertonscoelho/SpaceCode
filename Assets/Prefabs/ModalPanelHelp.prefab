@@ -2073,10 +2073,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\\t\\tSua miss\xE3o \xE9 coletar todas as estrelas espalhadas pelo mapa.
-    Para isso, utilize as pe\xE7as que voc\xEA recebeu para montar a sequ\xEAncia
-    de passos que levar\xE1 o foguete at\xE9 a estrela.\\n \" +\r\n            \"\\t\\tComece
-    colocando uma das pe\xE7as com formas geom\xE9tricas:"
+  m_Text: "tSua miss\xE3o \xE9 coletar todas as estrelas espalhadas pelo mapa. Para
+    isso, utilize as pe\xE7as que voc\xEA recebeu para montar a sequ\xEAncia de passos
+    que levar\xE1 o foguete at\xE9 a estrela.\\n \" +\r\n            \"\\t\\tColoque
+    as pe\xE7as sobre um fundo branco, come\xE7ando com uma das pe\xE7as em formas
+    geom\xE9tricas:\";"
 --- !u!114 &114474205336518876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2256,8 +2257,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 34a48eb833fe0b541be29f6182630762, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2283,10 +2284,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 1, b: 0.7607843, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -2553,15 +2554,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Voce deve baixar e imprimir......
-
-    sad
-
-    as
-
-    dsa
-
-    dsadsad'
+  m_Text: Voce deve baixar e imprimir
 --- !u!114 &114741817230488322
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3410,7 +3403,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 249.80824}
+  m_AnchoredPosition: {x: 0, y: 220}
   m_SizeDelta: {x: 164.4, y: 64.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224085322265224610
@@ -3492,7 +3485,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -8, y: -192.6}
+  m_AnchoredPosition: {x: -8, y: -222.40826}
   m_SizeDelta: {x: 565.3, y: 133.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224133286474725020
@@ -3608,7 +3601,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 436.2}
+  m_AnchoredPosition: {x: 0, y: 406.39175}
   m_SizeDelta: {x: 164.4, y: 64.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224211391015779730
@@ -3836,8 +3829,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 3.2}
+  m_SizeDelta: {x: 0, y: -6.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224366931887612010
 RectTransform:
@@ -4083,7 +4076,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -8.001249, y: 8}
+  m_AnchoredPosition: {x: -8.001249, y: -21.808266}
   m_SizeDelta: {x: 565.3, y: 98.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224570403868349466
@@ -4101,8 +4094,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -8, y: 239.3}
-  m_SizeDelta: {x: 565.3, y: 190.6}
+  m_AnchoredPosition: {x: -8, y: 220.6}
+  m_SizeDelta: {x: 565.3, y: 228}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224579694943954892
 RectTransform:

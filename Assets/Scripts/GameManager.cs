@@ -28,11 +28,20 @@ public class GameManager : MonoBehaviour
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
-
         DontDestroyOnLoad(gameObject);
         boardScript = GetComponent<BoardManager>();
         boardScript.initValues();
         messages = getLanguage();
+    }
+
+    void Start()
+    {
+        int firstAcess = PlayerPrefs.GetInt("firstAcess", 1);
+        if (firstAcess == 1)
+        {
+            clickHelp(-1);
+        }
+        PlayerPrefs.SetInt("firstAcess", 0);
     }
 
     private Messages getLanguage()

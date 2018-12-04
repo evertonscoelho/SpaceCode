@@ -66,13 +66,14 @@ public class RecognizeCommandManager : MonoBehaviour
         response = response.ToUpper();
         string[] commands = response.Split(',');
         List<Function> functions= new List<Function>();
-        int line = 0, indexCircle = -1, indexStar = -1, indexTriangle = -1;
+        int line = 0, indexCircle = -1, indexStar = -1, indexTriangle = -1, commandCount = 0;
         Command commandLoop = new Command(EnumCommand.LOOP);
         List<Command> commandsLine = new List<Command>(), commandsLoop = new List<Command>();
         Command command;
 
         foreach (string commandString in commands)
         {
+            commandCount++;
             if (!error)
             {
                 command = getCommand(commandString);
@@ -89,6 +90,7 @@ public class RecognizeCommandManager : MonoBehaviour
                     functions.Add(new Function(commandsLine));
                     commandsLine = new List<Command>();
                     firstCommandInLine = true;
+                    commandCount--;
                 }
                 else if (command.EnumCommand.Equals(EnumCommand.LOOP))
                 {
@@ -147,7 +149,7 @@ public class RecognizeCommandManager : MonoBehaviour
         if (!error)
         {
             functions.Add(new Function(commandsLine));
-            if (!checkErrorCommandUse(functions, line) && !checkErrorFucntionReference(indexCircle, indexTriangle, indexStar, refCircle, refStar, refTriangle) && 
+            if (!checkErrorCommandUse(commandCount, line) && !checkErrorFucntionReference(indexCircle, indexTriangle, indexStar, refCircle, refStar, refTriangle) && 
                 !checkLoop(loop, getFuncionInLine(line, indexCircle, indexTriangle, indexStar)))
             {
                 gameManager.recognizeCommand(functions, indexCircle, indexStar, indexTriangle);
@@ -251,13 +253,8 @@ public class RecognizeCommandManager : MonoBehaviour
         return false;
     }
 
-    private bool checkErrorCommandUse(List<Function> functions, int line)
+    private bool checkErrorCommandUse(int commands, int line)
     {
-        int commands = 0;
-        for(int x = 0; x < line; x++)
-        {
-            commands += functions[x].Commands.Count;
-        }
         if (maxCommandsUse < commands)
         { 
             GameManager.instance.showErro(String.Format(GameManager.instance.messages.getErroQuantidadeComandos(), maxCommandsUse, commands), false, true);
