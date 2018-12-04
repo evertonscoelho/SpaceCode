@@ -4,7 +4,7 @@
 	"author": "Everton/Yuri",
 	"difficulty": 4,
 	"maxCommands": 40,
-	"maxCommandsUse": 40,
+	"maxCommandsUse": 15,
 	"playerDirection": "up",
 	"board": {
 		"data": [
@@ -38,7 +38,7 @@
 			{
 				"positionX": -2,
 				"positionY": 2,
-				"objectType": "Collectable"
+				"objectType": "Floor"
 			},
 			{
 				"positionX": -2,
@@ -69,12 +69,12 @@
 			{
 				"positionX": -1,
 				"positionY": 2,
-				"objectType": "Collectable"
+				"objectType": "Obstacle"
 			},
 			{
 				"positionX": -1,
 				"positionY": 1,
-				"objectType": "Obstacle"
+				"objectType": "Collectable"
 			},
 			{
 				"positionX": -1,
@@ -100,7 +100,7 @@
 			{
 				"positionX": 0,
 				"positionY": 2,
-				"objectType": "Collectable"
+				"objectType": "Floor"
 			},
 			{
 				"positionX": 0,
@@ -162,7 +162,7 @@
 			{
 				"positionX": 2,
 				"positionY": 2,
-				"objectType": "Collectable"
+				"objectType": "Floor"
 			},
 			{
 				"positionX": 2,
